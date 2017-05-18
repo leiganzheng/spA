@@ -1,0 +1,40 @@
+//
+//  PrefixHeader_DT.pch
+//  DouTu
+//
+//  Created by leiganzheng on 2017/5/7.
+//  Copyright © 2017年 fly. All rights reserved.
+//
+
+#ifndef PrefixHeader_DT_pch
+#define PrefixHeader_DT_pch
+
+#import <UIKit/UIKit.h>
+//app配置
+#import "Config_DT.h"
+#import "NetAPI_DT.h"
+#import "Tools.h"
+#import "UITableView+Empty.h"
+////app工具
+#import "DTNetManger.h"
+#import "OpenUDID.h"
+#import "MGSwipeTableCell.h"
+
+
+////------------------- 三方 -------------
+//#import "FMDB.h"
+#import "Masonry.h"
+#import "MJRefresh.h"
+#import "MJExtension.h"
+#import "AFNetworking.h"
+#import "HYBNetworking.h"
+#import "MBProgressHUD.h"
+#import "MBProgressHUD+Add.h"
+#import "SDWebImageManager.h"
+//#import <SDWebImage/UIImage+GIF.h>
+#import <SDWebImage/UIImageView+WebCache.h>
+////------------------- 开放平台 -------------
+//#import "WXApi.h"
+//#import <TencentOpenAPI/TencentOAuth.h>
+#endif
+
