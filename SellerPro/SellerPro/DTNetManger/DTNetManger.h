@@ -31,65 +31,63 @@ typedef void(^detailCallBack) (NSError *error, NSArray *response, DTBaseModel *d
                         PW:(NSString*)passWord
                       code:(NSString*)verifyCode
                   callBack:(callBack)callBack;
-
-//获取服务单分页
-+(void)orderPageWith:(NSString *)page
+//获取员工佣金
++(void)staffGetCommission:(callBack)callBack;
+//获取员工银行卡
++(void)staffGetCreditCard:(callBack)callBack;
+//设置员工银行卡
++(void)staffSetCreditCardWith:(NSString*)bank
+                  credit_card:(NSString*)credit_card
+                     callBack:(callBack)callBack;
+//获取客户数量业绩统计
++(void)orderSumWith:(NSString*)date
+                     callBack:(callBack)callBack;
+//获取员工业绩分页
++(void)orderGetStaffPageWith:(NSString *)page
                        size:(NSString *)size
                        date:(NSString*)date
                  callBack:(callBack)callBack;
-//获取员工业绩分页
-+(void)orderStaffPageWith:(NSString *)page
-                     size:(NSString *)size
-                     date:(NSString*)date
-                 callBack:(callBack)callBack;
-//获取服务项目业绩分页
-+(void)orderServicePageWith:(NSString *)page
-                     size:(NSString *)size
-                     date:(NSString*)date
-                 callBack:(callBack)callBack;
-//获取工种列表
-+(void)workStypeListWithCallBack:(callBack)callBack;
-//获取工种注册地址
-+(void)getUrlOfWorkTypeWith:(NSString *)typeId
-                    callBack:(callBack)callBack;
-//获取工种资料
-+(void)getUrlOfWorkInfoWith:(NSString *)typeId
-                    callBack:(callBack)callBack;
-//添加/修改工种
-+(void)addWorkTypeWith:(NSString *)typeId
-                      name:(NSString*)name
-                  callBack:(callBack)callBack;
-//删除工种
-+(void)delWorkTypeWith:(NSString *)typeId
-                    callBack:(callBack)callBack;
+//获取服务单明细
++(void)orderGetDetail:(callBack)callBack;
 //获取服务分类列表
-+(void)seviceListWithCallBack:(callBack)callBack;
-//获取服务项目资料
-+(void)getServiceInfoWith:(NSString*)typeId
-                   callBack:(callBack)callBack;
-//添加/修改服务项目
-+(void)addServiceWith:(NSString*)service_id
-                 categoryId:(NSString*)categoryId
-                 name:(NSString*)name
-                  price:(NSString*)price
++(void)serviceGetCategoryList:(callBack)callBack;
+//车牌识别
++(void)customerOcrWith:(NSString*)plate_license_base64  //车牌照片base64
+           callBack:(callBack)callBack;
+//获取客户信息
++(void)customerGetWith:(NSString*)plate_license  //车牌号
               callBack:(callBack)callBack;
-//删除服务项目
-+(void)delServiceTypeWith:(NSString*)serviceId
+
+/*name	否	string	姓名
+phone	是	string	手机号
+car_type	是	string	车辆类型
+car_band	否	string	车辆品牌
+car_model	否	string	车辆型号
+plate_license	是	string	车牌号
+engine_number	否	string	发动机号
+frame_number	否	string	车架号
+buy_time	否	string	注册日期
+drive_license	否	string	行驶证图片base64
+yearly_inspection_location	否	string	年检地点
+yearly_inspection_end_time	否	string	年检到期时间
+insurance_company	否	string	保险公司
+insurance_end_time	否	string	保险到期时间*/
+//补录客户资料
++(void)customerAddWith:(NSDictionary*)info
               callBack:(callBack)callBack;
-//获取员工分页
-+(void)StaffPageWith:(NSString*)page
-                       size:(NSString*)size
-                   callBack:(callBack)callBack;
-//获取员工资料
-+(void)getStaffInfoWith:(NSString*)staffId
-                 callBack:(callBack)callBack;
-//修改员工
-+(void)addStaffWith:(NSString*)staff_id
-       work_type_id:(NSString*)work_type_id
-               name:(NSString*)name
-        is_disabled:(NSString*)is_disabled //状态(0->在职，1->离职)
-             callBack:(callBack)callBack;
-//删除员工
-+(void)delStaffInfoWith:(NSString*)staffId
-               callBack:(callBack)callBack;
+//获取佣金记录
++(void)staffMoneyGetPageWith:(NSString *)page
+                        size:(NSString *)size
+                    callBack:(callBack)callBack;
+//获取提现记录
++(void)staffWithdrawGetPageWith:(NSString *)page
+                        size:(NSString *)size
+                    callBack:(callBack)callBack;
+//申请结算
++(void)staffWithdrawApply:(NSString*)money  //float	金额
+              callBack:(callBack)callBack;
+//获取商品信息
++(void)goodGetWith:(NSString *)barcode //条码
+                        type:(NSString *)type //商品类型（1->供应商供货，2->商家自购）
+                    callBack:(callBack)callBack;
 @end

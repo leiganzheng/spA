@@ -94,18 +94,6 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 }
 #pragma mark -- private method
 -(void)featchData{
-    [DTNetManger workStypeListWithCallBack:^(NSError *error, id response) {
-        if (response && [response isKindOfClass:[NSArray class]]) {
-            NSArray *arr = (NSArray*)response;
-            if (arr.count>0) {
-                self.dataSource = [NSArray arrayWithArray:(NSArray*)response];
-                [_myTableView reloadData];
-            }else{
-                [MBProgressHUD showError:@"暂无数据" toView:self.view];
-            }
-        }else{
-            [MBProgressHUD showError:error.description toView:self.view];
-        }
-    }];
+    
 }
 @end

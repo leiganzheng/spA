@@ -9,31 +9,30 @@
 #ifndef NetAPI_DT_h
 #define NetAPI_DT_h
 
-#define kDTBaseHostUrl               @"http://120.77.149.156:92"
+#define kDTBaseHostUrl               @"http://120.77.149.156:91"
 //login
-#define kDTLoginUrl                  @"Merchant/login"
-#define kDVerifyCodeUrl              @"Merchant/verifyCode"
-#define kDTCheckVerifyCodeUrl        @"Merchant/checkVerifyCode"
-#define kDTMpasswordUrl              @"Merchant/password"
+#define kDTLoginUrl                  @"Staff/login"
+#define kDVerifyCodeUrl              @"Staff/verifyCode"
+#define kDTCheckVerifyCodeUrl        @"Staff/checkVerifyCode"
+#define kDTMpasswordUrl              @"Staff/password"
+//
+#define kDTGetCommissionUrl                @"Staff/getCommission"
+#define kDTGetStaffCreditCardUrl           @"Staff/getCreditCard"
+#define kDTStaffSetCreditCardUrl         @"Staff/setCreditCard"
 //order
-#define kDTGetPageUrl                @"Order/getPage"
-#define kDTGetStaffPageUrl           @"Order/getStaffPage"
-#define kDTGetServicePageUrl         @"Order/getServicePage"
-//WorkType
-#define kDTGetListUrl                @"WorkType/getList"
-#define kDTGetUrlUrl                 @"WorkType/getUrl"
-#define kDTGetInfoUrl                @"WorkType/get"
-#define kDTsaveUrl                   @"WorkType/save"
-#define kDTdelUrl                    @"WorkType/del"
-//Service
-#define kDTgetCategoryListUrl        @"Service/getCategoryList"
-#define kDTGetSInfoUrlUrl            @"Service/get"
-#define kDTSsaveUrl                  @"Service/save"
-#define kDTSdelUrl                   @"Service/del"
-//Staff
-#define kDTStaffgetPageUrl           @"Staff/getPage"
-#define kDTStaffGetInfoUrl           @"Staff/get"
-#define kDTStaffsaveUrl              @"Staff/save"
-#define kDTStaffdelUrl               @"Staff/del"
+#define kDTOrderSumUrl                @"Order/sum"
+#define kDTOrderGetStaffPagUrl                 @"Order/getStaffPag"
+#define kDTOrderGetDetailUrl                @"Order/getDetail"
+#define kDTServiceGetCategoryListUrl                   @"Service/getCategoryList"
+//Customer
+#define kDTCustomerOcrUrl        @"Customer/ocr"
+#define kDTCustomerGetUrl            @"Customer/get"
+#define kDTCustomerAddUrl                  @"Customer/add"
+
+//StaffMoney/StaffWithdraw
+#define kDTStaffMoneyGetPageUrl           @"StaffMoney/getPage"
+#define kDTStaffWithdrawGetPageUrl           @"StaffWithdraw/getPage"
+#define kDTStaffWithdrawApplyUrl              @"StaffWithdraw/apply"
+#define kDTGoodUrl               @"Good/get"
 
 #endif /* NetAPI_DT_h */

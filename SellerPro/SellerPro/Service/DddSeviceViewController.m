@@ -71,19 +71,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     if (self.priceTF.text.length == 0) {
         [MBProgressHUD showError:@"请输入价格" toView:self.view];
     }
-    [DTNetManger addServiceWith:[_dict objectForKey:@"id"] categoryId:self.cId name:self.nameTF.text price:self.priceTF.text callBack:^(NSError *error, id response) {
-        if (response && [response isKindOfClass:[NSString class]]) {
-            NSString *str = (NSString*)response;
-            if (str.integerValue == 0) {
-                [MBProgressHUD showError:@"成功" toView:self.view];
-                [self.navigationController popViewControllerAnimated:YES];
-            }else{
-                 [MBProgressHUD showError:@"失败" toView:self.view];
-            }
-        }else{
-            [MBProgressHUD showError:[(NSDictionary*)response objectForKey:@"msg"] toView:self.view];
-        }
-    }];
+    
 }
 
 #pragma mark - tableView Delegate

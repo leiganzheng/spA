@@ -9,7 +9,6 @@
 #import "StaffInfoViewController.h"
 #import "DTMyTableViewCell.h"
 #import "StaffInfoMdViewController.h"
-#import "AuthorSettingViewController.h"
 #import "StaffInfoTableViewCell.h"
 
 @interface StaffInfoViewController ()<UITableViewDelegate,UITableViewDataSource,StaffInfoMdViewControllerDelegate,UIAlertViewDelegate,UIGestureRecognizerDelegate>
@@ -171,8 +170,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
         if (self.flagStr.integerValue == 1) {
             [MBProgressHUD showError:@"离职状态，无法设置权限" toView:self.view];
         }else{
-        AuthorSettingViewController *vc = [[AuthorSettingViewController alloc]init];
-        [self.navigationController pushViewController:vc animated:YES];
+        
         }
     }
 
@@ -211,9 +209,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     if (_nameTF.text.length == 0) {
         [MBProgressHUD showError:@"输入名字" toView:self.view];
     }
-    [DTNetManger addStaffWith:_staffID work_type_id:self.typeID name:_nameTF.text is_disabled:self.flagStr callBack:^(NSError *error, id response) {
-        [self.navigationController popViewControllerAnimated:YES];
-    }];
+    
 }
 - (BOOL)updateCK{
     if ([self.nameTF.text isEqualToString:self.dataSource1[0]]&&[self.workStrH isEqualToString:_workStr]&&[self.flagStr isEqualToString:self.flagStrH]) {
@@ -227,22 +223,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 }
 -(void)featchData{
     if (self.staffID&&self.staffID.length != 0) {
-        [DTNetManger getStaffInfoWith:self.staffID callBack:^(NSError *error, id response) {
-            if (response && [response isKindOfClass:[NSDictionary class]]) {
-                NSDictionary *dict = (NSDictionary*)response;
-                _dataSource1 = @[[dict objectForKey:@"name"],[dict objectForKey:@"phone"],[NSString stringWithFormat:@"%@",[dict objectForKey:@"work_type_id"]],[NSString stringWithFormat:@"%@",[dict objectForKey:@"is_disabled"]],@""];
-                self.flagStrH = [NSString stringWithFormat:@"%@",[dict objectForKey:@"is_disabled"]];
-                self.flagStr = self.flagStrH;
-                self.workStrH = self.workStr;
-                [_myTableView reloadData];
-            }else{
-                if ([response  isKindOfClass:[NSString class]]) {
-                    [MBProgressHUD showError:(NSString *)response toView:self.view];
-                    [self.myTableView.mj_header endRefreshing];
-                }
-            }
-            
-        }];
+        
     }
     
 }

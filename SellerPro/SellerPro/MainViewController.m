@@ -41,14 +41,14 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 - (NSArray *)dataSource
 {
     if (!_dataSource) {
-        _dataSource = @[@"业绩报表",@"员工管理",@"服务项目",@"密码设置"];
+        _dataSource = @[@"个人业绩",@"我的佣金"];
     }
     return _dataSource;
 }
 - (NSArray *)iconSource
 {
     if (!_iconSource) {
-        _iconSource = @[@"home_icon_form",@"home_btn_staff",@"home_btn_servement",@"home_btn_password_setting"];
+        _iconSource = @[@"home_icon_form",@"home_btn_staff"];
     }
     return _iconSource;
 }
@@ -57,7 +57,6 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     [super viewDidLoad];
     self.title = @"首页";
     [self.view addSubview:self.myTableView];
-
 }
 
 #pragma mark - tableView Delegate
@@ -76,20 +75,44 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 -(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
     UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0,0,KSCREEN_WIDTH,100)];
     v.backgroundColor = [UIColor clearColor];
-    
-    UIImageView * im= [[UIImageView alloc] init];
-    im.frame = CGRectMake((KSCREEN_WIDTH - 150)/2, 40, 150, 28);
-    im.image = [UIImage imageNamed:@"home_img_92logo"];
-    [v addSubview:im];
-    
+//    
+//    UIImageView * im= [[UIImageView alloc] init];
+//    im.frame = CGRectMake((KSCREEN_WIDTH - 150)/2, 40, 150, 28);
+//    im.image = [UIImage imageNamed:@"home_img_92logo"];
+//    [v addSubview:im];
+//    
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn.frame = CGRectMake((KSCREEN_WIDTH - 150)/2, im.frame.size.height+30, 150, 44);
-    [btn setTitle:@"退出登录" forState:UIControlStateNormal];
-    btn.backgroundColor = [UIColor clearColor];
-    btn.titleLabel.font = [UIFont systemFontOfSize:14];
-    [btn setTitleColor:[UIColor lightGrayColor] forState:0];
-    [btn addTarget:self action:@selector(logOut:) forControlEvents:UIControlEventTouchUpInside];
+    btn.frame = CGRectMake(20, 40, KSCREEN_WIDTH-40, 44);
+    [btn setTitle:@"开始接待" forState:UIControlStateNormal];
+    btn.backgroundColor = RGB(17, 157, 255);
+    [btn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
     [v addSubview:btn];
+    
+    UIView *v1 = [[UIView alloc] initWithFrame:CGRectMake(0,btn.frame.size.height+50,KSCREEN_WIDTH,44)];
+    v1.backgroundColor = [UIColor clearColor];
+    
+    UIButton *btn1 = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn1.frame = CGRectMake((KSCREEN_WIDTH - 150)/2-75, btn.frame.size.height+30, 150, 44);
+    [btn1 setTitle:@"退出登录" forState:UIControlStateNormal];
+    btn1.backgroundColor = [UIColor clearColor];
+    btn1.titleLabel.font = [UIFont systemFontOfSize:14];
+    [btn1 setTitleColor:[UIColor lightGrayColor] forState:0];
+    [btn1 addTarget:self action:@selector(logOut:) forControlEvents:UIControlEventTouchUpInside];
+    [v1 addSubview:btn1];
+    
+    UILabel *lb = [[UILabel alloc]initWithFrame:CGRectMake( (KSCREEN_WIDTH - 150)/2-75+10, btn.frame.size.height+30, 2, 44)];
+    lb.text = @"/";
+    lb.textColor = [UIColor lightGrayColor];
+    [v1 addSubview:lb];
+    UIButton *btn2 = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn2.frame = CGRectMake((KSCREEN_WIDTH - 150)/2+75, btn.frame.size.height+30, 150, 44);
+    [btn2 setTitle:@"修改密码" forState:UIControlStateNormal];
+    btn2.backgroundColor = [UIColor clearColor];
+    btn2.titleLabel.font = [UIFont systemFontOfSize:14];
+    [btn2 setTitleColor:[UIColor lightGrayColor] forState:0];
+    [btn2 addTarget:self action:@selector(mdpW:) forControlEvents:UIControlEventTouchUpInside];
+    [v1 addSubview:btn2];
+    [v addSubview:v1];
     return v;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -156,5 +179,11 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     LoginViewController *cvc = [board instantiateViewControllerWithIdentifier:@"LoginViewController"];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:cvc];
     [Tools enterRootViewController:nav animated:YES];
+}
+-(void)mdpW:(UIButton *)sender{
+     UIStoryboard *board = [UIStoryboard storyboardWithName: @"Main" bundle: nil];
+    ForgetPWViewController *cvc = [board instantiateViewControllerWithIdentifier:@"ForgetPWViewController"];
+    [self.navigationController pushViewController:cvc animated:YES];
+
 }
 @end

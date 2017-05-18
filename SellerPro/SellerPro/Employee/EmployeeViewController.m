@@ -8,7 +8,6 @@
 
 #import "EmployeeViewController.h"
 #import "StaffViewController.h"
-#import "WorkTypeViewController.h"
 
 
 @interface EmployeeViewController () <TabContainerDelegate,TabContainerDataSource>
@@ -77,14 +76,10 @@
 }
 
 -(UIViewController *)tabContainer:(TabContainerViewController *)tabContainer contentViewControllerForTabAtIndex:(NSUInteger)index{
-    if (index == 0) {
+//    if (index == 0) {
         StaffViewController *cvc = [[StaffViewController alloc] init];
         return cvc;
-    }else{
-        WorkTypeViewController *cvc = [[WorkTypeViewController alloc] init];
-        cvc.isAdd = NO;
-        return cvc;
-    }
+//    }
 }
 
 

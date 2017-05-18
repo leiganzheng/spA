@@ -99,48 +99,48 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     [self featchData];
 }
 -(void)featchData{
-    [DTNetManger orderStaffPageWith:[NSString stringWithFormat:@"%ld",(long)self.page] size:@"10" date:self.date callBack:^(NSError *error, id response) {
-        if (response && [response isKindOfClass:[NSArray class]]) {
-            NSArray *arr = (NSArray*)response;
-            if (self.page == 1) {
-                self.dataSource = [[NSMutableArray alloc] init];
-                [self.dataSource removeAllObjects];
-                if (arr.count>0) {
-                    [self.dataSource addObjectsFromArray:arr];
-                    if (arr.count>10) {
-                        self.page ++;
-                        _myTableView.mj_footer.hidden = NO;
-                    }else{
-                        _myTableView.mj_footer.hidden = YES;
-                    }
-                    [_myTableView reloadData];
-                }else{
-                    [MBProgressHUD showError:@"暂无数据" toView:self.view];
-                }
-                [self.myTableView.mj_header endRefreshing];
-            }else{
-                if (arr.count>0) {
-                    [self.dataSource addObjectsFromArray:arr];
-                    if (arr.count>10) {
-                        self.page ++;
-                        _myTableView.mj_footer.hidden = NO;
-                    }else{
-                        _myTableView.mj_footer.hidden = YES;
-                    }
-                    [_myTableView reloadData];
-                }else{
-                    [MBProgressHUD showError:@"暂无数据" toView:self.view];
-                }
-                [self.myTableView.mj_footer endRefreshing];
-                
-            }
-        }else{
-            if ([response  isKindOfClass:[NSString class]]) {
-                [MBProgressHUD showError:(NSString *)response toView:self.view];
-                 [self.myTableView.mj_header endRefreshing];
-                 [self.myTableView.mj_footer endRefreshing];
-            }
-        }
-    }];
+//    [DTNetManger orderStaffPageWith:[NSString stringWithFormat:@"%ld",(long)self.page] size:@"10" date:self.date callBack:^(NSError *error, id response) {
+//        if (response && [response isKindOfClass:[NSArray class]]) {
+//            NSArray *arr = (NSArray*)response;
+//            if (self.page == 1) {
+//                self.dataSource = [[NSMutableArray alloc] init];
+//                [self.dataSource removeAllObjects];
+//                if (arr.count>0) {
+//                    [self.dataSource addObjectsFromArray:arr];
+//                    if (arr.count>10) {
+//                        self.page ++;
+//                        _myTableView.mj_footer.hidden = NO;
+//                    }else{
+//                        _myTableView.mj_footer.hidden = YES;
+//                    }
+//                    [_myTableView reloadData];
+//                }else{
+//                    [MBProgressHUD showError:@"暂无数据" toView:self.view];
+//                }
+//                [self.myTableView.mj_header endRefreshing];
+//            }else{
+//                if (arr.count>0) {
+//                    [self.dataSource addObjectsFromArray:arr];
+//                    if (arr.count>10) {
+//                        self.page ++;
+//                        _myTableView.mj_footer.hidden = NO;
+//                    }else{
+//                        _myTableView.mj_footer.hidden = YES;
+//                    }
+//                    [_myTableView reloadData];
+//                }else{
+//                    [MBProgressHUD showError:@"暂无数据" toView:self.view];
+//                }
+//                [self.myTableView.mj_footer endRefreshing];
+//                
+//            }
+//        }else{
+//            if ([response  isKindOfClass:[NSString class]]) {
+//                [MBProgressHUD showError:(NSString *)response toView:self.view];
+//                 [self.myTableView.mj_header endRefreshing];
+//                 [self.myTableView.mj_footer endRefreshing];
+//            }
+//        }
+//    }];
 }
 @end

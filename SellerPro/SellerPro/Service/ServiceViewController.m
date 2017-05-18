@@ -123,23 +123,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     [self.navigationController pushViewController:vc animated:YES];
 }
 -(void)featchData{
-    [DTNetManger seviceListWithCallBack:^(NSError *error, id response) {
-        if (response && [response isKindOfClass:[NSArray class]]) {
-            NSArray *arr = (NSArray*)response;
-            if (arr.count>0) {
-                self.dataSource = [NSArray arrayWithArray:(NSArray*)response];
-                [_myTableView reloadData];
-            }else{
-                [MBProgressHUD showError:@"暂无数据" toView:self.view];
-            }
-            [self.myTableView.mj_header endRefreshing];
-        }else{
-            if ([response  isKindOfClass:[NSString class]]) {
-                [MBProgressHUD showError:(NSString *)response toView:self.view];
-                [self.myTableView.mj_header endRefreshing];
-            }
-        }
-    }];
+
 }
 @end
 

@@ -94,13 +94,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 
         cell.leftButtons = @[[MGSwipeButton buttonWithTitle:@"删除" backgroundColor:[UIColor redColor] callback:^BOOL(MGSwipeTableCell * _Nonnull cell) {
             NSDictionary *dic = self.dataSource[indexPath.row];
-            [DTNetManger delServiceTypeWith:[dic objectForKey:@"id"] callBack:^(NSError *error, id response) {
-                if (response) {
-                    [MBProgressHUD showError:response toView:self.view];
-                }else{
-                    [self featchData];
-                }
-            }];
+            
             return  YES;
         }]];
         cell.leftSwipeSettings.transition = MGSwipeTransition3D;
@@ -127,36 +121,8 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     [self.navigationController pushViewController:vc animated:YES];
 }
 -(void)featchData{
-    [DTNetManger seviceListWithCallBack:^(NSError *error, id response) {
-        if (response && [response isKindOfClass:[NSArray class]]) {
-            NSArray *arr = (NSArray*)response;
-            if (arr.count>0) {
-                NSArray *arr = [NSArray arrayWithArray:(NSArray*)response];
-                if (arr.count >0) {
-                    for (NSDictionary *dict in arr) {
-                        NSString *tempId = [NSString stringWithFormat:@"%@",[dict objectForKey:@"id"]];
-                        if ([tempId isEqualToString:self.cateID]) {
-                            NSArray *arrSub = [NSArray arrayWithArray:[(NSDictionary*)dict objectForKey:@"sub"]];
-                            for (NSDictionary *dicSub in arrSub) {
-                                NSString *tempIdSub = [NSString stringWithFormat:@"%@",[dicSub objectForKey:@"id"]];
-                                if ([tempIdSub isEqualToString:self.customID]) {
-                                    _dataSource = [NSArray arrayWithArray:[(NSDictionary*)dicSub objectForKey:@"service"]];
-                                }
-                            }
-                        }
-                    }
-                }
-                [_myTableView reloadData];
-            }else{
-                [MBProgressHUD showError:@"暂无数据" toView:self.view];
-            }
-        }else{
-            if ([response  isKindOfClass:[NSString class]]) {
-                [MBProgressHUD showError:(NSString *)response toView:self.view];
-            }
-        }
-    }];
-}
+    
+    }
 
 
 @end

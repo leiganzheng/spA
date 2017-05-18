@@ -24,7 +24,6 @@
 		710FEF631EBEE23D0064CC85 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 710FEF621EBEE23D0064CC85 /* Assets.xcassets */; };
 		710FEF661EBEE23D0064CC85 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 710FEF641EBEE23D0064CC85 /* LaunchScreen.storyboard */; };
 		712952271EC0BC36005A16F0 /* StaffViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 712952261EC0BC36005A16F0 /* StaffViewController.m */; };
-		7129522A1EC0BD63005A16F0 /* WorkTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 712952291EC0BD63005A16F0 /* WorkTypeViewController.m */; };
 		712952301EC0BE3B005A16F0 /* SFormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7129522F1EC0BE3B005A16F0 /* SFormViewController.m */; };
 		712952331EC0BE49005A16F0 /* PersionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 712952321EC0BE49005A16F0 /* PersionViewController.m */; };
 		712952361EC0BE58005A16F0 /* ProgramViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 712952351EC0BE58005A16F0 /* ProgramViewController.m */; };
@@ -53,7 +52,6 @@
 		BB87F45B1EC173F700D67843 /* SFormTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB87F4591EC173F700D67843 /* SFormTableViewCell.xib */; };
 		BB87F45F1EC18E8200D67843 /* MBProgressHUD+Add.m in Sources */ = {isa = PBXBuildFile; fileRef = BB87F45E1EC18E8200D67843 /* MBProgressHUD+Add.m */; };
 		BB87F4941EC443D500D67843 /* UITableView+Empty.m in Sources */ = {isa = PBXBuildFile; fileRef = BB87F4931EC443D500D67843 /* UITableView+Empty.m */; };
-		BB87F4971EC9782900D67843 /* AuthorSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB87F4961EC9782900D67843 /* AuthorSettingViewController.m */; };
 		BB87F49A1EC98B7100D67843 /* SubSeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB87F4991EC98B7100D67843 /* SubSeviceViewController.m */; };
 		BB87F49D1EC98F7300D67843 /* DetailServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB87F49C1EC98F7300D67843 /* DetailServiceViewController.m */; };
 		BBE524B81ECAE4D600FCD703 /* UIViewController+BackButtonHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = BBE524B71ECAE4D600FCD703 /* UIViewController+BackButtonHandler.m */; };
@@ -94,8 +92,6 @@
 		710FEF6F1EBEE5AC0064CC85 /* PrefixHeader_DT.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader_DT.pch; sourceTree = "<group>"; };
 		712952251EC0BC36005A16F0 /* StaffViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaffViewController.h; sourceTree = "<group>"; };
 		712952261EC0BC36005A16F0 /* StaffViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaffViewController.m; sourceTree = "<group>"; };
-		712952281EC0BD63005A16F0 /* WorkTypeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkTypeViewController.h; sourceTree = "<group>"; };
-		712952291EC0BD63005A16F0 /* WorkTypeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkTypeViewController.m; sourceTree = "<group>"; };
 		7129522E1EC0BE3B005A16F0 /* SFormViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFormViewController.h; sourceTree = "<group>"; };
 		7129522F1EC0BE3B005A16F0 /* SFormViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFormViewController.m; sourceTree = "<group>"; };
 		712952311EC0BE49005A16F0 /* PersionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersionViewController.h; sourceTree = "<group>"; };
@@ -149,8 +145,6 @@
 		BB87F45E1EC18E8200D67843 /* MBProgressHUD+Add.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+Add.m"; sourceTree = "<group>"; };
 		BB87F4921EC443D500D67843 /* UITableView+Empty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+Empty.h"; sourceTree = "<group>"; };
 		BB87F4931EC443D500D67843 /* UITableView+Empty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+Empty.m"; sourceTree = "<group>"; };
-		BB87F4951EC9782900D67843 /* AuthorSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthorSettingViewController.h; sourceTree = "<group>"; };
-		BB87F4961EC9782900D67843 /* AuthorSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthorSettingViewController.m; sourceTree = "<group>"; };
 		BB87F4981EC98B7100D67843 /* SubSeviceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubSeviceViewController.h; sourceTree = "<group>"; };
 		BB87F4991EC98B7100D67843 /* SubSeviceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubSeviceViewController.m; sourceTree = "<group>"; };
 		BB87F49B1EC98F7300D67843 /* DetailServiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailServiceViewController.h; sourceTree = "<group>"; };
@@ -196,8 +190,6 @@
 				7109ED471EBEF11300C542AC /* EmployeeViewController.m */,
 				712952251EC0BC36005A16F0 /* StaffViewController.h */,
 				712952261EC0BC36005A16F0 /* StaffViewController.m */,
-				712952281EC0BD63005A16F0 /* WorkTypeViewController.h */,
-				712952291EC0BD63005A16F0 /* WorkTypeViewController.m */,
 				712952371EC0BF7A005A16F0 /* StaffInfoViewController.h */,
 				712952381EC0BF7A005A16F0 /* StaffInfoViewController.m */,
 				BB87F4481EC16A1D00D67843 /* EmployeeTableViewCell.h */,
@@ -211,8 +203,6 @@
 				7129525E1EC36DD4005A16F0 /* QRCodeViewController.m */,
 				712952661EC8860D005A16F0 /* StaffInfoMdViewController.h */,
 				712952671EC8860D005A16F0 /* StaffInfoMdViewController.m */,
-				BB87F4951EC9782900D67843 /* AuthorSettingViewController.h */,
-				BB87F4961EC9782900D67843 /* AuthorSettingViewController.m */,
 				7148E8F71EC9F199007A15AB /* StaffInfoTableViewCell.h */,
 				7148E8F81EC9F199007A15AB /* StaffInfoTableViewCell.m */,
 				7148E8F91EC9F199007A15AB /* StaffInfoTableViewCell.xib */,
@@ -526,9 +516,7 @@
 			files = (
 				710FEF5B1EBEE23C0064CC85 /* AppDelegate.m in Sources */,
 				712952301EC0BE3B005A16F0 /* SFormViewController.m in Sources */,
-				7129522A1EC0BD63005A16F0 /* WorkTypeViewController.m in Sources */,
 				712952391EC0BF7A005A16F0 /* StaffInfoViewController.m in Sources */,
-				BB87F4971EC9782900D67843 /* AuthorSettingViewController.m in Sources */,
 				BB87F4941EC443D500D67843 /* UITableView+Empty.m in Sources */,
 				7109ED5D1EBF4CB200C542AC /* DTNetManger.m in Sources */,
 				7109ED3B1EBEE84800C542AC /* MainViewController.m in Sources */,

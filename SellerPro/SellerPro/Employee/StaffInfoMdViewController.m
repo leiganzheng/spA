@@ -144,32 +144,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 }
 #pragma mark - private action
 -(void)featchData{
-    [DTNetManger workStypeListWithCallBack:^(NSError *error, id response) {
-        if (response && [response isKindOfClass:[NSArray class]]) {
-            NSArray *arr = (NSArray*)response;
-            if (arr.count>0) {
-                _dataFlag = [NSMutableArray array];
-                 self.dataSource = [NSArray arrayWithArray:(NSArray*)response];
-                for (NSDictionary *dic in self.dataSource) {
-                    NSString *str = [NSString stringWithFormat:@"%@",[dic objectForKey:@"name"]];
-                    if ([str isEqualToString:_cusID]) {
-                        [_dataFlag addObject:@"0"];
-                    }else{
-                        [_dataFlag addObject:@"1"];
-                    }
-                }
-                _myTableView.frame = CGRectMake(0, 0, KSCREEN_WIDTH, 52*self.dataSource.count) ;
-            }else{
-                [MBProgressHUD showError:@"暂无数据" toView:self.view];
-            }
-            [self.myTableView reloadData];
-        }else{
-            if ([response  isKindOfClass:[NSString class]]) {
-                [MBProgressHUD showError:(NSString *)response toView:self.view];
-                
-            }
-        }
-    }];
+   
 }
 
 @end

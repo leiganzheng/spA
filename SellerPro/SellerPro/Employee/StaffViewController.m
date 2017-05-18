@@ -10,7 +10,6 @@
 #import "StaffInfoViewController.h"
 #import "EmployeeTableViewCell.h"
 #import "AddEmployeeViewController.h"
-#import "WorkTypeViewController.h"
 
 @interface StaffViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -113,41 +112,39 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     [self.navigationController pushViewController:cvc animated:YES];
 }
 - (void)save:(UIButton *)sender{
-    WorkTypeViewController *vc = [[WorkTypeViewController alloc] init];
-    vc.isAdd = YES;
-    [self.navigationController pushViewController:vc animated:YES];
+ 
 }
 -(void)featchData{
-    [DTNetManger StaffPageWith:[NSString stringWithFormat:@"%li",(long)self.page] size:@"10" callBack:^(NSError *error, id response) {
-        if (response && [response isKindOfClass:[NSArray class]]) {
-            NSArray *arr = (NSArray*)response;
-            if (self.page == 1) {
-                self.dataSource = [[NSMutableArray alloc] init];
-                [self.dataSource removeAllObjects];
-                if (arr.count>0) {
-                    [self.dataSource addObjectsFromArray:arr];
-                    [_myTableView reloadData];
-                }else{
-                    [MBProgressHUD showError:@"暂无数据" toView:self.view];
-                }
-                [self.myTableView.mj_header endRefreshing];
-            }else{
-                if (arr.count>0) {
-                    [self.dataSource addObjectsFromArray:arr];
-                    self.page = self.page + 1;
-                    [_myTableView reloadData];
-                }else{
-                    [MBProgressHUD showError:@"暂无数据" toView:self.view];
-                }
-                [self.myTableView.mj_footer endRefreshing];
-            }
-        }else{
-            if ([response  isKindOfClass:[NSString class]]) {
-                [MBProgressHUD showError:(NSString *)response toView:self.view];
-                [self.myTableView.mj_header endRefreshing];
-                [self.myTableView.mj_footer endRefreshing];
-            }
-        }
-    }];
+//    [DTNetManger StaffPageWith:[NSString stringWithFormat:@"%li",(long)self.page] size:@"10" callBack:^(NSError *error, id response) {
+//        if (response && [response isKindOfClass:[NSArray class]]) {
+//            NSArray *arr = (NSArray*)response;
+//            if (self.page == 1) {
+//                self.dataSource = [[NSMutableArray alloc] init];
+//                [self.dataSource removeAllObjects];
+//                if (arr.count>0) {
+//                    [self.dataSource addObjectsFromArray:arr];
+//                    [_myTableView reloadData];
+//                }else{
+//                    [MBProgressHUD showError:@"暂无数据" toView:self.view];
+//                }
+//                [self.myTableView.mj_header endRefreshing];
+//            }else{
+//                if (arr.count>0) {
+//                    [self.dataSource addObjectsFromArray:arr];
+//                    self.page = self.page + 1;
+//                    [_myTableView reloadData];
+//                }else{
+//                    [MBProgressHUD showError:@"暂无数据" toView:self.view];
+//                }
+//                [self.myTableView.mj_footer endRefreshing];
+//            }
+//        }else{
+//            if ([response  isKindOfClass:[NSString class]]) {
+//                [MBProgressHUD showError:(NSString *)response toView:self.view];
+//                [self.myTableView.mj_header endRefreshing];
+//                [self.myTableView.mj_footer endRefreshing];
+//            }
+//        }
+//    }];
 }
 @end

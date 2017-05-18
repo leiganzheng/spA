@@ -93,26 +93,9 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
         [MBProgressHUD showError:@"输入内容" toView:self.view];
         return;
     }
-    [DTNetManger addWorkTypeWith:self.workType name:self.name.text callBack:^(NSError *error, id response) {
-        if (response) {
-            [MBProgressHUD showError:@"提交成功" toView:self.view];
-            [self.navigationController popViewControllerAnimated:YES];
-        }else{
-            [MBProgressHUD showError:error.description toView:self.view];
-        }
-
-    }];
-}
+    }
 -(void)delete:(id)sender{
-    [DTNetManger delWorkTypeWith:self.workType callBack:^(NSError *error, id response) {
-        if (response) {
-            [MBProgressHUD showError:@"删除成功" toView:self.view];
-            [self.navigationController popViewControllerAnimated:YES];
-        }else{
-            [MBProgressHUD showError:error.description toView:self.view];
-        }
-    }];
-}
+   }
 
 
 @end
