@@ -90,7 +90,7 @@
 }
 +(NSString*)signature{
     //    merchant_ios
-    NSString * str = [NSString stringWithFormat:@"%@%@", @"merchant_ios", [self timeStamp:NO]];
+    NSString * str = [NSString stringWithFormat:@"%@%@", @"staff_ios", [self timeStamp:NO]];
     //sha1
     const char *cstr = [str cStringUsingEncoding:NSUTF8StringEncoding];
     

@@ -69,7 +69,12 @@
                 UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:main];
                 [Tools enterRootViewController:nav animated:YES];
             }else{
-                [MBProgressHUD showError:@"登录失败，请重试" toView:self.view];
+                if (response && [response isKindOfClass:[NSString class]]) {
+                    [MBProgressHUD showError:(NSString*)response toView:self.view];
+                }else{
+                    [MBProgressHUD showError:@"登录失败，请重试" toView:self.view];
+                }
+                
             }
         }];
     }

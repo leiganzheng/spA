@@ -16,6 +16,7 @@
 @property (nonatomic, strong) UITableView    *myTableView;
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, strong) NSArray *iconSource;
+@property (nonatomic, strong) NSString *date;
 @property (nonatomic, assign) NSInteger page;
 
 @end
@@ -53,8 +54,11 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"个人业绩";
     [self.view addSubview:self.myTableView];
+    [self setLeftBackNavItem];
    self.page = 1;
+    self.date = @"2017-04";
     
 }
 -(void)viewWillAppear:(BOOL)animated{
@@ -68,17 +72,21 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 4;
+    return 80;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    return 80;
+    return 2;
 }
--(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0,0,KSCREEN_WIDTH,80)];
-    v.backgroundColor = [UIColor clearColor];
+    v.backgroundColor = [UIColor lightGrayColor];
+    UIImageView *img = [[UIImageView alloc] init];
+    img.frame = CGRectMake(0,0,KSCREEN_WIDTH,80);
+    img.image = [UIImage imageNamed:@"staffmanagement_img_bg"];
+    [v addSubview:img];
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn.frame = CGRectMake(0, 40, KSCREEN_WIDTH, 44);
+    btn.frame = CGRectMake(0, 40, 200, 44);
     [btn setImage:[UIImage imageNamed:@"staffmanagement_btn_add_pressed"] forState:UIControlStateNormal];
     [btn setImage:[UIImage imageNamed:@"staffmanagement_btn_add"] forState:UIControlStateSelected];
     btn.backgroundColor = [UIColor clearColor];
@@ -98,9 +106,9 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     EmployeeTableViewCell *myCell = (EmployeeTableViewCell *)cell;
     myCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     NSDictionary *dict = self.dataSource[indexPath.row];
-    myCell.name.text = [dict objectForKey:@"name"];
-    myCell.time.text = [dict objectForKey:@"create_time"];
-    myCell.logoName.text = [dict objectForKey:@"work_type"];
+    myCell.name.text = [dict objectForKey:@"customer"];
+    myCell.time.text = [dict objectForKey:@"pay_time"];
+    myCell.logoName.text = [dict objectForKey:@"price"];
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -108,43 +116,44 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     NSDictionary *dict = self.dataSource[indexPath.row];
     StaffInfoViewController *cvc = [[StaffInfoViewController alloc] init];
     cvc.staffID = [NSString stringWithFormat:@"%@",[dict objectForKey:@"id"]];
-    cvc.workStr = [dict objectForKey:@"work_type"];
+    cvc.workStr = [dict objectForKey:@"customer_id"];
     [self.navigationController pushViewController:cvc animated:YES];
 }
 - (void)save:(UIButton *)sender{
  
 }
 -(void)featchData{
-//    [DTNetManger StaffPageWith:[NSString stringWithFormat:@"%li",(long)self.page] size:@"10" callBack:^(NSError *error, id response) {
-//        if (response && [response isKindOfClass:[NSArray class]]) {
-//            NSArray *arr = (NSArray*)response;
-//            if (self.page == 1) {
-//                self.dataSource = [[NSMutableArray alloc] init];
-//                [self.dataSource removeAllObjects];
-//                if (arr.count>0) {
-//                    [self.dataSource addObjectsFromArray:arr];
-//                    [_myTableView reloadData];
-//                }else{
-//                    [MBProgressHUD showError:@"暂无数据" toView:self.view];
-//                }
-//                [self.myTableView.mj_header endRefreshing];
-//            }else{
-//                if (arr.count>0) {
-//                    [self.dataSource addObjectsFromArray:arr];
-//                    self.page = self.page + 1;
-//                    [_myTableView reloadData];
-//                }else{
-//                    [MBProgressHUD showError:@"暂无数据" toView:self.view];
-//                }
-//                [self.myTableView.mj_footer endRefreshing];
-//            }
-//        }else{
-//            if ([response  isKindOfClass:[NSString class]]) {
-//                [MBProgressHUD showError:(NSString *)response toView:self.view];
-//                [self.myTableView.mj_header endRefreshing];
-//                [self.myTableView.mj_footer endRefreshing];
-//            }
-//        }
-//    }];
+    [DTNetManger orderGetStaffPageWith:[NSString stringWithFormat:@"%li",(long)self.page] size:@"10" date:self.date callBack:^(NSError *error, id response) {
+        if (response && [response isKindOfClass:[NSArray class]]) {
+            NSArray *arr = (NSArray*)response;
+            if (self.page == 1) {
+                self.dataSource = [[NSMutableArray alloc] init];
+                [self.dataSource removeAllObjects];
+                if (arr.count>0) {
+                    [self.dataSource addObjectsFromArray:arr];
+                    [_myTableView reloadData];
+                }else{
+                    [MBProgressHUD showError:@"暂无数据" toView:self.view];
+                }
+                [self.myTableView.mj_header endRefreshing];
+            }else{
+                if (arr.count>0) {
+                    [self.dataSource addObjectsFromArray:arr];
+                    self.page = self.page + 1;
+                    [_myTableView reloadData];
+                }else{
+                    [MBProgressHUD showError:@"暂无数据" toView:self.view];
+                }
+                [self.myTableView.mj_footer endRefreshing];
+            }
+        }else{
+            if ([response  isKindOfClass:[NSString class]]) {
+                [MBProgressHUD showError:(NSString *)response toView:self.view];
+                [self.myTableView.mj_header endRefreshing];
+                [self.myTableView.mj_footer endRefreshing];
+            }
+        }
+
+    }];
 }
 @end

@@ -21,7 +21,7 @@
 #define kDTStaffSetCreditCardUrl         @"Staff/setCreditCard"
 //order
 #define kDTOrderSumUrl                @"Order/sum"
-#define kDTOrderGetStaffPagUrl                 @"Order/getStaffPag"
+#define kDTOrderGetStaffPagUrl                 @"Order/getStaffPage"
 #define kDTOrderGetDetailUrl                @"Order/getDetail"
 #define kDTServiceGetCategoryListUrl                   @"Service/getCategoryList"
 //Customer

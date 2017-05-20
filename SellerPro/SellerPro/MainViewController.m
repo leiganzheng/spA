@@ -9,7 +9,7 @@
 #import "MainViewController.h"
 #import "DTMyTableViewCell.h"
 #import "EmployeeViewController.h"
-#import "FromsMViewController.h"
+#import "StaffViewController.h"
 #import "ServiceViewController.h"
 #import "ForgetPWViewController.h"
 #import "LoginViewController.h"
@@ -139,7 +139,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     switch (indexPath.row) {
         case 0:
         {
-            FromsMViewController *cvc = [board instantiateViewControllerWithIdentifier:@"FromsMViewController"];
+            StaffViewController *cvc = [[StaffViewController alloc]init];
             [self.navigationController pushViewController:cvc animated:YES];
         }
  
