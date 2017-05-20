@@ -27,7 +27,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 {
     if (!_myTableView) {
         _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KSCREEN_WIDTH, KSCREEN_HEIGHT-144) style:UITableViewStylePlain];
-        _myTableView.rowHeight = 90;
+        _myTableView.rowHeight = 60;
         _myTableView.delegate   = self;
         _myTableView.dataSource = self;
         _myTableView.backgroundColor = [UIColor clearColor];
@@ -76,7 +76,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    return 2;
+    return 0.01;
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0,0,KSCREEN_WIDTH,80)];
@@ -104,11 +104,11 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     EmployeeTableViewCell *myCell = (EmployeeTableViewCell *)cell;
-    myCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+//    myCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     NSDictionary *dict = self.dataSource[indexPath.row];
     myCell.name.text = [dict objectForKey:@"customer"];
     myCell.time.text = [dict objectForKey:@"pay_time"];
-    myCell.logoName.text = [dict objectForKey:@"price"];
+    myCell.logoName.text =[NSString stringWithFormat:@"消费¥:%@", [dict objectForKey:@"price"]];
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {

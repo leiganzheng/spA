@@ -8,9 +8,9 @@
 
 #import "MainViewController.h"
 #import "DTMyTableViewCell.h"
-#import "EmployeeViewController.h"
+#import "QRCodeViewController.h"
 #import "StaffViewController.h"
-#import "ServiceViewController.h"
+#import "ProgramViewController.h"
 #import "ForgetPWViewController.h"
 #import "LoginViewController.h"
 #import "AppDelegate.h"
@@ -146,14 +146,14 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
             break;
         case 1:
         {
-            EmployeeViewController *cvc = [board instantiateViewControllerWithIdentifier:@"EmployeeViewController"];
+            ProgramViewController *cvc = [[ProgramViewController alloc] init];
             [self.navigationController pushViewController:cvc animated:YES];
         }
             break;
         case 2:
         {
-            ServiceViewController *cvc = [board instantiateViewControllerWithIdentifier:@"ServiceViewController"];
-            [self.navigationController pushViewController:cvc animated:YES];
+//            ServiceViewController *cvc = [board instantiateViewControllerWithIdentifier:@"ServiceViewController"];
+//            [self.navigationController pushViewController:cvc animated:YES];
         }
   
             break;
@@ -171,6 +171,11 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 
 }
 #pragma mark - private action
+-(void)save:(UIButton *)sender
+{
+    QRCodeViewController *vc = [[QRCodeViewController alloc]init];
+     [self.navigationController pushViewController:vc animated:YES];
+}
 - (void)logOut:(UIButton *)sender{
     ((AppDelegate*)[UIApplication sharedApplication].delegate).phone = @"";
     [((AppDelegate*)[UIApplication sharedApplication].delegate).myTimer invalidate];

@@ -7,23 +7,22 @@
 //
 
 #import "QRCodeViewController.h"
+#import <AVFoundation/AVFoundation.h>
 
-@interface QRCodeViewController ()
+@interface QRCodeViewController ()<AVCaptureMetadataOutputObjectsDelegate>
 @property (weak, nonatomic) IBOutlet UIView *bgView;
 @property (weak, nonatomic) IBOutlet UIButton *veryBtn;
 @property (weak, nonatomic) IBOutlet UIImageView *qrV;
-
+@property (strong, nonatomic)AVCaptureSession * session;//输入输出的中间桥梁
 @end
 
 @implementation QRCodeViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-        
-    [Tools QRCodeGenerator:self.qrV withUrl:[self.dict objectForKey:@"url"]];
-    [self openCountdown];
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap)];
+     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap)];
     [self.view addGestureRecognizer:tap];
+    [self scan];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -35,44 +34,44 @@
         
     }];
 }
-// 开启倒计时效果
--(void)openCountdown{
-    NSString *mytime = [NSString stringWithFormat:@"%@",[self.dict objectForKey:@"expires"]];
-    __block NSInteger time = mytime.integerValue-1; //倒计时时间
-    
-    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_source_t _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue);
-    
-    dispatch_source_set_timer(_timer,dispatch_walltime(NULL, 0),1.0*NSEC_PER_SEC, 0); //每秒执行
-    
-    dispatch_source_set_event_handler(_timer, ^{
-        
-        if(time <= 0){ //倒计时结束，关闭
-            
-            dispatch_source_cancel(_timer);
-            dispatch_async(dispatch_get_main_queue(), ^{
-                
-                //设置按钮的样式
-                [self.veryBtn setTitle:@"二维码到期" forState:UIControlStateNormal];
-                [self.veryBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-                self.veryBtn.userInteractionEnabled = YES;
-            });
-            
-        }else{
-            
-            int seconds = (int)time;
-            dispatch_async(dispatch_get_main_queue(), ^{
-                
-                //设置按钮显示读秒效果
-                [self.veryBtn setTitle:[NSString stringWithFormat:@"二维码有效期：(%.2d)", seconds] forState:UIControlStateNormal];
-                [self.veryBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-                self.veryBtn.userInteractionEnabled = NO;
-            });
-            time--;
-        }
-    });
-    dispatch_resume(_timer);
+#pragma mark -AVCaptureMetadataOutputObjectsDelegate method
+
+-(void)captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:(AVCaptureConnection *)connection{
+    if (metadataObjects.count>0) {
+        //[session stopRunning];
+        AVMetadataMachineReadableCodeObject * metadataObject = [metadataObjects objectAtIndex : 0 ];
+        //输出扫描字符串
+        NSLog(@"%@",metadataObject.stringValue);
+    }
 }
+#pragma mark -private method
 
-
+- (void)scan{
+    // Do any additional setup after loading the view, typically from a nib.
+    //获取摄像设备
+    AVCaptureDevice * device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+    //创建输入流
+    AVCaptureDeviceInput * input = [AVCaptureDeviceInput deviceInputWithDevice:device error:nil];
+    //创建输出流
+    AVCaptureMetadataOutput * output = [[AVCaptureMetadataOutput alloc]init];
+    //设置代理 在主线程里刷新
+    [output setMetadataObjectsDelegate:self queue:dispatch_get_main_queue()];
+    
+    //初始化链接对象
+    _session = [[AVCaptureSession alloc]init];
+    //高质量采集率
+    [_session setSessionPreset:AVCaptureSessionPresetHigh];
+    
+    [_session addInput:input];
+    [_session addOutput:output];
+    //设置扫码支持的编码格式(如下设置条形码和二维码兼容)
+    output.metadataObjectTypes=@[AVMetadataObjectTypeQRCode,AVMetadataObjectTypeEAN13Code, AVMetadataObjectTypeEAN8Code, AVMetadataObjectTypeCode128Code];
+    
+    AVCaptureVideoPreviewLayer * layer = [AVCaptureVideoPreviewLayer layerWithSession:_session];
+    layer.videoGravity=AVLayerVideoGravityResizeAspectFill;
+    layer.frame=self.view.layer.bounds;
+    [self.view.layer insertSublayer:layer atIndex:0];
+    //开始捕获
+    [_session startRunning];
+}
 @end
