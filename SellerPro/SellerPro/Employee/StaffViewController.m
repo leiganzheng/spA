@@ -18,6 +18,9 @@
 @property (nonatomic, strong) NSArray *iconSource;
 @property (nonatomic, strong) NSString *date;
 @property (nonatomic, assign) NSInteger page;
+@property (nonatomic, strong) UILabel *sum;
+@property (nonatomic, strong) UILabel *customerSum;
+
 
 @end
 
@@ -55,15 +58,17 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"个人业绩";
+    
     [self.view addSubview:self.myTableView];
     [self setLeftBackNavItem];
    self.page = 1;
     self.date = @"2017-04";
+    [self featchData];
+    [self featchOrderSun];
     
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self featchData];
 }
 #pragma mark - tableView Delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -72,26 +77,41 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 80;
+    return 140;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     return 0.01;
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0,0,KSCREEN_WIDTH,80)];
+    UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0,0,KSCREEN_WIDTH,140)];
     v.backgroundColor = [UIColor lightGrayColor];
     UIImageView *img = [[UIImageView alloc] init];
-    img.frame = CGRectMake(0,0,KSCREEN_WIDTH,80);
+    img.frame = CGRectMake(0,0,KSCREEN_WIDTH,140);
     img.image = [UIImage imageNamed:@"staffmanagement_img_bg"];
     [v addSubview:img];
-    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn.frame = CGRectMake(0, 40, 200, 44);
-    [btn setImage:[UIImage imageNamed:@"staffmanagement_btn_add_pressed"] forState:UIControlStateNormal];
-    [btn setImage:[UIImage imageNamed:@"staffmanagement_btn_add"] forState:UIControlStateSelected];
-    btn.backgroundColor = [UIColor clearColor];
-    [btn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
-    [v addSubview:btn];
+    UIButton *_btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [_btn setTitle:@"2017-04" forState:UIControlStateNormal];
+    [_btn setImage:[UIImage imageNamed:@"home_btn_dropdown"] forState:UIControlStateNormal];
+    _btn.frame = CGRectMake(KSCREEN_WIDTH-80, 8, 80, 44);
+    _btn.titleEdgeInsets = UIEdgeInsetsMake(0, -_btn.imageView.frame.size.width - _btn.frame.size.width + _btn.titleLabel.intrinsicContentSize.width, 0, 0);
+    _btn.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -_btn.titleLabel.frame.size.width - _btn.frame.size.width + _btn.imageView.frame.size.width);
+    [_btn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [v addSubview:_btn];
+    
+    self.sum = [[UILabel alloc] initWithFrame:CGRectMake(0, 20, 200, 40)];
+    self.sum.textAlignment = NSTextAlignmentLeft;
+    self.sum.textColor = [UIColor whiteColor];
+    
+    [v addSubview:self.sum];
+    
+    self.customerSum = [[UILabel alloc] initWithFrame:CGRectMake(0, 60, 250, 40)];
+    self.customerSum.font = [UIFont systemFontOfSize:20.0f];
+    self.customerSum.textAlignment = NSTextAlignmentLeft;
+    self.customerSum.textColor = [UIColor whiteColor];
+
+    [v addSubview:self.customerSum];
     return v;
 }
 
@@ -121,6 +141,21 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 }
 - (void)save:(UIButton *)sender{
  
+}
+-(void)featchOrderSun{
+    [DTNetManger orderSumWith:@"2017-04" callBack:^(NSError *error, id response) {
+        if (response && [response isKindOfClass:[NSDictionary class]]) {
+            NSDictionary *dic = (NSDictionary*)response;
+            self.sum.text = [NSString stringWithFormat:@"客户:%@人",dic[@"count_customer"]];
+            self.customerSum.text = [NSString stringWithFormat:@"¥%@",dic[@"count_money"]];
+            [self.myTableView reloadData];
+        }else{
+            if ([response  isKindOfClass:[NSString class]]) {
+                [MBProgressHUD showError:(NSString *)response toView:self.view];
+            }
+        }
+
+    }];
 }
 -(void)featchData{
     [DTNetManger orderGetStaffPageWith:[NSString stringWithFormat:@"%li",(long)self.page] size:@"10" date:self.date callBack:^(NSError *error, id response) {

@@ -189,8 +189,8 @@
         NSString *code = [(NSDictionary*)response objectForKey:@"code"];
         if (code.integerValue == 0) {
             if (callBack) {
-                NSArray *arr = [(NSDictionary*)response objectForKey:@"data"];
-                callBack(nil,arr);
+                NSDictionary *dict = [(NSDictionary*)response objectForKey:@"data"];
+                callBack(nil,dict);
             }
         }else{
             if (code.integerValue == 401) {
