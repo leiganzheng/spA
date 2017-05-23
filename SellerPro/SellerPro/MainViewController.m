@@ -85,6 +85,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     btn.frame = CGRectMake(20, 40, KSCREEN_WIDTH-40, 44);
     [btn setTitle:@"开始接待" forState:UIControlStateNormal];
     btn.backgroundColor = RGB(17, 157, 255);
+    [Tools configCornerOfView:btn with:3];
     [btn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
     [v addSubview:btn];
     

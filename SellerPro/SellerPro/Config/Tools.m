@@ -15,7 +15,7 @@
 
 +(void)configCornerOfView:(UIView *)view with:(NSInteger)value{
     if (view) {
-        view.layer.cornerRadius = 3;
+        view.layer.cornerRadius = value;
         view.layer.masksToBounds = YES;
     }
 }

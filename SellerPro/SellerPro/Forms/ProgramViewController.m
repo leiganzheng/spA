@@ -8,6 +8,7 @@
 
 #import "ProgramViewController.h"
 #import "SprogramTableViewCell.h"
+#import "SFormViewController.h"
 
 @interface ProgramViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -16,6 +17,7 @@
 @property (nonatomic, strong) NSArray *iconSource;
 @property (nonatomic, assign) NSInteger page;
 @property (nonatomic, strong) NSString *date;
+@property (nonatomic, strong) NSDictionary *dataDict;
 
 @end
 
@@ -67,7 +69,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     _btn.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -_btn.titleLabel.frame.size.width - _btn.frame.size.width + _btn.imageView.frame.size.width);
     [_btn addTarget:self action:@selector(select:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_btn];
-
+    [self featchOrderSun];
     [self featchData];
 }
 
@@ -86,19 +88,44 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     return 0.01;
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0,0,KSCREEN_WIDTH,80)];
+    UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0,0,KSCREEN_WIDTH,140)];
     v.backgroundColor = [UIColor lightGrayColor];
+    
     UIImageView *img = [[UIImageView alloc] init];
-    img.frame = CGRectMake(0,0,KSCREEN_WIDTH,80);
+    img.frame = CGRectMake(0,0,KSCREEN_WIDTH,140);
     img.image = [UIImage imageNamed:@"staffmanagement_img_bg"];
     [v addSubview:img];
-    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn.frame = CGRectMake(0, 40, 200, 44);
-    [btn setImage:[UIImage imageNamed:@"staffmanagement_btn_add_pressed"] forState:UIControlStateNormal];
-    [btn setImage:[UIImage imageNamed:@"staffmanagement_btn_add"] forState:UIControlStateSelected];
-    btn.backgroundColor = [UIColor clearColor];
-    [btn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
-    [v addSubview:btn];
+    
+    
+    UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(20, 40, 200, 40)];
+    lb.textAlignment = NSTextAlignmentLeft;
+    lb.textColor = [UIColor whiteColor];
+    lb.text = @"余额";
+    [v addSubview:lb];
+    
+    UILabel *lb1 = [[UILabel alloc] initWithFrame:CGRectMake(20, 70, 250, 40)];
+    lb1.font = [UIFont boldSystemFontOfSize:28.0f];
+    lb1.textAlignment = NSTextAlignmentLeft;
+    lb1.textColor = [UIColor whiteColor];
+    
+    UILabel *lb2 = [[UILabel alloc] initWithFrame:CGRectMake(KSCREEN_WIDTH-90, 40, 200, 40)];
+    lb2.textAlignment = NSTextAlignmentLeft;
+    lb2.textColor = [UIColor whiteColor];
+    lb2.text = @"累计佣金";
+    [v addSubview:lb2];
+    
+    UILabel *lb3 = [[UILabel alloc] initWithFrame:CGRectMake(KSCREEN_WIDTH-90, 70, 250, 40)];
+    lb3.font = [UIFont boldSystemFontOfSize:28.0f];
+    lb3.textAlignment = NSTextAlignmentLeft;
+    lb3.textColor = [UIColor whiteColor];
+    [v addSubview:lb3];
+    
+    if (_dataDict.allKeys != 0) {
+        lb1.text = [NSString stringWithFormat:@"¥%@",_dataDict[@"commission_valid"]];
+        lb3.text = [NSString stringWithFormat:@"¥%@",_dataDict[@"count_commission_valid"]];
+    }
+    [v addSubview:lb1];
+
     return v;
 }
 
@@ -126,8 +153,24 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     [self featchData];
 }
 - (void)select:(UIButton *)sender{
-    
+    SFormViewController *vc = [[SFormViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
+-(void)featchOrderSun{
+    [DTNetManger staffGetCommission:^(NSError *error, id response) {
+        if (response && [response isKindOfClass:[NSDictionary class]]) {
+            NSDictionary *dic = (NSDictionary*)response;
+            self.dataDict = dic;
+            [self.myTableView reloadData];
+        }else{
+            if ([response  isKindOfClass:[NSString class]]) {
+                [MBProgressHUD showError:(NSString *)response toView:self.view];
+            }
+        }
+
+    }];
+}
+
 -(void)featchData{
     [DTNetManger staffMoneyGetPageWith:[NSString stringWithFormat:@"%li",(long)self.page] size:@"10" callBack:^(NSError *error, id response) {
         if (response && [response isKindOfClass:[NSArray class]]) {

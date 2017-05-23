@@ -8,6 +8,7 @@
 
 #import "SFormViewController.h"
 #import "SFormTableViewCell.h"
+#import "EditCardViewController.h"
 
 @interface SFormViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -53,6 +54,8 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"申请结算";
+    [self setLeftBackNavItem];
     self.page = 1;
     self.date = @"2017-04";
     [self.view addSubview:self.myTableView];
@@ -69,24 +72,70 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 //    return ((NSArray*)self.dataSource[section]).count;
     return _dataSource.count;
 }
-//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-//{
-//    if (section == 0) {
-//        return 0.01;
-//    }
-//    return 40;
-//}
-//- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
-//{
-//    return 0.01;
-//}
-//-(NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-//    if (section ==0) {
-//        return  @"";
-//    }else{
-//        return @"-----昨天------";
-//    }
-//}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 260;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 0.01;
+}
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0,0,KSCREEN_WIDTH,260)];
+    v.backgroundColor = RGB(243, 240, 246);
+    
+    UIImageView *img = [[UIImageView alloc] init];
+    img.frame = CGRectMake(0,10,KSCREEN_WIDTH,140);
+    img.image = [UIImage imageNamed:@"bg_bankcard_pressed"];
+    [v addSubview:img];
+    
+    
+    UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(15, 30, 200, 40)];
+    lb.textAlignment = NSTextAlignmentLeft;
+    lb.textColor = [UIColor whiteColor];
+    lb.text = @"88888888*****88888";
+    [v addSubview:lb];
+    
+    UILabel *lb1 = [[UILabel alloc] initWithFrame:CGRectMake(15, 90, 250, 40)];
+    lb1.textAlignment = NSTextAlignmentLeft;
+    lb1.text = @"中国招商银行";
+    lb1.textColor = [UIColor whiteColor];
+    [v addSubview:lb1];
+    
+    UIButton *btn1 = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn1.frame = CGRectMake(KSCREEN_WIDTH-30,30, 15, 44);
+    [btn1 setImage:[UIImage imageNamed:@"btn_edit bankcard"] forState:0];
+    [btn1 addTarget:self action:@selector(edit) forControlEvents:UIControlEventTouchUpInside];
+    [v addSubview:btn1];
+
+    
+    UITextField *tf = [[UITextField alloc] init];
+    tf.frame = CGRectMake(10, 155, KSCREEN_WIDTH-20, 30);
+    tf.backgroundColor = [UIColor whiteColor];
+    tf.text = @"¥88";
+    [Tools configCornerOfView:tf with:3];
+    tf.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    tf.layer.borderWidth = 1;
+    [v addSubview:tf];
+    
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn.frame = CGRectMake(10,200, KSCREEN_WIDTH-20, 44);
+    [btn setTitle:@"提交" forState:UIControlStateNormal];
+    btn.backgroundColor = RGB(17, 157, 255);
+    [Tools configCornerOfView:btn with:3];
+//    [btn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
+    [v addSubview:btn];
+    
+    UILabel *lb3 = [[UILabel alloc] initWithFrame:CGRectMake(10, 255, KSCREEN_WIDTH-20, 20)];
+    lb3.textAlignment = NSTextAlignmentCenter;
+    lb3.textColor = [UIColor blackColor];
+    lb3.text = @"--------结算记录-------";
+    [v addSubview:lb3];
+    
+    return v;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     SFormTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kDTMyCellIdentifier];
@@ -114,7 +163,44 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     self.date = date;
     [self featchData];
 }
+-(void)edit{
+    UIStoryboard *board = [UIStoryboard storyboardWithName: @"Main" bundle: nil];
+    EditCardViewController *cvc = [board instantiateViewControllerWithIdentifier:@"EditCardViewController"];
+    [self.navigationController pushViewController:cvc animated:YES];
+}
 -(void)featchData{
-    
+    [DTNetManger staffWithdrawGetPageWith:[NSString stringWithFormat:@"%li",(long)self.page] size:@"10" callBack:^(NSError *error, id response) {
+        if (response && [response isKindOfClass:[NSArray class]]) {
+            NSArray *arr = (NSArray*)response;
+            if (self.page == 1) {
+                self.dataSource = [[NSMutableArray alloc] init];
+                [self.dataSource removeAllObjects];
+                if (arr.count>0) {
+                    [self.dataSource addObjectsFromArray:arr];
+                    [_myTableView reloadData];
+                }else{
+                    [MBProgressHUD showError:@"暂无数据" toView:self.view];
+                }
+                [self.myTableView.mj_header endRefreshing];
+            }else{
+                if (arr.count>0) {
+                    [self.dataSource addObjectsFromArray:arr];
+                    self.page = self.page + 1;
+                    [_myTableView reloadData];
+                }else{
+                    [MBProgressHUD showError:@"暂无数据" toView:self.view];
+                }
+                [self.myTableView.mj_footer endRefreshing];
+            }
+        }else{
+            if ([response  isKindOfClass:[NSString class]]) {
+                [MBProgressHUD showError:(NSString *)response toView:self.view];
+                [self.myTableView.mj_header endRefreshing];
+                [self.myTableView.mj_footer endRefreshing];
+            }
+        }
+        
+    }];
+
 }
 @end

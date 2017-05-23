@@ -15,6 +15,7 @@
 
 @property (nonatomic, strong) UITableView    *myTableView;
 @property (nonatomic, strong) NSMutableArray *dataSource;
+@property (nonatomic, strong) NSDictionary *dataDict;
 @property (nonatomic, strong) NSArray *iconSource;
 @property (nonatomic, strong) NSString *date;
 @property (nonatomic, assign) NSInteger page;
@@ -86,32 +87,41 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0,0,KSCREEN_WIDTH,140)];
     v.backgroundColor = [UIColor lightGrayColor];
+    
     UIImageView *img = [[UIImageView alloc] init];
     img.frame = CGRectMake(0,0,KSCREEN_WIDTH,140);
     img.image = [UIImage imageNamed:@"staffmanagement_img_bg"];
     [v addSubview:img];
+    
+    UIView *bgV = [[UIView alloc] initWithFrame:CGRectMake(KSCREEN_WIDTH-90, 8, 80, 24)];
+    bgV.backgroundColor = [UIColor colorWithWhite:0.f alpha:0.5];
+    [v addSubview:bgV];
+    bgV.layer.masksToBounds = YES;
+    bgV.layer.cornerRadius = 10;
+    
     UIButton *_btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [_btn setTitle:@"2017-04" forState:UIControlStateNormal];
-    [_btn setImage:[UIImage imageNamed:@"home_btn_dropdown"] forState:UIControlStateNormal];
-    _btn.frame = CGRectMake(KSCREEN_WIDTH-80, 8, 80, 44);
-    _btn.titleEdgeInsets = UIEdgeInsetsMake(0, -_btn.imageView.frame.size.width - _btn.frame.size.width + _btn.titleLabel.intrinsicContentSize.width, 0, 0);
-    _btn.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -_btn.titleLabel.frame.size.width - _btn.frame.size.width + _btn.imageView.frame.size.width);
+    [_btn setTitle:@"04" forState:UIControlStateNormal];
+    [_btn setImage:[UIImage imageNamed:@"btn_calendar"] forState:UIControlStateNormal];
+    _btn.frame = CGRectMake(0, 0, 80, 24);
+//    _btn.titleEdgeInsets = UIEdgeInsetsMake(0, -_btn.imageView.frame.size.width - _btn.frame.size.width + _btn.titleLabel.intrinsicContentSize.width, 0, 0);
+//    _btn.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -_btn.titleLabel.frame.size.width - _btn.frame.size.width + _btn.imageView.frame.size.width);
     [_btn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
+    [bgV addSubview:_btn];
     
-    [v addSubview:_btn];
+    UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(20, 40, 200, 40)];
+    lb.textAlignment = NSTextAlignmentLeft;
+    lb.textColor = [UIColor whiteColor];
+    [v addSubview:lb];
     
-    self.sum = [[UILabel alloc] initWithFrame:CGRectMake(0, 20, 200, 40)];
-    self.sum.textAlignment = NSTextAlignmentLeft;
-    self.sum.textColor = [UIColor whiteColor];
-    
-    [v addSubview:self.sum];
-    
-    self.customerSum = [[UILabel alloc] initWithFrame:CGRectMake(0, 60, 250, 40)];
-    self.customerSum.font = [UIFont systemFontOfSize:20.0f];
-    self.customerSum.textAlignment = NSTextAlignmentLeft;
-    self.customerSum.textColor = [UIColor whiteColor];
-
-    [v addSubview:self.customerSum];
+    UILabel *lb1 = [[UILabel alloc] initWithFrame:CGRectMake(20, 70, 250, 40)];
+    lb1.font = [UIFont boldSystemFontOfSize:28.0f];
+    lb1.textAlignment = NSTextAlignmentLeft;
+    lb1.textColor = [UIColor whiteColor];
+    if (_dataDict.allKeys != 0) {
+         lb.text = [NSString stringWithFormat:@"客户:%@人",_dataDict[@"count_customer"]];
+        lb1.text = [NSString stringWithFormat:@"¥%@",_dataDict[@"count_money"]];
+    }
+    [v addSubview:lb1];
     return v;
 }
 
@@ -146,8 +156,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     [DTNetManger orderSumWith:@"2017-04" callBack:^(NSError *error, id response) {
         if (response && [response isKindOfClass:[NSDictionary class]]) {
             NSDictionary *dic = (NSDictionary*)response;
-            self.sum.text = [NSString stringWithFormat:@"客户:%@人",dic[@"count_customer"]];
-            self.customerSum.text = [NSString stringWithFormat:@"¥%@",dic[@"count_money"]];
+            self.dataDict = dic;
             [self.myTableView reloadData];
         }else{
             if ([response  isKindOfClass:[NSString class]]) {

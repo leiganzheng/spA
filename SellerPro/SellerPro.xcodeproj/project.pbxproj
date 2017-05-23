@@ -36,6 +36,8 @@
 		71322E3C1EC0AFB1003E0D23 /* DddSeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71322E3B1EC0AFB1003E0D23 /* DddSeviceViewController.m */; };
 		7148E8FA1EC9F199007A15AB /* StaffInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7148E8F81EC9F199007A15AB /* StaffInfoTableViewCell.m */; };
 		7148E8FB1EC9F199007A15AB /* StaffInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7148E8F91EC9F199007A15AB /* StaffInfoTableViewCell.xib */; };
+		71790F271ED4830F00E865E3 /* EditCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71790F261ED4830F00E865E3 /* EditCardViewController.m */; };
+		71790F2A1ED4886100E865E3 /* ScanResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71790F291ED4886100E865E3 /* ScanResultViewController.m */; };
 		71AA0ECF1EBF67DD00D2ADD3 /* TabContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71AA0ECE1EBF67DD00D2ADD3 /* TabContainerViewController.m */; };
 		71AA0ED21EBF68E400D2ADD3 /* ContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71AA0ED11EBF68E400D2ADD3 /* ContentViewController.m */; };
 		BB87F43E1EC05A5E00D67843 /* FPPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB87F4391EC05A5E00D67843 /* FPPopoverController.m */; };
@@ -115,6 +117,10 @@
 		7148E8F71EC9F199007A15AB /* StaffInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaffInfoTableViewCell.h; sourceTree = "<group>"; };
 		7148E8F81EC9F199007A15AB /* StaffInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaffInfoTableViewCell.m; sourceTree = "<group>"; };
 		7148E8F91EC9F199007A15AB /* StaffInfoTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StaffInfoTableViewCell.xib; sourceTree = "<group>"; };
+		71790F251ED4830F00E865E3 /* EditCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditCardViewController.h; sourceTree = "<group>"; };
+		71790F261ED4830F00E865E3 /* EditCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditCardViewController.m; sourceTree = "<group>"; };
+		71790F281ED4886100E865E3 /* ScanResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanResultViewController.h; sourceTree = "<group>"; };
+		71790F291ED4886100E865E3 /* ScanResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanResultViewController.m; sourceTree = "<group>"; };
 		71AA0ECD1EBF67DD00D2ADD3 /* TabContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabContainerViewController.h; sourceTree = "<group>"; };
 		71AA0ECE1EBF67DD00D2ADD3 /* TabContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabContainerViewController.m; sourceTree = "<group>"; };
 		71AA0ED01EBF68E400D2ADD3 /* ContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentViewController.h; sourceTree = "<group>"; };
@@ -232,6 +238,10 @@
 				BB87F4571EC173F700D67843 /* SFormTableViewCell.h */,
 				BB87F4581EC173F700D67843 /* SFormTableViewCell.m */,
 				BB87F4591EC173F700D67843 /* SFormTableViewCell.xib */,
+				71790F251ED4830F00E865E3 /* EditCardViewController.h */,
+				71790F261ED4830F00E865E3 /* EditCardViewController.m */,
+				71790F281ED4886100E865E3 /* ScanResultViewController.h */,
+				71790F291ED4886100E865E3 /* ScanResultViewController.m */,
 			);
 			path = Forms;
 			sourceTree = "<group>";
@@ -527,6 +537,7 @@
 				BB87F44B1EC16A1D00D67843 /* EmployeeTableViewCell.m in Sources */,
 				712952331EC0BE49005A16F0 /* PersionViewController.m in Sources */,
 				7148E8FA1EC9F199007A15AB /* StaffInfoTableViewCell.m in Sources */,
+				71790F2A1ED4886100E865E3 /* ScanResultViewController.m in Sources */,
 				712952271EC0BC36005A16F0 /* StaffViewController.m in Sources */,
 				BBE524B81ECAE4D600FCD703 /* UIViewController+BackButtonHandler.m in Sources */,
 				71AA0ECF1EBF67DD00D2ADD3 /* TabContainerViewController.m in Sources */,
@@ -540,6 +551,7 @@
 				BB87F45A1EC173F700D67843 /* SFormTableViewCell.m in Sources */,
 				7109ED521EBEF21900C542AC /* LoginViewController.m in Sources */,
 				71AA0ED21EBF68E400D2ADD3 /* ContentViewController.m in Sources */,
+				71790F271ED4830F00E865E3 /* EditCardViewController.m in Sources */,
 				BB87F4431EC05D2500D67843 /* TimeViewController.m in Sources */,
 				7109ED421EBEEA7B00C542AC /* DTMyTableViewCell.m in Sources */,
 				7109ED3F1EBEE8BC00C542AC /* DTBaseViewController.m in Sources */,

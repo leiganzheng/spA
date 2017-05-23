@@ -8,6 +8,7 @@
 
 #import "QRCodeViewController.h"
 #import <AVFoundation/AVFoundation.h>
+#import "ScanResultViewController.h"
 
 @interface QRCodeViewController ()<AVCaptureMetadataOutputObjectsDelegate>
 @property (weak, nonatomic) IBOutlet UIView *bgView;
@@ -20,9 +21,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"拍照";
+    [self setLeftBackNavItem];
      UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap)];
     [self.view addGestureRecognizer:tap];
     [self scan];
+    [self buildView];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -45,7 +49,38 @@
     }
 }
 #pragma mark -private method
+- (void)buildView{
+    UIView *bgv = [[UIView alloc] initWithFrame:self.view.bounds];
+    bgv.backgroundColor = [UIColor colorWithWhite:0.f alpha:0.5];
+    [self.view addSubview:bgv];
+    
+    
+    UILabel *lb1 = [[UILabel alloc] initWithFrame:CGRectMake(10,self.view.center.y-40-100, KSCREEN_WIDTH-20, 44)];
+    lb1.textAlignment = NSTextAlignmentCenter;
+    lb1.text = @"请将客户的车牌号对准拍照区域";
+    lb1.textColor = [UIColor whiteColor];
+    [bgv addSubview:lb1];
+    
+    UIView *scanV = [[UIView alloc] initWithFrame:CGRectMake(10,self.view.center.y-40, KSCREEN_WIDTH-20, 80)];
+    scanV.backgroundColor = [UIColor colorWithWhite:1 alpha:0.1];
+    [bgv addSubview:scanV];
+    
+    
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn.frame = CGRectMake(self.view.center.x-40,KSCREEN_HEIGHT - 180, 80, 80);
+    [btn setTitle:@"拍照" forState:UIControlStateNormal];
+    btn.backgroundColor = RGB(17, 157, 255);
+    [Tools configCornerOfView:btn with:40];
+    [btn addTarget:self action:@selector(photo) forControlEvents:UIControlEventTouchUpInside];
+    [bgv addSubview:btn];
 
+}
+- (void)photo{
+    UIStoryboard *board = [UIStoryboard storyboardWithName: @"Main" bundle: nil];
+    ScanResultViewController *cvc = [board instantiateViewControllerWithIdentifier:@"ScanResultViewController"];
+    [self.navigationController pushViewController:cvc animated:YES];
+
+}
 - (void)scan{
     // Do any additional setup after loading the view, typically from a nib.
     //获取摄像设备

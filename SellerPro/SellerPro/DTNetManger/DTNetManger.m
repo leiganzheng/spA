@@ -113,8 +113,8 @@
         NSString *code = [(NSDictionary*)response objectForKey:@"code"];
         if (code.integerValue == 0) {
             if (callBack) {
-                NSArray *arr = [(NSDictionary*)response objectForKey:@"data"];
-                callBack(nil,arr);
+                NSDictionary *dic = [(NSDictionary*)response objectForKey:@"data"];
+                callBack(nil,dic);
             }
         }else{
             if (code.integerValue == 401) {
