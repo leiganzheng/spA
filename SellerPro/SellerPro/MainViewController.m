@@ -8,12 +8,12 @@
 
 #import "MainViewController.h"
 #import "DTMyTableViewCell.h"
-#import "QRCodeViewController.h"
 #import "StaffViewController.h"
 #import "ProgramViewController.h"
 #import "ForgetPWViewController.h"
 #import "LoginViewController.h"
 #import "AppDelegate.h"
+#import "ScanCodeViewController.h"
 
 @interface MainViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -174,7 +174,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 #pragma mark - private action
 -(void)save:(UIButton *)sender
 {
-    QRCodeViewController *vc = [[QRCodeViewController alloc]init];
+    ScanCodeViewController *vc = [[ScanCodeViewController alloc]init];
      [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)logOut:(UIButton *)sender{
