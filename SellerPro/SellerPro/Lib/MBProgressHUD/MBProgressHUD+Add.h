@@ -11,6 +11,7 @@
 @interface MBProgressHUD (Add)
 + (void)showError:(NSString *)error toView:(UIView *)view;
 + (void)showSuccess:(NSString *)success toView:(UIView *)view;
++ (void)hiddenFromView:(UIView *)view;
 
 + (MBProgressHUD *)showMessag:(NSString *)message toView:(UIView *)view;
 @end

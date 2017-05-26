@@ -11,9 +11,6 @@
 		7109ED3B1EBEE84800C542AC /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7109ED3A1EBEE84800C542AC /* MainViewController.m */; };
 		7109ED3F1EBEE8BC00C542AC /* DTBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7109ED3E1EBEE8BC00C542AC /* DTBaseViewController.m */; };
 		7109ED421EBEEA7B00C542AC /* DTMyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7109ED411EBEEA7B00C542AC /* DTMyTableViewCell.m */; };
-		7109ED481EBEF11300C542AC /* EmployeeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7109ED471EBEF11300C542AC /* EmployeeViewController.m */; };
-		7109ED4B1EBEF16500C542AC /* FromsMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7109ED4A1EBEF16500C542AC /* FromsMViewController.m */; };
-		7109ED4E1EBEF1AA00C542AC /* ServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7109ED4D1EBEF1AA00C542AC /* ServiceViewController.m */; };
 		7109ED521EBEF21900C542AC /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7109ED511EBEF21900C542AC /* LoginViewController.m */; };
 		7109ED551EBEF23800C542AC /* ForgetPWViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7109ED541EBEF23800C542AC /* ForgetPWViewController.m */; };
 		7109ED581EBEF24400C542AC /* SettingPWViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7109ED571EBEF24400C542AC /* SettingPWViewController.m */; };
@@ -25,16 +22,10 @@
 		710FEF661EBEE23D0064CC85 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 710FEF641EBEE23D0064CC85 /* LaunchScreen.storyboard */; };
 		712952271EC0BC36005A16F0 /* StaffViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 712952261EC0BC36005A16F0 /* StaffViewController.m */; };
 		712952301EC0BE3B005A16F0 /* SFormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7129522F1EC0BE3B005A16F0 /* SFormViewController.m */; };
-		712952331EC0BE49005A16F0 /* PersionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 712952321EC0BE49005A16F0 /* PersionViewController.m */; };
 		712952361EC0BE58005A16F0 /* ProgramViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 712952351EC0BE58005A16F0 /* ProgramViewController.m */; };
-		712952391EC0BF7A005A16F0 /* StaffInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 712952381EC0BF7A005A16F0 /* StaffInfoViewController.m */; };
 		7129523C1EC208BD005A16F0 /* AddEmployeeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7129523B1EC208BD005A16F0 /* AddEmployeeViewController.m */; };
 		7129525C1EC36751005A16F0 /* AddWorkTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7129525B1EC36751005A16F0 /* AddWorkTypeViewController.m */; };
-		712952681EC8860D005A16F0 /* StaffInfoMdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 712952671EC8860D005A16F0 /* StaffInfoMdViewController.m */; };
 		71322E391EC09F0D003E0D23 /* Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 71322E381EC09F0D003E0D23 /* Tools.m */; };
-		71322E3C1EC0AFB1003E0D23 /* DddSeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71322E3B1EC0AFB1003E0D23 /* DddSeviceViewController.m */; };
-		7148E8FA1EC9F199007A15AB /* StaffInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7148E8F81EC9F199007A15AB /* StaffInfoTableViewCell.m */; };
-		7148E8FB1EC9F199007A15AB /* StaffInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7148E8F91EC9F199007A15AB /* StaffInfoTableViewCell.xib */; };
 		71790F271ED4830F00E865E3 /* EditCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71790F261ED4830F00E865E3 /* EditCardViewController.m */; };
 		71790F2A1ED4886100E865E3 /* ScanResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71790F291ED4886100E865E3 /* ScanResultViewController.m */; };
 		71790F341ED71FF000E865E3 /* LCQrcodeUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 71790F331ED71FF000E865E3 /* LCQrcodeUtil.m */; };
@@ -49,16 +40,12 @@
 		BB87F4431EC05D2500D67843 /* TimeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB87F4421EC05D2500D67843 /* TimeViewController.m */; };
 		BB87F44B1EC16A1D00D67843 /* EmployeeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB87F4491EC16A1D00D67843 /* EmployeeTableViewCell.m */; };
 		BB87F44C1EC16A1D00D67843 /* EmployeeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB87F44A1EC16A1D00D67843 /* EmployeeTableViewCell.xib */; };
-		BB87F4501EC1709500D67843 /* SpersonTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB87F44E1EC1709500D67843 /* SpersonTableViewCell.m */; };
-		BB87F4511EC1709500D67843 /* SpersonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB87F44F1EC1709500D67843 /* SpersonTableViewCell.xib */; };
 		BB87F4551EC1722100D67843 /* SprogramTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB87F4531EC1722100D67843 /* SprogramTableViewCell.m */; };
 		BB87F4561EC1722100D67843 /* SprogramTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB87F4541EC1722100D67843 /* SprogramTableViewCell.xib */; };
 		BB87F45A1EC173F700D67843 /* SFormTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB87F4581EC173F700D67843 /* SFormTableViewCell.m */; };
 		BB87F45B1EC173F700D67843 /* SFormTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB87F4591EC173F700D67843 /* SFormTableViewCell.xib */; };
 		BB87F45F1EC18E8200D67843 /* MBProgressHUD+Add.m in Sources */ = {isa = PBXBuildFile; fileRef = BB87F45E1EC18E8200D67843 /* MBProgressHUD+Add.m */; };
 		BB87F4941EC443D500D67843 /* UITableView+Empty.m in Sources */ = {isa = PBXBuildFile; fileRef = BB87F4931EC443D500D67843 /* UITableView+Empty.m */; };
-		BB87F49A1EC98B7100D67843 /* SubSeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB87F4991EC98B7100D67843 /* SubSeviceViewController.m */; };
-		BB87F49D1EC98F7300D67843 /* DetailServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB87F49C1EC98F7300D67843 /* DetailServiceViewController.m */; };
 		BBE524B81ECAE4D600FCD703 /* UIViewController+BackButtonHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = BBE524B71ECAE4D600FCD703 /* UIViewController+BackButtonHandler.m */; };
 /* End PBXBuildFile section */
 
@@ -70,12 +57,6 @@
 		7109ED3E1EBEE8BC00C542AC /* DTBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTBaseViewController.m; sourceTree = "<group>"; };
 		7109ED401EBEEA7B00C542AC /* DTMyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTMyTableViewCell.h; sourceTree = "<group>"; };
 		7109ED411EBEEA7B00C542AC /* DTMyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTMyTableViewCell.m; sourceTree = "<group>"; };
-		7109ED461EBEF11300C542AC /* EmployeeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeViewController.h; sourceTree = "<group>"; };
-		7109ED471EBEF11300C542AC /* EmployeeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployeeViewController.m; sourceTree = "<group>"; };
-		7109ED491EBEF16500C542AC /* FromsMViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FromsMViewController.h; sourceTree = "<group>"; };
-		7109ED4A1EBEF16500C542AC /* FromsMViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FromsMViewController.m; sourceTree = "<group>"; };
-		7109ED4C1EBEF1AA00C542AC /* ServiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceViewController.h; sourceTree = "<group>"; };
-		7109ED4D1EBEF1AA00C542AC /* ServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceViewController.m; sourceTree = "<group>"; };
 		7109ED501EBEF21900C542AC /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		7109ED511EBEF21900C542AC /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		7109ED531EBEF23800C542AC /* ForgetPWViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetPWViewController.h; sourceTree = "<group>"; };
@@ -99,25 +80,14 @@
 		712952261EC0BC36005A16F0 /* StaffViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaffViewController.m; sourceTree = "<group>"; };
 		7129522E1EC0BE3B005A16F0 /* SFormViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFormViewController.h; sourceTree = "<group>"; };
 		7129522F1EC0BE3B005A16F0 /* SFormViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFormViewController.m; sourceTree = "<group>"; };
-		712952311EC0BE49005A16F0 /* PersionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersionViewController.h; sourceTree = "<group>"; };
-		712952321EC0BE49005A16F0 /* PersionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersionViewController.m; sourceTree = "<group>"; };
 		712952341EC0BE58005A16F0 /* ProgramViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgramViewController.h; sourceTree = "<group>"; };
 		712952351EC0BE58005A16F0 /* ProgramViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgramViewController.m; sourceTree = "<group>"; };
-		712952371EC0BF7A005A16F0 /* StaffInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaffInfoViewController.h; sourceTree = "<group>"; };
-		712952381EC0BF7A005A16F0 /* StaffInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaffInfoViewController.m; sourceTree = "<group>"; };
 		7129523A1EC208BD005A16F0 /* AddEmployeeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddEmployeeViewController.h; sourceTree = "<group>"; };
 		7129523B1EC208BD005A16F0 /* AddEmployeeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddEmployeeViewController.m; sourceTree = "<group>"; };
 		7129525A1EC36751005A16F0 /* AddWorkTypeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddWorkTypeViewController.h; sourceTree = "<group>"; };
 		7129525B1EC36751005A16F0 /* AddWorkTypeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddWorkTypeViewController.m; sourceTree = "<group>"; };
-		712952661EC8860D005A16F0 /* StaffInfoMdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaffInfoMdViewController.h; sourceTree = "<group>"; };
-		712952671EC8860D005A16F0 /* StaffInfoMdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaffInfoMdViewController.m; sourceTree = "<group>"; };
 		71322E371EC09F0D003E0D23 /* Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tools.h; sourceTree = "<group>"; };
 		71322E381EC09F0D003E0D23 /* Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tools.m; sourceTree = "<group>"; };
-		71322E3A1EC0AFB1003E0D23 /* DddSeviceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DddSeviceViewController.h; sourceTree = "<group>"; };
-		71322E3B1EC0AFB1003E0D23 /* DddSeviceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DddSeviceViewController.m; sourceTree = "<group>"; };
-		7148E8F71EC9F199007A15AB /* StaffInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaffInfoTableViewCell.h; sourceTree = "<group>"; };
-		7148E8F81EC9F199007A15AB /* StaffInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaffInfoTableViewCell.m; sourceTree = "<group>"; };
-		7148E8F91EC9F199007A15AB /* StaffInfoTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StaffInfoTableViewCell.xib; sourceTree = "<group>"; };
 		71790F251ED4830F00E865E3 /* EditCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditCardViewController.h; sourceTree = "<group>"; };
 		71790F261ED4830F00E865E3 /* EditCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditCardViewController.m; sourceTree = "<group>"; };
 		71790F281ED4886100E865E3 /* ScanResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanResultViewController.h; sourceTree = "<group>"; };
@@ -147,9 +117,6 @@
 		BB87F4481EC16A1D00D67843 /* EmployeeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeTableViewCell.h; sourceTree = "<group>"; };
 		BB87F4491EC16A1D00D67843 /* EmployeeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployeeTableViewCell.m; sourceTree = "<group>"; };
 		BB87F44A1EC16A1D00D67843 /* EmployeeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmployeeTableViewCell.xib; sourceTree = "<group>"; };
-		BB87F44D1EC1709500D67843 /* SpersonTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpersonTableViewCell.h; sourceTree = "<group>"; };
-		BB87F44E1EC1709500D67843 /* SpersonTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpersonTableViewCell.m; sourceTree = "<group>"; };
-		BB87F44F1EC1709500D67843 /* SpersonTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SpersonTableViewCell.xib; sourceTree = "<group>"; };
 		BB87F4521EC1722100D67843 /* SprogramTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SprogramTableViewCell.h; sourceTree = "<group>"; };
 		BB87F4531EC1722100D67843 /* SprogramTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SprogramTableViewCell.m; sourceTree = "<group>"; };
 		BB87F4541EC1722100D67843 /* SprogramTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SprogramTableViewCell.xib; sourceTree = "<group>"; };
@@ -160,10 +127,6 @@
 		BB87F45E1EC18E8200D67843 /* MBProgressHUD+Add.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+Add.m"; sourceTree = "<group>"; };
 		BB87F4921EC443D500D67843 /* UITableView+Empty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+Empty.h"; sourceTree = "<group>"; };
 		BB87F4931EC443D500D67843 /* UITableView+Empty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+Empty.m"; sourceTree = "<group>"; };
-		BB87F4981EC98B7100D67843 /* SubSeviceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubSeviceViewController.h; sourceTree = "<group>"; };
-		BB87F4991EC98B7100D67843 /* SubSeviceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubSeviceViewController.m; sourceTree = "<group>"; };
-		BB87F49B1EC98F7300D67843 /* DetailServiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailServiceViewController.h; sourceTree = "<group>"; };
-		BB87F49C1EC98F7300D67843 /* DetailServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailServiceViewController.m; sourceTree = "<group>"; };
 		BBE524B61ECAE4D600FCD703 /* UIViewController+BackButtonHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+BackButtonHandler.h"; sourceTree = "<group>"; };
 		BBE524B71ECAE4D600FCD703 /* UIViewController+BackButtonHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+BackButtonHandler.m"; sourceTree = "<group>"; };
 		D98C340185C8CD86CBC7569B /* Pods-SellerPro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SellerPro.release.xcconfig"; path = "Pods/Target Support Files/Pods-SellerPro/Pods-SellerPro.release.xcconfig"; sourceTree = "<group>"; };
@@ -207,12 +170,8 @@
 				71790F361ED721E900E865E3 /* LoadView.m */,
 				71790F371ED721E900E865E3 /* ScanView.h */,
 				71790F381ED721E900E865E3 /* ScanView.m */,
-				7109ED461EBEF11300C542AC /* EmployeeViewController.h */,
-				7109ED471EBEF11300C542AC /* EmployeeViewController.m */,
 				712952251EC0BC36005A16F0 /* StaffViewController.h */,
 				712952261EC0BC36005A16F0 /* StaffViewController.m */,
-				712952371EC0BF7A005A16F0 /* StaffInfoViewController.h */,
-				712952381EC0BF7A005A16F0 /* StaffInfoViewController.m */,
 				BB87F4481EC16A1D00D67843 /* EmployeeTableViewCell.h */,
 				BB87F4491EC16A1D00D67843 /* EmployeeTableViewCell.m */,
 				BB87F44A1EC16A1D00D67843 /* EmployeeTableViewCell.xib */,
@@ -220,11 +179,6 @@
 				7129523B1EC208BD005A16F0 /* AddEmployeeViewController.m */,
 				7129525A1EC36751005A16F0 /* AddWorkTypeViewController.h */,
 				7129525B1EC36751005A16F0 /* AddWorkTypeViewController.m */,
-				712952661EC8860D005A16F0 /* StaffInfoMdViewController.h */,
-				712952671EC8860D005A16F0 /* StaffInfoMdViewController.m */,
-				7148E8F71EC9F199007A15AB /* StaffInfoTableViewCell.h */,
-				7148E8F81EC9F199007A15AB /* StaffInfoTableViewCell.m */,
-				7148E8F91EC9F199007A15AB /* StaffInfoTableViewCell.xib */,
 			);
 			path = Employee;
 			sourceTree = "<group>";
@@ -232,19 +186,12 @@
 		7109ED441EBEF0F300C542AC /* Forms */ = {
 			isa = PBXGroup;
 			children = (
-				7109ED491EBEF16500C542AC /* FromsMViewController.h */,
-				7109ED4A1EBEF16500C542AC /* FromsMViewController.m */,
 				BB87F4411EC05D2500D67843 /* TimeViewController.h */,
 				BB87F4421EC05D2500D67843 /* TimeViewController.m */,
 				7129522E1EC0BE3B005A16F0 /* SFormViewController.h */,
 				7129522F1EC0BE3B005A16F0 /* SFormViewController.m */,
-				712952311EC0BE49005A16F0 /* PersionViewController.h */,
-				712952321EC0BE49005A16F0 /* PersionViewController.m */,
 				712952341EC0BE58005A16F0 /* ProgramViewController.h */,
 				712952351EC0BE58005A16F0 /* ProgramViewController.m */,
-				BB87F44D1EC1709500D67843 /* SpersonTableViewCell.h */,
-				BB87F44E1EC1709500D67843 /* SpersonTableViewCell.m */,
-				BB87F44F1EC1709500D67843 /* SpersonTableViewCell.xib */,
 				BB87F4521EC1722100D67843 /* SprogramTableViewCell.h */,
 				BB87F4531EC1722100D67843 /* SprogramTableViewCell.m */,
 				BB87F4541EC1722100D67843 /* SprogramTableViewCell.xib */,
@@ -257,21 +204,6 @@
 				71790F291ED4886100E865E3 /* ScanResultViewController.m */,
 			);
 			path = Forms;
-			sourceTree = "<group>";
-		};
-		7109ED451EBEF0F300C542AC /* Service */ = {
-			isa = PBXGroup;
-			children = (
-				7109ED4C1EBEF1AA00C542AC /* ServiceViewController.h */,
-				7109ED4D1EBEF1AA00C542AC /* ServiceViewController.m */,
-				71322E3A1EC0AFB1003E0D23 /* DddSeviceViewController.h */,
-				71322E3B1EC0AFB1003E0D23 /* DddSeviceViewController.m */,
-				BB87F4981EC98B7100D67843 /* SubSeviceViewController.h */,
-				BB87F4991EC98B7100D67843 /* SubSeviceViewController.m */,
-				BB87F49B1EC98F7300D67843 /* DetailServiceViewController.h */,
-				BB87F49C1EC98F7300D67843 /* DetailServiceViewController.m */,
-			);
-			path = Service;
 			sourceTree = "<group>";
 		};
 		7109ED4F1EBEF20900C542AC /* Login */ = {
@@ -323,7 +255,6 @@
 				7109ED4F1EBEF20900C542AC /* Login */,
 				7109ED431EBEF0F300C542AC /* Employee */,
 				7109ED441EBEF0F300C542AC /* Forms */,
-				7109ED451EBEF0F300C542AC /* Service */,
 				7109ED3C1EBEE8BC00C542AC /* SPBase */,
 				710FEF6D1EBEE5AC0064CC85 /* Config */,
 				710FEF591EBEE23C0064CC85 /* AppDelegate.h */,
@@ -482,12 +413,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				710FEF661EBEE23D0064CC85 /* LaunchScreen.storyboard in Resources */,
-				BB87F4511EC1709500D67843 /* SpersonTableViewCell.xib in Resources */,
 				BB87F45B1EC173F700D67843 /* SFormTableViewCell.xib in Resources */,
 				BB87F4561EC1722100D67843 /* SprogramTableViewCell.xib in Resources */,
 				BB87F44C1EC16A1D00D67843 /* EmployeeTableViewCell.xib in Resources */,
 				710FEF631EBEE23D0064CC85 /* Assets.xcassets in Resources */,
-				7148E8FB1EC9F199007A15AB /* StaffInfoTableViewCell.xib in Resources */,
 				710FEF611EBEE23D0064CC85 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -550,17 +479,11 @@
 				710FEF5B1EBEE23C0064CC85 /* AppDelegate.m in Sources */,
 				712952301EC0BE3B005A16F0 /* SFormViewController.m in Sources */,
 				71790F3D1ED7220100E865E3 /* ScanCodeViewController.m in Sources */,
-				712952391EC0BF7A005A16F0 /* StaffInfoViewController.m in Sources */,
 				BB87F4941EC443D500D67843 /* UITableView+Empty.m in Sources */,
 				7109ED5D1EBF4CB200C542AC /* DTNetManger.m in Sources */,
 				7109ED3B1EBEE84800C542AC /* MainViewController.m in Sources */,
-				7109ED4E1EBEF1AA00C542AC /* ServiceViewController.m in Sources */,
 				BB87F4401EC05A5E00D67843 /* FPTouchView.m in Sources */,
-				7109ED481EBEF11300C542AC /* EmployeeViewController.m in Sources */,
-				71322E3C1EC0AFB1003E0D23 /* DddSeviceViewController.m in Sources */,
 				BB87F44B1EC16A1D00D67843 /* EmployeeTableViewCell.m in Sources */,
-				712952331EC0BE49005A16F0 /* PersionViewController.m in Sources */,
-				7148E8FA1EC9F199007A15AB /* StaffInfoTableViewCell.m in Sources */,
 				71790F2A1ED4886100E865E3 /* ScanResultViewController.m in Sources */,
 				71790F391ED721E900E865E3 /* LoadView.m in Sources */,
 				712952271EC0BC36005A16F0 /* StaffViewController.m in Sources */,
@@ -572,8 +495,6 @@
 				712952361EC0BE58005A16F0 /* ProgramViewController.m in Sources */,
 				710FEF581EBEE23C0064CC85 /* main.m in Sources */,
 				71322E391EC09F0D003E0D23 /* Tools.m in Sources */,
-				BB87F4501EC1709500D67843 /* SpersonTableViewCell.m in Sources */,
-				BB87F49D1EC98F7300D67843 /* DetailServiceViewController.m in Sources */,
 				BB87F45A1EC173F700D67843 /* SFormTableViewCell.m in Sources */,
 				7109ED521EBEF21900C542AC /* LoginViewController.m in Sources */,
 				71AA0ED21EBF68E400D2ADD3 /* ContentViewController.m in Sources */,
@@ -583,14 +504,11 @@
 				7109ED3F1EBEE8BC00C542AC /* DTBaseViewController.m in Sources */,
 				BB87F4551EC1722100D67843 /* SprogramTableViewCell.m in Sources */,
 				7109ED551EBEF23800C542AC /* ForgetPWViewController.m in Sources */,
-				BB87F49A1EC98B7100D67843 /* SubSeviceViewController.m in Sources */,
 				BB87F45F1EC18E8200D67843 /* MBProgressHUD+Add.m in Sources */,
 				BB87F43E1EC05A5E00D67843 /* FPPopoverController.m in Sources */,
 				71790F341ED71FF000E865E3 /* LCQrcodeUtil.m in Sources */,
 				7109ED581EBEF24400C542AC /* SettingPWViewController.m in Sources */,
 				7129523C1EC208BD005A16F0 /* AddEmployeeViewController.m in Sources */,
-				712952681EC8860D005A16F0 /* StaffInfoMdViewController.m in Sources */,
-				7109ED4B1EBEF16500C542AC /* FromsMViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

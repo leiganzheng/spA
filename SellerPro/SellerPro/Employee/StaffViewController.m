@@ -7,7 +7,6 @@
 //
 
 #import "StaffViewController.h"
-#import "StaffInfoViewController.h"
 #import "EmployeeTableViewCell.h"
 #import "AddEmployeeViewController.h"
 
@@ -144,10 +143,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     NSDictionary *dict = self.dataSource[indexPath.row];
-    StaffInfoViewController *cvc = [[StaffInfoViewController alloc] init];
-    cvc.staffID = [NSString stringWithFormat:@"%@",[dict objectForKey:@"id"]];
-    cvc.workStr = [dict objectForKey:@"customer_id"];
-    [self.navigationController pushViewController:cvc animated:YES];
+  
 }
 - (void)save:(UIButton *)sender{
  
