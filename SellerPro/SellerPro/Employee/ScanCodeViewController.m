@@ -11,6 +11,8 @@
 #import <AVFoundation/AVFoundation.h>
 #import "ScanView.h"
 #import "LoadView.h"
+#import "ScanResultViewController.h"
+
 @interface ScanCodeViewController ()
 <AVCaptureMetadataOutputObjectsDelegate,
 UIImagePickerControllerDelegate,
@@ -40,6 +42,16 @@ UINavigationControllerDelegate
     _viewWidth = 50.0;
     self.isOpen = NO;
     self.view.backgroundColor = [UIColor greenColor];
+    
+    UIButton *_btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [_btn setTitle:@"开灯" forState:UIControlStateNormal];
+    _btn.frame = CGRectMake(0, 0, 80, 44);
+    _btn.titleEdgeInsets = UIEdgeInsetsMake(0, -_btn.imageView.frame.size.width - _btn.frame.size.width + _btn.titleLabel.intrinsicContentSize.width, 0, 0);
+    _btn.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -_btn.titleLabel.frame.size.width - _btn.frame.size.width + _btn.imageView.frame.size.width);
+    _btn.titleLabel.font = [UIFont systemFontOfSize:15];
+    [_btn addTarget:self action:@selector(lightButtonDidTouch) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_btn];
+    
     //    设置loading界面
     [self setupBgView];
     //    设置扫面界面
@@ -87,10 +99,13 @@ UINavigationControllerDelegate
     _lightButton = [[UIButton alloc]initWithFrame:CGRectMake(100, 500, 50, 50)];
     [_lightButton setTitle:@"light" forState:UIControlStateNormal];
     [_lightButton addTarget:self action:@selector(lightButtonDidTouch) forControlEvents:UIControlEventTouchUpInside];
-    [_scan addSubview:_lightButton];
+//    [_scan addSubview:_lightButton];
     
     _imageButton = [[UIButton alloc]initWithFrame:CGRectMake(200, 500, 50, 50)];
-    [_imageButton setTitle:@"相册" forState:UIControlStateNormal];
+    [_imageButton setTitle:@"拍照" forState:UIControlStateNormal];
+    _imageButton.backgroundColor = RGB(17, 157, 255);
+    _imageButton.layer.masksToBounds = YES;
+    _imageButton.layer.cornerRadius = _imageButton.frame.size.width/2;
     [_imageButton addTarget:self action:@selector(imageButtonDidTouch) forControlEvents:UIControlEventTouchUpInside];
     [_scan addSubview:_imageButton];
 }
@@ -116,16 +131,20 @@ UINavigationControllerDelegate
 - (void)imageButtonDidTouch {
     [_timer invalidate];
     _timer = nil;
+    UIStoryboard *board = [UIStoryboard storyboardWithName: @"Main" bundle: nil];
+    ScanResultViewController *cvc = [board instantiateViewControllerWithIdentifier:@"ScanResultViewController"];
+    [self.navigationController pushViewController:cvc animated:YES];
+
     
-    UIImagePickerController *picker = [[UIImagePickerController alloc]init];
-    //设置图片源(相簿)
-    picker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
-    //设置代理
-    picker.delegate = self;
-    //设置可以编辑
-    picker.allowsEditing = YES;
-    //打开拾取器界面
-    [self presentViewController:picker animated:YES completion:nil];
+//    UIImagePickerController *picker = [[UIImagePickerController alloc]init];
+//    //设置图片源(相簿)
+//    picker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+//    //设置代理
+//    picker.delegate = self;
+//    //设置可以编辑
+//    picker.allowsEditing = YES;
+//    //打开拾取器界面
+//    [self presentViewController:picker animated:YES completion:nil];
 }
 
 - (void)setupAVFoundation {

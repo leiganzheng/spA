@@ -7,6 +7,7 @@
 //
 
 #import "ScanResultViewController.h"
+#import "CarInfoViewController.h"
 
 @interface ScanResultViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *saveBtn;
@@ -29,8 +30,13 @@
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)saveAction:(id)sender {
+    UIStoryboard *board = [UIStoryboard storyboardWithName: @"Main" bundle: nil];
+    CarInfoViewController *cvc = [board instantiateViewControllerWithIdentifier:@"CarInfoViewController"];
+    [self.navigationController pushViewController:cvc animated:YES];
+
 }
 - (IBAction)retakePhotoAction:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 /*
