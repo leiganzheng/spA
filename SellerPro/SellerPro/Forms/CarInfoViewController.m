@@ -7,8 +7,15 @@
 //
 
 #import "CarInfoViewController.h"
+#import "ServiceViewController.h"
 
 @interface CarInfoViewController ()
+@property (weak, nonatomic) IBOutlet UIImageView *profile;
+@property (weak, nonatomic) IBOutlet UILabel *name;
+@property (weak, nonatomic) IBOutlet UILabel *phone;
+@property (weak, nonatomic) IBOutlet UILabel *baoxian;
+@property (weak, nonatomic) IBOutlet UILabel *weizhang;
+@property (weak, nonatomic) IBOutlet UILabel *nianjian;
 
 @end
 
@@ -16,22 +23,19 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.title = @"车辆概况";
+    [self setLeftBackNavItem];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (IBAction)recordService:(id)sender {
+    ServiceViewController *vc = [[ServiceViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
-*/
+
+
 
 @end

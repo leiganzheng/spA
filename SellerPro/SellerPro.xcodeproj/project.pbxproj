@@ -35,6 +35,9 @@
 		71790F3D1ED7220100E865E3 /* ScanCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71790F3C1ED7220100E865E3 /* ScanCodeViewController.m */; };
 		71AA0ECF1EBF67DD00D2ADD3 /* TabContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71AA0ECE1EBF67DD00D2ADD3 /* TabContainerViewController.m */; };
 		71AA0ED21EBF68E400D2ADD3 /* ContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71AA0ED11EBF68E400D2ADD3 /* ContentViewController.m */; };
+		BB28CE0C1EDFFDBB004CF012 /* ServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB28CE0B1EDFFDBB004CF012 /* ServiceViewController.m */; };
+		BB28CE0F1EDFFF7A004CF012 /* WorkTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB28CE0E1EDFFF7A004CF012 /* WorkTypeViewController.m */; };
+		BB28CE121EE000A7004CF012 /* CarGoodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB28CE111EE000A7004CF012 /* CarGoodViewController.m */; };
 		BB87F43E1EC05A5E00D67843 /* FPPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB87F4391EC05A5E00D67843 /* FPPopoverController.m */; };
 		BB87F43F1EC05A5E00D67843 /* FPPopoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = BB87F43B1EC05A5E00D67843 /* FPPopoverView.m */; };
 		BB87F4401EC05A5E00D67843 /* FPTouchView.m in Sources */ = {isa = PBXBuildFile; fileRef = BB87F43D1EC05A5E00D67843 /* FPTouchView.m */; };
@@ -85,8 +88,8 @@
 		712952351EC0BE58005A16F0 /* ProgramViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgramViewController.m; sourceTree = "<group>"; };
 		7129523A1EC208BD005A16F0 /* AddEmployeeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddEmployeeViewController.h; sourceTree = "<group>"; };
 		7129523B1EC208BD005A16F0 /* AddEmployeeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddEmployeeViewController.m; sourceTree = "<group>"; };
-		7129525A1EC36751005A16F0 /* AddWorkTypeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddWorkTypeViewController.h; sourceTree = "<group>"; };
-		7129525B1EC36751005A16F0 /* AddWorkTypeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddWorkTypeViewController.m; sourceTree = "<group>"; };
+		7129525A1EC36751005A16F0 /* AddWorkTypeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddWorkTypeViewController.h; path = ../Employee/AddWorkTypeViewController.h; sourceTree = "<group>"; };
+		7129525B1EC36751005A16F0 /* AddWorkTypeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddWorkTypeViewController.m; path = ../Employee/AddWorkTypeViewController.m; sourceTree = "<group>"; };
 		71322E371EC09F0D003E0D23 /* Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tools.h; sourceTree = "<group>"; };
 		71322E381EC09F0D003E0D23 /* Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tools.m; sourceTree = "<group>"; };
 		715117F81EDDB53C005837C7 /* CarInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarInfoViewController.h; sourceTree = "<group>"; };
@@ -108,6 +111,12 @@
 		71AA0ED01EBF68E400D2ADD3 /* ContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentViewController.h; sourceTree = "<group>"; };
 		71AA0ED11EBF68E400D2ADD3 /* ContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentViewController.m; sourceTree = "<group>"; };
 		859766395445D2D4A9B2BC20 /* libPods-SellerPro.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SellerPro.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BB28CE0A1EDFFDBB004CF012 /* ServiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceViewController.h; sourceTree = "<group>"; };
+		BB28CE0B1EDFFDBB004CF012 /* ServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceViewController.m; sourceTree = "<group>"; };
+		BB28CE0D1EDFFF7A004CF012 /* WorkTypeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkTypeViewController.h; sourceTree = "<group>"; };
+		BB28CE0E1EDFFF7A004CF012 /* WorkTypeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkTypeViewController.m; sourceTree = "<group>"; };
+		BB28CE101EE000A7004CF012 /* CarGoodViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarGoodViewController.h; sourceTree = "<group>"; };
+		BB28CE111EE000A7004CF012 /* CarGoodViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarGoodViewController.m; sourceTree = "<group>"; };
 		BB87F4371EC05A5E00D67843 /* ARCMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARCMacros.h; sourceTree = "<group>"; };
 		BB87F4381EC05A5E00D67843 /* FPPopoverController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPPopoverController.h; sourceTree = "<group>"; };
 		BB87F4391EC05A5E00D67843 /* FPPopoverController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPPopoverController.m; sourceTree = "<group>"; };
@@ -180,8 +189,6 @@
 				BB87F44A1EC16A1D00D67843 /* EmployeeTableViewCell.xib */,
 				7129523A1EC208BD005A16F0 /* AddEmployeeViewController.h */,
 				7129523B1EC208BD005A16F0 /* AddEmployeeViewController.m */,
-				7129525A1EC36751005A16F0 /* AddWorkTypeViewController.h */,
-				7129525B1EC36751005A16F0 /* AddWorkTypeViewController.m */,
 			);
 			path = Employee;
 			sourceTree = "<group>";
@@ -189,6 +196,12 @@
 		7109ED441EBEF0F300C542AC /* Forms */ = {
 			isa = PBXGroup;
 			children = (
+				BB28CE0D1EDFFF7A004CF012 /* WorkTypeViewController.h */,
+				BB28CE0E1EDFFF7A004CF012 /* WorkTypeViewController.m */,
+				7129525A1EC36751005A16F0 /* AddWorkTypeViewController.h */,
+				7129525B1EC36751005A16F0 /* AddWorkTypeViewController.m */,
+				BB28CE0A1EDFFDBB004CF012 /* ServiceViewController.h */,
+				BB28CE0B1EDFFDBB004CF012 /* ServiceViewController.m */,
 				BB87F4411EC05D2500D67843 /* TimeViewController.h */,
 				BB87F4421EC05D2500D67843 /* TimeViewController.m */,
 				7129522E1EC0BE3B005A16F0 /* SFormViewController.h */,
@@ -207,6 +220,8 @@
 				71790F291ED4886100E865E3 /* ScanResultViewController.m */,
 				715117F81EDDB53C005837C7 /* CarInfoViewController.h */,
 				715117F91EDDB53C005837C7 /* CarInfoViewController.m */,
+				BB28CE101EE000A7004CF012 /* CarGoodViewController.h */,
+				BB28CE111EE000A7004CF012 /* CarGoodViewController.m */,
 			);
 			path = Forms;
 			sourceTree = "<group>";
@@ -487,6 +502,7 @@
 				BB87F4941EC443D500D67843 /* UITableView+Empty.m in Sources */,
 				7109ED5D1EBF4CB200C542AC /* DTNetManger.m in Sources */,
 				7109ED3B1EBEE84800C542AC /* MainViewController.m in Sources */,
+				BB28CE121EE000A7004CF012 /* CarGoodViewController.m in Sources */,
 				BB87F4401EC05A5E00D67843 /* FPTouchView.m in Sources */,
 				BB87F44B1EC16A1D00D67843 /* EmployeeTableViewCell.m in Sources */,
 				71790F2A1ED4886100E865E3 /* ScanResultViewController.m in Sources */,
@@ -504,6 +520,7 @@
 				BB87F45A1EC173F700D67843 /* SFormTableViewCell.m in Sources */,
 				7109ED521EBEF21900C542AC /* LoginViewController.m in Sources */,
 				71AA0ED21EBF68E400D2ADD3 /* ContentViewController.m in Sources */,
+				BB28CE0C1EDFFDBB004CF012 /* ServiceViewController.m in Sources */,
 				71790F271ED4830F00E865E3 /* EditCardViewController.m in Sources */,
 				BB87F4431EC05D2500D67843 /* TimeViewController.m in Sources */,
 				7109ED421EBEEA7B00C542AC /* DTMyTableViewCell.m in Sources */,
@@ -511,6 +528,7 @@
 				BB87F4551EC1722100D67843 /* SprogramTableViewCell.m in Sources */,
 				7109ED551EBEF23800C542AC /* ForgetPWViewController.m in Sources */,
 				BB87F45F1EC18E8200D67843 /* MBProgressHUD+Add.m in Sources */,
+				BB28CE0F1EDFFF7A004CF012 /* WorkTypeViewController.m in Sources */,
 				BB87F43E1EC05A5E00D67843 /* FPPopoverController.m in Sources */,
 				71790F341ED71FF000E865E3 /* LCQrcodeUtil.m in Sources */,
 				7109ED581EBEF24400C542AC /* SettingPWViewController.m in Sources */,

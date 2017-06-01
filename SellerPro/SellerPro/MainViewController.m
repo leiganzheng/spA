@@ -14,6 +14,8 @@
 #import "LoginViewController.h"
 #import "AppDelegate.h"
 #import "ScanCodeViewController.h"
+#import "ScanResultViewController.h"
+
 
 @interface MainViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -174,8 +176,11 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 #pragma mark - private action
 -(void)save:(UIButton *)sender
 {
-    ScanCodeViewController *vc = [[ScanCodeViewController alloc]init];
-     [self.navigationController pushViewController:vc animated:YES];
+    UIStoryboard *board = [UIStoryboard storyboardWithName: @"Main" bundle: nil];
+    ScanResultViewController *cvc = [board instantiateViewControllerWithIdentifier:@"ScanResultViewController"];
+    [self.navigationController pushViewController:cvc animated:YES];
+//    ScanCodeViewController *vc = [[ScanCodeViewController alloc]init];
+//     [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)logOut:(UIButton *)sender{
     ((AppDelegate*)[UIApplication sharedApplication].delegate).phone = @"";
