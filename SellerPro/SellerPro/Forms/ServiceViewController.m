@@ -8,7 +8,8 @@
 
 #import "ServiceViewController.h"
 #import "WorkTypeViewController.h"
-
+#import "CarGoodViewController.h"
+#import "CustomFooterView.h"
 
 @interface ServiceViewController () <TabContainerDelegate,TabContainerDataSource>
 @property (nonatomic) NSUInteger numberOfTabs;
@@ -23,7 +24,8 @@
     [self setLeftBackNavItem];
     self.title = @"服务内容";
     self.numberOfTabs = 2;   ///////当设置数量时，去调用setter方法去加载控件
-    
+    CustomFooterView *footer = [[CustomFooterView alloc]initWithFrame:CGRectMake(0, KSCREEN_HEIGHT-140, KSCREEN_WIDTH, 80)];
+    [self.view addSubview:footer];
 }
 -(void)footerView{
 
@@ -67,11 +69,11 @@
     label.font = [UIFont systemFontOfSize:15.0];
     label.text = @"汽车商品";
     if (index == 1) {
-        label.text = @"汽车服务     ";
+        label.text = @"汽车服务";
     }
     
     label.textAlignment = NSTextAlignmentCenter;
-    label.textColor = [UIColor whiteColor];
+    label.textColor = [UIColor blackColor];
     [label sizeToFit];
     
     return label;
@@ -82,7 +84,7 @@
         WorkTypeViewController *cvc = [[WorkTypeViewController alloc] init];
         return cvc;
     }else{
-        WorkTypeViewController *cvc = [[WorkTypeViewController alloc] init];
+        CarGoodViewController *cvc = [[CarGoodViewController alloc] init];
         return cvc;
     }
 }

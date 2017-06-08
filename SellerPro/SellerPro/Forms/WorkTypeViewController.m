@@ -9,6 +9,8 @@
 #import "WorkTypeViewController.h"
 #import "DTMyTableViewCell.h"
 #import "AddWorkTypeViewController.h"
+#import "WorkTypeTableViewCell.h"
+#import "CustomFooterView.h"
 
 @interface WorkTypeViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -23,17 +25,17 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 - (UITableView *)myTableView
 {
     if (!_myTableView) {
-        _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KSCREEN_WIDTH, KSCREEN_HEIGHT) style:UITableViewStylePlain];
+        _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KSCREEN_WIDTH, KSCREEN_HEIGHT-80) style:UITableViewStylePlain];
         _myTableView.rowHeight = 100;
         _myTableView.delegate   = self;
         _myTableView.dataSource = self;
         _myTableView.backgroundColor = [UIColor clearColor];
-        _myTableView.separatorColor = [UIColor clearColor];
+        _myTableView.separatorColor = [UIColor whiteColor];
         _myTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
             [self featchData];
             
         }];
-        [_myTableView registerClass:[DTMyTableViewCell class] forCellReuseIdentifier:kDTMyCellIdentifier];
+        [_myTableView registerNib:[UINib nibWithNibName:@"WorkTypeTableViewCell" bundle:nil] forCellReuseIdentifier:kDTMyCellIdentifier];
     }
     return _myTableView;
 }
@@ -49,6 +51,8 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view addSubview:self.myTableView];
+    CustomFooterView *footer = [[CustomFooterView alloc]initWithFrame:CGRectMake(0, KSCREEN_HEIGHT-180, KSCREEN_WIDTH, 80)];
+//    [self.view addSubview:footer];
     if (self.isAdd) {
         [self setLeftBackNavItem];
         self.title = @"添加员工";
@@ -62,7 +66,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 #pragma mark - tableView Delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.dataSource.count;
+    return 3;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
@@ -92,29 +96,29 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    DTMyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kDTMyCellIdentifier];
-    cell.backgroundColor = [UIColor clearColor];
+    WorkTypeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kDTMyCellIdentifier];
+    cell.backgroundColor = [UIColor whiteColor];
     return cell;
 }
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    DTMyTableViewCell *myCell = (DTMyTableViewCell *)cell;
-    myCell.titleLabel.font = [UIFont boldSystemFontOfSize:15.0f];
-    myCell.titleLabel.textColor = DT_Base_TitleColor;
-    myCell.iconView.hidden = NO;
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [btn setTitle:@"洗" forState:UIControlStateNormal];
-    btn.backgroundColor =RGB(17, 157, 255);
-    btn.frame = CGRectMake(0, 0, 60, 60);
-    btn.layer.masksToBounds = YES;
-    btn.layer.cornerRadius = btn.frame.size.width/2;
-    //    btn.layer.borderColor = RGB(17, 157, 255).CGColor;
-    //    btn.layer.borderWidth = 1;
-    [myCell.iconView addSubview:btn];
-
-    NSDictionary *dict = self.dataSource[indexPath.row];
-    myCell.titleLabel.text = [dict objectForKey:@"name"];
+    WorkTypeTableViewCell *myCell = (WorkTypeTableViewCell *)cell;
+//    myCell.titleLabel.font = [UIFont boldSystemFontOfSize:15.0f];
+//    myCell.titleLabel.textColor = DT_Base_TitleColor;
+//    myCell.iconView.hidden = NO;
+//    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+//    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [btn setTitle:@"洗" forState:UIControlStateNormal];
+//    btn.backgroundColor =RGB(17, 157, 255);
+//    btn.frame = CGRectMake(0, 0, 60, 60);
+//    btn.layer.masksToBounds = YES;
+//    btn.layer.cornerRadius = btn.frame.size.width/2;
+//    //    btn.layer.borderColor = RGB(17, 157, 255).CGColor;
+//    //    btn.layer.borderWidth = 1;
+//    [myCell.iconView addSubview:btn];
+//
+//    NSDictionary *dict = self.dataSource[indexPath.row];
+//    myCell.titleLabel.text = [dict objectForKey:@"name"];
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];

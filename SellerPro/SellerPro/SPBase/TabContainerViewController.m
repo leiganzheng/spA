@@ -217,7 +217,7 @@
     frame.origin.x = 0.0 ;
     frame.origin.y = CGRectGetMaxY(self.tabsView.frame);
     frame.size.width = CGRectGetWidth(self.view.frame);
-    frame.size.height = CGRectGetHeight(self.view.frame) - self.tabsView.frame.size.height - topLayoutGuid;
+    frame.size.height = CGRectGetHeight(self.view.frame) - self.tabsView.frame.size.height;
     self.contentView.frame = frame;
 }
 
