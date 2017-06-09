@@ -9,8 +9,10 @@
 #import "StaffViewController.h"
 #import "EmployeeTableViewCell.h"
 #import "AddEmployeeViewController.h"
+#import "FPPopoverController.h"
+#import "TimeViewController.h"
 
-@interface StaffViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface StaffViewController ()<UITableViewDelegate,UITableViewDataSource,TimeViewControllerDelegate>
 
 @property (nonatomic, strong) UITableView    *myTableView;
 @property (nonatomic, strong) NSMutableArray *dataSource;
@@ -20,6 +22,8 @@
 @property (nonatomic, assign) NSInteger page;
 @property (nonatomic, strong) UILabel *sum;
 @property (nonatomic, strong) UILabel *customerSum;
+@property (nonatomic,strong) FPPopoverController*popover;
+@property (nonatomic,strong)UIButton *btn;
 
 
 @end
@@ -62,7 +66,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     [self.view addSubview:self.myTableView];
     [self setLeftBackNavItem];
    self.page = 1;
-    self.date = @"2017-04";
+    self.date =[NSString stringWithFormat:@"%@-%@", [Tools nowDateofYear] , [Tools nowDateofMonth]];
     [self featchData];
     [self featchOrderSun];
     
@@ -98,12 +102,10 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     bgV.layer.masksToBounds = YES;
     bgV.layer.cornerRadius = 10;
     
-    UIButton *_btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [_btn setTitle:@"04" forState:UIControlStateNormal];
+    _btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [_btn setTitle:[self.date substringFromIndex:5] forState:UIControlStateNormal];
     [_btn setImage:[UIImage imageNamed:@"btn_calendar"] forState:UIControlStateNormal];
     _btn.frame = CGRectMake(0, 0, 80, 24);
-//    _btn.titleEdgeInsets = UIEdgeInsetsMake(0, -_btn.imageView.frame.size.width - _btn.frame.size.width + _btn.titleLabel.intrinsicContentSize.width, 0, 0);
-//    _btn.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -_btn.titleLabel.frame.size.width - _btn.frame.size.width + _btn.imageView.frame.size.width);
     [_btn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
     [bgV addSubview:_btn];
     
@@ -146,10 +148,25 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
   
 }
 - (void)save:(UIButton *)sender{
- 
+    TimeViewController *vc = [[TimeViewController alloc]init];
+    vc.delegate = self;
+    _popover = [[FPPopoverController alloc] initWithViewController:vc];
+    _popover.contentSize = CGSizeMake(200, 300);
+    _popover.arrowDirection = UIMenuControllerArrowUp;
+    [_popover presentPopoverFromView:sender];
+
+}
+#pragma mark --TimeViewControllerDelegate
+- (void)didSelectedDate:(NSString *)date{
+    [_btn setTitle:date forState:UIControlStateNormal];
+    [_popover dismissPopoverAnimated:YES];
+    self.date = date;
+    [self featchOrderSun];
+    [self featchData];
+    
 }
 -(void)featchOrderSun{
-    [DTNetManger orderSumWith:@"2017-04" callBack:^(NSError *error, id response) {
+    [DTNetManger orderSumWith:self.date callBack:^(NSError *error, id response) {
         if (response && [response isKindOfClass:[NSDictionary class]]) {
             NSDictionary *dic = (NSDictionary*)response;
             self.dataDict = dic;

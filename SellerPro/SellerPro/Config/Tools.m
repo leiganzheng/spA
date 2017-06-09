@@ -156,4 +156,56 @@
     CGImageRelease(bitmapImage);
     return [UIImage imageWithCGImage:scaledImage];
 }
++(NSString*)nowDateofMonth{
+    // 获取代表公历的NSCalendar对象
+    NSCalendar *gregorian = [[NSCalendar alloc]
+                             initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    // 获取当前日期
+    NSDate* dt = [NSDate date];
+    // 定义一个时间字段的旗标，指定将会获取指定年、月、日、时、分、秒的信息
+    unsigned unitFlags = NSCalendarUnitYear |
+    NSCalendarUnitMonth |  NSCalendarUnitDay |
+    NSCalendarUnitHour |  NSCalendarUnitMinute |
+    NSCalendarUnitSecond | NSCalendarUnitWeekday;
+    // 获取不同时间字段的信息
+    NSDateComponents* comp = [gregorian components: unitFlags
+                                          fromDate:dt];
+    // 获取各时间字段的数值
+//    NSLog(@"现在是%ld年" , comp.year);
+//    NSLog(@"现在是%ld月 " , comp.month);
+//    NSLog(@"现在是%ld日" , comp.day);
+//    NSLog(@"现在是%ld时" , comp.hour);
+//    NSLog(@"现在是%ld分" , comp.minute);
+//    NSLog(@"现在是%ld秒" , comp.second);
+//    NSLog(@"现在是星期%ld" , comp.weekday);
+    if (comp.month>=10) {
+        return [NSString stringWithFormat:@"%ld" , comp.month];
+    }else{
+        return [NSString stringWithFormat:@"0%ld" , comp.month];
+    }
+}
++(NSString*)nowDateofYear{
+    // 获取代表公历的NSCalendar对象
+    NSCalendar *gregorian = [[NSCalendar alloc]
+                             initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    // 获取当前日期
+    NSDate* dt = [NSDate date];
+    // 定义一个时间字段的旗标，指定将会获取指定年、月、日、时、分、秒的信息
+    unsigned unitFlags = NSCalendarUnitYear |
+    NSCalendarUnitMonth |  NSCalendarUnitDay |
+    NSCalendarUnitHour |  NSCalendarUnitMinute |
+    NSCalendarUnitSecond | NSCalendarUnitWeekday;
+    // 获取不同时间字段的信息
+    NSDateComponents* comp = [gregorian components: unitFlags
+                                          fromDate:dt];
+    // 获取各时间字段的数值
+//    NSLog(@"现在是%ld年" , comp.year);
+//    NSLog(@"现在是%ld月 " , comp.month);
+//    NSLog(@"现在是%ld日" , comp.day);
+//    NSLog(@"现在是%ld时" , comp.hour);
+//    NSLog(@"现在是%ld分" , comp.minute);
+//    NSLog(@"现在是%ld秒" , comp.second);
+//    NSLog(@"现在是星期%ld" , comp.weekday);
+    return [NSString stringWithFormat:@"%ld" , comp.year];
+}
 @end

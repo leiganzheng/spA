@@ -17,7 +17,7 @@
 #import "ScanResultViewController.h"
 
 
-@interface MainViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface MainViewController ()<UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) UITableView    *myTableView;
 @property (nonatomic, strong) NSArray *dataSource;
@@ -72,17 +72,12 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    return 100;
+    return 300;
 }
 -(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
-    UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0,0,KSCREEN_WIDTH,100)];
+    UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0,0,KSCREEN_WIDTH,300)];
     v.backgroundColor = [UIColor clearColor];
-//    
-//    UIImageView * im= [[UIImageView alloc] init];
-//    im.frame = CGRectMake((KSCREEN_WIDTH - 150)/2, 40, 150, 28);
-//    im.image = [UIImage imageNamed:@"home_img_92logo"];
-//    [v addSubview:im];
-//    
+    
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     btn.frame = CGRectMake(20, 40, KSCREEN_WIDTH-40, 44);
     [btn setTitle:@"开始接待" forState:UIControlStateNormal];
@@ -91,25 +86,31 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     [btn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
     [v addSubview:btn];
     
-    UIView *v1 = [[UIView alloc] initWithFrame:CGRectMake(0,btn.frame.size.height+50,KSCREEN_WIDTH,44)];
+    UIView *v1 = [[UIView alloc] initWithFrame:CGRectMake(0,250,KSCREEN_WIDTH,44)];
     v1.backgroundColor = [UIColor clearColor];
     
+    
+    UILabel *lb = [[UILabel alloc]initWithFrame:CGRectMake(KSCREEN_WIDTH/2-5, 0, 10, 44)];
+    lb.text = @"/";
+    lb.textColor = [UIColor lightGrayColor];
+    [v1 addSubview:lb];
+    
     UIButton *btn1 = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn1.frame = CGRectMake((KSCREEN_WIDTH - 150)/2-75, btn.frame.size.height+30, 150, 44);
+    btn1.frame = CGRectMake(lb.frame.origin.x-90, 0, 90, 44);
     [btn1 setTitle:@"退出登录" forState:UIControlStateNormal];
     btn1.backgroundColor = [UIColor clearColor];
+    btn1.titleLabel.textAlignment = NSTextAlignmentRight;
     btn1.titleLabel.font = [UIFont systemFontOfSize:14];
     [btn1 setTitleColor:[UIColor lightGrayColor] forState:0];
     [btn1 addTarget:self action:@selector(logOut:) forControlEvents:UIControlEventTouchUpInside];
     [v1 addSubview:btn1];
     
-    UILabel *lb = [[UILabel alloc]initWithFrame:CGRectMake( (KSCREEN_WIDTH - 150)/2-75+10, btn.frame.size.height+30, 2, 44)];
-    lb.text = @"/";
-    lb.textColor = [UIColor lightGrayColor];
-    [v1 addSubview:lb];
+   
+    
     UIButton *btn2 = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn2.frame = CGRectMake((KSCREEN_WIDTH - 150)/2+75, btn.frame.size.height+30, 150, 44);
+    btn2.frame = CGRectMake(lb.frame.origin.x+5, 0, 90, 44);
     [btn2 setTitle:@"修改密码" forState:UIControlStateNormal];
+    btn2.titleLabel.textAlignment = NSTextAlignmentLeft;
     btn2.backgroundColor = [UIColor clearColor];
     btn2.titleLabel.font = [UIFont systemFontOfSize:14];
     [btn2 setTitleColor:[UIColor lightGrayColor] forState:0];

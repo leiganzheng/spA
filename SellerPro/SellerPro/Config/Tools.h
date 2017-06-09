@@ -15,5 +15,6 @@
 +(void)configOrignNetWork;
 
 +(void)QRCodeGenerator:(UIImageView *)imageView withUrl:(NSString*)url;
-
++(NSString*)nowDateofMonth;
++(NSString*)nowDateofYear;
 @end
