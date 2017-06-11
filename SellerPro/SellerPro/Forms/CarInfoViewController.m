@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *weizhang;
 @property (weak, nonatomic) IBOutlet UILabel *nianjian;
 @property (nonatomic, strong) UITableView    *myTableView;
+@property (weak, nonatomic) IBOutlet UIImageView *vipimg;
 @property (nonatomic, strong) NSArray *dataSource;
 @property (nonatomic, strong) NSArray *iconSource;
 
@@ -56,6 +57,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     [self.view addSubview:self.myTableView];
     self.title = @"车辆概况";
     [self setLeftBackNavItem];
+    [self featchData];
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -96,7 +98,9 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     RecordTableViewCell *myCell = (RecordTableViewCell *)cell;
-
+    NSDictionary *dict = self.dataSource[indexPath.row];
+    myCell.name.text = [dict objectForKey:@"name"];
+    myCell.time.text = [dict objectForKey:@"create_time"];
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -105,7 +109,26 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 #pragma mark -- private method
 
 -(void)featchData{
-    
+    [DTNetManger customerGetWith:@"粤S777ML" callBack:^(NSError *error, id response) {
+        if (response && [response isKindOfClass:[NSDictionary class]]) {
+            NSDictionary *dict = (NSDictionary*)response;
+            self.name.text = [dict objectForKey:@"name"];
+            self.phone.text = [dict objectForKey:@"phone"];
+            self.baoxian.text = [dict objectForKey:@"insurance_end_time"];
+            self.nianjian.text = [dict objectForKey:@"yearly_inspection_end_time"];
+            self.dataSource = [dict objectForKey:@"records"];
+            self.weizhang.text = [NSString stringWithFormat:@"%@",[dict objectForKey:@"count_illegal"]];
+            NSString *state = [NSString stringWithFormat:@"%@",[dict objectForKey:@"status"]];
+            NSString *str = @"label_Non-VIP";
+            if ([state isEqualToString:@"1"]) {
+                str = @"label_VIP";
+            }
+            self.vipimg.image = [UIImage imageNamed:str];
+            [self.myTableView reloadData];
+        }else{
+            
+        }
+    }];
 }
 
 - (void)save:(id)sender {

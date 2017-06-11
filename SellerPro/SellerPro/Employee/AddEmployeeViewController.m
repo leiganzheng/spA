@@ -9,7 +9,7 @@
 #import "AddEmployeeViewController.h"
 #import "DTMyTableViewCell.h"
 
-@interface AddEmployeeViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface AddEmployeeViewController ()<UITableViewDelegate,UITableViewDataSource,UIActionSheetDelegate>
 
 @property (nonatomic, strong) UITableView    *myTableView;
 @property (nonatomic, strong) NSArray *dataSource;
@@ -22,8 +22,8 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 - (UITableView *)myTableView
 {
     if (!_myTableView) {
-        _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KSCREEN_WIDTH, KSCREEN_HEIGHT-144) style:UITableViewStylePlain];
-        _myTableView.rowHeight = 100;
+        _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KSCREEN_WIDTH, KSCREEN_HEIGHT-114) style:UITableViewStylePlain];
+        _myTableView.rowHeight = 60;
         _myTableView.delegate   = self;
         _myTableView.dataSource = self;
         _myTableView.backgroundColor = [UIColor clearColor];
@@ -35,7 +35,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 - (NSArray *)dataSource
 {
     if (!_dataSource) {
-        _dataSource = @[@"洗车工",@"维修工",@"打蜡工"];
+        _dataSource = @[@"洗车",@"打蜡",@"洗车"];
     }
     return _dataSource;
 }
@@ -52,6 +52,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     self.title = @"添加员工";
     [self setLeftBackNavItem];
     [self.view addSubview:self.myTableView];
+    [self subview];
 }
 
 #pragma mark - tableView Delegate
@@ -63,36 +64,93 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 {
     return 4;
 }
+
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    return 0.01;
+    return 100;
 }
+-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0,0,KSCREEN_WIDTH,100)];
+    v.backgroundColor = [UIColor clearColor];
+    
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn.frame = CGRectMake(20, 40, KSCREEN_WIDTH-40, 44);
+    [btn setTitle:@"添加新项目" forState:UIControlStateNormal];
+    [btn setTitleColor:[UIColor lightGrayColor] forState:0];
+    [btn setImage:[UIImage imageNamed:@"btn_add service"] forState:0];
+//    btn.backgroundColor = RGB(17, 157, 255);
+    [Tools configCornerOfView:btn with:3];
+    [btn addTarget:self action:@selector(add:) forControlEvents:UIControlEventTouchUpInside];
+    [v addSubview:btn];
+
+    return v;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    DTMyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kDTMyCellIdentifier];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kDTMyCellIdentifier];
     cell.backgroundColor = [UIColor clearColor];
     return cell;
 }
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    DTMyTableViewCell *myCell = (DTMyTableViewCell *)cell;
-    myCell.titleLabel.font = [UIFont boldSystemFontOfSize:15.0f];
-    myCell.titleLabel.textColor = DT_Base_TitleColor;
-    myCell.iconView.hidden = NO;
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    UITableViewCell *myCell = (UITableViewCell *)cell;
+  
+    
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [btn setTitle:@"洗" forState:UIControlStateNormal];
-    btn.backgroundColor =RGB(17, 157, 255);
+    [btn setTitle:@"¥45" forState:UIControlStateNormal];
     btn.frame = CGRectMake(0, 0, 60, 60);
-    btn.layer.masksToBounds = YES;
-    btn.layer.cornerRadius = btn.frame.size.width/2;
-//    btn.layer.borderColor = RGB(17, 157, 255).CGColor;
-//    btn.layer.borderWidth = 1;
-    [myCell.iconView addSubview:btn];
-    //    myCell.iconView.image = [UIImage imageNamed:self.iconSource[indexPath.row]];
-    myCell.titleLabel.text = self.dataSource[indexPath.row];
+    [btn setTitleColor:[UIColor redColor] forState:0];
+    myCell.accessoryView = btn;
+    myCell.textLabel.text = self.dataSource[indexPath.row];
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    UIActionSheet *actionSheet = [[UIActionSheet alloc]
+                                  initWithTitle:@"是否删除该项目？"
+                                  delegate:self
+                                  cancelButtonTitle:@"取消"
+                                  destructiveButtonTitle:@"删除"
+                                  otherButtonTitles:nil];
+    actionSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
+    [actionSheet showInView:self.view];
+}
+#pragma mark -- UIActionSheetDelegate method
+
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0) {//删除
+    }else if(buttonIndex == 3) {
+    }
+    
 }
 #pragma mark -- private method
+-(void)subview{
+    UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, KSCREEN_HEIGHT-114, KSCREEN_WIDTH/2, 60)];
+    v.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:v];
+    
+    UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, KSCREEN_WIDTH/2, 60)];
+    lb.textAlignment = NSTextAlignmentCenter ;
+    lb.textColor = [UIColor redColor];
+    lb.text = @"¥321";
+    [v addSubview:lb];
+  
+    
+    UIView *v1 = [[UIView alloc] initWithFrame:CGRectMake(KSCREEN_WIDTH/2, 0, KSCREEN_WIDTH/2, 60)];
+    v1.backgroundColor = RGB(17, 157, 255);
+    [v addSubview:v1];
+    
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [btn setTitle:@"结账" forState:UIControlStateNormal];
+    btn.backgroundColor = RGB(17, 157, 255);
+    btn.titleLabel.textAlignment = NSTextAlignmentCenter;
+    btn.frame = CGRectMake(0, 0, KSCREEN_WIDTH/2, 60);
+    [btn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
+    [v1 addSubview:btn];
+}
+-(void)add:(UIButton *)sender{
+    
+}
 -(void)featchData{
     
 }

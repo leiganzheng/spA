@@ -9,7 +9,7 @@
 #ifndef Config_DT_h
 #define Config_DT_h
 
-#define kAppName                  @"商家"
+#define kAppName                  @"员工"
 #define kAppUrl                   @""
 
 // key
@@ -31,7 +31,7 @@
 #define DT_TabBar_SeleteColor      RGB(254, 203, 47)
 
 #define DT_Nav_TitleColor          RGB(112, 112, 112)
-#define DT_Nav_TitleFont           BOLD_FONT(16)
+#define DT_Nav_TitleFont           BOLD_FONT(18)
 
 //#define DT_Base_TitleColor         RGB(112, 112, 112)
 //#define DT_Base_TitleColor         RGB(79, 79, 79)

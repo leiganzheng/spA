@@ -77,7 +77,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 #pragma mark - tableView Delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.dataSource.count;
+    return 3;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
@@ -96,7 +96,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     img.image = [UIImage imageNamed:@"staffmanagement_img_bg"];
     [v addSubview:img];
     
-    UIView *bgV = [[UIView alloc] initWithFrame:CGRectMake(KSCREEN_WIDTH-90, 8, 80, 24)];
+    UIView *bgV = [[UIView alloc] initWithFrame:CGRectMake(KSCREEN_WIDTH-70, 8, 60, 24)];
     bgV.backgroundColor = [UIColor colorWithWhite:0.f alpha:0.5];
     [v addSubview:bgV];
     bgV.layer.masksToBounds = YES;
@@ -105,7 +105,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     _btn = [UIButton buttonWithType:UIButtonTypeCustom];
     [_btn setTitle:[self.date substringFromIndex:5] forState:UIControlStateNormal];
     [_btn setImage:[UIImage imageNamed:@"btn_calendar"] forState:UIControlStateNormal];
-    _btn.frame = CGRectMake(0, 0, 80, 24);
+    _btn.frame = CGRectMake(0, 0, 60, 24);
     [_btn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
     [bgV addSubview:_btn];
     
@@ -136,16 +136,17 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 {
     EmployeeTableViewCell *myCell = (EmployeeTableViewCell *)cell;
 //    myCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    NSDictionary *dict = self.dataSource[indexPath.row];
-    myCell.name.text = [dict objectForKey:@"customer"];
-    myCell.time.text = [dict objectForKey:@"pay_time"];
-    myCell.logoName.text =[NSString stringWithFormat:@"消费¥:%@", [dict objectForKey:@"price"]];
+//    NSDictionary *dict = self.dataSource[indexPath.row];
+//    myCell.name.text = [dict objectForKey:@"customer"];
+//    myCell.time.text = [dict objectForKey:@"pay_time"];
+//    myCell.logoName.text =[NSString stringWithFormat:@"消费¥:%@", [dict objectForKey:@"price"]];
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    NSDictionary *dict = self.dataSource[indexPath.row];
-  
+//    NSDictionary *dict = self.dataSource[indexPath.row];
+    AddEmployeeViewController *vc = [[AddEmployeeViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)save:(UIButton *)sender{
     TimeViewController *vc = [[TimeViewController alloc]init];
@@ -158,7 +159,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 }
 #pragma mark --TimeViewControllerDelegate
 - (void)didSelectedDate:(NSString *)date{
-    [_btn setTitle:date forState:UIControlStateNormal];
+//    [_btn setTitle:date forState:UIControlStateNormal];
     [_popover dismissPopoverAnimated:YES];
     self.date = date;
     [self featchOrderSun];

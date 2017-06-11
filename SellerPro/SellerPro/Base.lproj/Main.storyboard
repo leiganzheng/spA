@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="vfc-1e-Gi8">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="vfc-1e-Gi8">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -692,10 +692,10 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gPm-G6-nnt">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon_Default avatar" translatesAutoresizingMaskIntoConstraints="NO" id="gPm-G6-nnt">
                                         <rect key="frame" x="147" y="27" width="80" height="80"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="吴建权" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tJT-FN-vhb">
                                         <rect key="frame" x="147" y="115" width="80" height="21"/>
@@ -755,6 +755,10 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cUS-oC-mGS">
+                                        <rect key="frame" x="160" y="84" width="55" height="20"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -767,6 +771,7 @@
                         <outlet property="nianjian" destination="aZn-rJ-LLX" id="nb8-l5-hOu"/>
                         <outlet property="phone" destination="he2-Zw-NO9" id="mhp-Qv-whq"/>
                         <outlet property="profile" destination="gPm-G6-nnt" id="ex7-n2-Ggc"/>
+                        <outlet property="vipimg" destination="cUS-oC-mGS" id="nn3-qs-Wx0"/>
                         <outlet property="weizhang" destination="M55-tw-X0t" id="mmx-hJ-h0U"/>
                     </connections>
                 </viewController>
@@ -777,6 +782,7 @@
     </scenes>
     <resources>
         <image name="LOGO" width="535" height="100"/>
+        <image name="icon_Default avatar" width="104" height="104"/>
         <image name="icon_edit bank" width="16" height="15"/>
         <image name="icon_edit bankcard" width="15" height="12"/>
         <image name="login_icon_password" width="20" height="20"/>

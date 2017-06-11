@@ -27,7 +27,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 {
     if (!_myTableView) {
         _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KSCREEN_WIDTH, KSCREEN_HEIGHT) style:UITableViewStylePlain];
-        _myTableView.rowHeight = 90;
+        _myTableView.rowHeight = 60;
         _myTableView.delegate   = self;
         _myTableView.dataSource = self;
         _myTableView.backgroundColor = [UIColor clearColor];
@@ -81,7 +81,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 80;
+    return 140;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
@@ -139,9 +139,9 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 {
     SprogramTableViewCell *myCell = (SprogramTableViewCell*)cell;
     NSDictionary *dict = self.dataSource[indexPath.row];
-    myCell.name.text = [dict objectForKey:@"name"];
-        myCell.price.text = [dict objectForKey:@"order_sum"];
-        myCell.logo.text = [NSString stringWithFormat:@"%@",[dict objectForKey:@"order_count"]];
+    myCell.name.text = [dict objectForKey:@"create_time"];
+    myCell.price.text = [dict objectForKey:@"money"];
+//        myCell.logo.text = [NSString stringWithFormat:@"%@",[dict objectForKey:@"order_count"]];
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {

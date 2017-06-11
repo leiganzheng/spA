@@ -51,8 +51,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view addSubview:self.myTableView];
-    CustomFooterView *footer = [[CustomFooterView alloc]initWithFrame:CGRectMake(0, KSCREEN_HEIGHT-180, KSCREEN_WIDTH, 80)];
-//    [self.view addSubview:footer];
+    [self featchData];
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -93,22 +92,9 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CarInfoTableViewCell *myCell = (CarInfoTableViewCell *)cell;
-    //    myCell.titleLabel.font = [UIFont boldSystemFontOfSize:15.0f];
-    //    myCell.titleLabel.textColor = DT_Base_TitleColor;
-    //    myCell.iconView.hidden = NO;
-    //    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    //    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    //    [btn setTitle:@"洗" forState:UIControlStateNormal];
-    //    btn.backgroundColor =RGB(17, 157, 255);
-    //    btn.frame = CGRectMake(0, 0, 60, 60);
-    //    btn.layer.masksToBounds = YES;
-    //    btn.layer.cornerRadius = btn.frame.size.width/2;
-    //    //    btn.layer.borderColor = RGB(17, 157, 255).CGColor;
-    //    //    btn.layer.borderWidth = 1;
-    //    [myCell.iconView addSubview:btn];
-    //
-    //    NSDictionary *dict = self.dataSource[indexPath.row];
-    //    myCell.titleLabel.text = [dict objectForKey:@"name"];
+    NSDictionary *dict = self.dataSource[indexPath.row];
+    myCell.name.text = [dict objectForKey:@"name"];
+    myCell.price.text = [dict objectForKey:@"price"];
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -121,7 +107,17 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     [self.navigationController pushViewController:vc animated:YES];
 }
 -(void)featchData{
-    
+    [DTNetManger orderGetDetail:^(NSError *error, id response) {
+        if (response && [response isKindOfClass:[NSDictionary class]]) {
+            NSDictionary *dict = (NSDictionary*)response;
+            self.dataSource = [dict objectForKey:@"service"];
+            [self.myTableView reloadData];
+        }else{
+            
+        }
+        
+    }];
+
 }
 
 @end
