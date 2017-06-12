@@ -7,7 +7,7 @@
 //
 
 #import "AddEmployeeViewController.h"
-#import "DTMyTableViewCell.h"
+#import "ServiceTableViewCell.h"
 
 @interface AddEmployeeViewController ()<UITableViewDelegate,UITableViewDataSource,UIActionSheetDelegate>
 
@@ -18,6 +18,7 @@
 @end
 
 static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
+static NSString *const kDTMyCellIdentifier1 = @"myCellIdentifier1";
 @implementation AddEmployeeViewController
 - (UITableView *)myTableView
 {
@@ -28,7 +29,8 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
         _myTableView.dataSource = self;
         _myTableView.backgroundColor = [UIColor clearColor];
         _myTableView.separatorColor = DT_Base_LineColor;
-        [_myTableView registerClass:[DTMyTableViewCell class] forCellReuseIdentifier:kDTMyCellIdentifier];
+        [_myTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kDTMyCellIdentifier];
+//        [_myTableView registerNib:[UINib nibWithNibName:@"ServiceTableViewCell" bundle:nil] forCellReuseIdentifier:kDTMyCellIdentifier];
     }
     return _myTableView;
 }
@@ -49,7 +51,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"添加员工";
+    self.title = @"消费内容";
     [self setLeftBackNavItem];
     [self.view addSubview:self.myTableView];
     [self subview];
@@ -88,21 +90,29 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+//    if (indexPath.row==2) {
+//        ServiceTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kDTMyCellIdentifier1];
+//        cell.backgroundColor = [UIColor clearColor];
+//        return cell;
+//    }else{
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kDTMyCellIdentifier];
     cell.backgroundColor = [UIColor clearColor];
     return cell;
+//    }
 }
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *myCell = (UITableViewCell *)cell;
-  
-    
-    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [btn setTitle:@"¥45" forState:UIControlStateNormal];
-    btn.frame = CGRectMake(0, 0, 60, 60);
-    [btn setTitleColor:[UIColor redColor] forState:0];
-    myCell.accessoryView = btn;
-    myCell.textLabel.text = self.dataSource[indexPath.row];
+//    if (indexPath.row==2) {
+//        ServiceTableViewCell *myCell = (ServiceTableViewCell *)cell;
+//    }else{
+        UITableViewCell *myCell = (UITableViewCell *)cell;
+        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [btn setTitle:@"¥45" forState:UIControlStateNormal];
+        btn.frame = CGRectMake(0, 0, 60, 60);
+        [btn setTitleColor:[UIColor redColor] forState:0];
+        myCell.accessoryView = btn;
+        myCell.textLabel.text = self.dataSource[indexPath.row];
+//    }
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     UIActionSheet *actionSheet = [[UIActionSheet alloc]

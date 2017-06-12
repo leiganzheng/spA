@@ -35,6 +35,8 @@
 		71790F3D1ED7220100E865E3 /* ScanCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71790F3C1ED7220100E865E3 /* ScanCodeViewController.m */; };
 		71AA0ECF1EBF67DD00D2ADD3 /* TabContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71AA0ECE1EBF67DD00D2ADD3 /* TabContainerViewController.m */; };
 		71AA0ED21EBF68E400D2ADD3 /* ContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71AA0ED11EBF68E400D2ADD3 /* ContentViewController.m */; };
+		71D31BB11EEED3A40083F688 /* ServiceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 71D31BAF1EEED3A40083F688 /* ServiceTableViewCell.m */; };
+		71D31BB21EEED3A40083F688 /* ServiceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 71D31BB01EEED3A40083F688 /* ServiceTableViewCell.xib */; };
 		BB28CE0C1EDFFDBB004CF012 /* ServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB28CE0B1EDFFDBB004CF012 /* ServiceViewController.m */; };
 		BB28CE0F1EDFFF7A004CF012 /* WorkTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB28CE0E1EDFFF7A004CF012 /* WorkTypeViewController.m */; };
 		BB28CE121EE000A7004CF012 /* CarGoodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB28CE111EE000A7004CF012 /* CarGoodViewController.m */; };
@@ -118,6 +120,9 @@
 		71AA0ECE1EBF67DD00D2ADD3 /* TabContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabContainerViewController.m; sourceTree = "<group>"; };
 		71AA0ED01EBF68E400D2ADD3 /* ContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentViewController.h; sourceTree = "<group>"; };
 		71AA0ED11EBF68E400D2ADD3 /* ContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentViewController.m; sourceTree = "<group>"; };
+		71D31BAE1EEED3A40083F688 /* ServiceTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceTableViewCell.h; sourceTree = "<group>"; };
+		71D31BAF1EEED3A40083F688 /* ServiceTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceTableViewCell.m; sourceTree = "<group>"; };
+		71D31BB01EEED3A40083F688 /* ServiceTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServiceTableViewCell.xib; sourceTree = "<group>"; };
 		859766395445D2D4A9B2BC20 /* libPods-SellerPro.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SellerPro.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB28CE0A1EDFFDBB004CF012 /* ServiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceViewController.h; sourceTree = "<group>"; };
 		BB28CE0B1EDFFDBB004CF012 /* ServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceViewController.m; sourceTree = "<group>"; };
@@ -210,6 +215,9 @@
 				BB87F44A1EC16A1D00D67843 /* EmployeeTableViewCell.xib */,
 				7129523A1EC208BD005A16F0 /* AddEmployeeViewController.h */,
 				7129523B1EC208BD005A16F0 /* AddEmployeeViewController.m */,
+				71D31BAE1EEED3A40083F688 /* ServiceTableViewCell.h */,
+				71D31BAF1EEED3A40083F688 /* ServiceTableViewCell.m */,
+				71D31BB01EEED3A40083F688 /* ServiceTableViewCell.xib */,
 			);
 			path = Employee;
 			sourceTree = "<group>";
@@ -475,6 +483,7 @@
 				710FEF611EBEE23D0064CC85 /* Main.storyboard in Resources */,
 				BBFC3B3F1EE8E8CC00CB5F28 /* CarInfoTableViewCell.xib in Resources */,
 				BBFC3B3A1EE8E5DF00CB5F28 /* WorkTypeTableViewCell.xib in Resources */,
+				71D31BB21EEED3A40083F688 /* ServiceTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -534,6 +543,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				710FEF5B1EBEE23C0064CC85 /* AppDelegate.m in Sources */,
+				71D31BB11EEED3A40083F688 /* ServiceTableViewCell.m in Sources */,
 				712952301EC0BE3B005A16F0 /* SFormViewController.m in Sources */,
 				71790F3D1ED7220100E865E3 /* ScanCodeViewController.m in Sources */,
 				BB87F4941EC443D500D67843 /* UITableView+Empty.m in Sources */,
