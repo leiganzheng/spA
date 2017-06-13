@@ -122,6 +122,9 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 //    [self.navigationController pushViewController:vc animated:YES];
     
     ScanAddViewController *vc = [[ScanAddViewController alloc] init];
+    vc.resultBlock = ^(NSDictionary *dict) {
+        
+    };
     [self.navigationController pushViewController:vc animated:YES];
     
 }

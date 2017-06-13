@@ -206,12 +206,9 @@ UINavigationControllerDelegate
                 }
                 CIQRCodeFeature *qrFeature = (CIQRCodeFeature *)feature;
                 NSString *code = qrFeature.messageString;
-                if (self.resultBlock) {
-                    self.resultBlock(code);
-                    [self scanSuccess];
-                }
-                //输出扫描字符串
-                [self.navigationController popViewControllerAnimated:YES];
+                [self scanSuccess];
+                [self goodInfo:code];
+               
             }
         }else {
             [self setupTimer];
@@ -222,7 +219,23 @@ UINavigationControllerDelegate
 -(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
-
+-(void)goodInfo:(NSString *)barcode{
+    [MBProgressHUD showMessag:@"处理中" toView:self.view];
+    [DTNetManger goodGetWith:barcode type:@"1" callBack:^(NSError *error, id response) {
+        [MBProgressHUD hiddenFromView:self.view];
+        if (response && [response isKindOfClass:[NSDictionary class]]) {
+            NSDictionary *dic = (NSDictionary*)response;
+            if (self.resultBlock) {
+                self.resultBlock(dic);
+            }
+             [self.navigationController popViewControllerAnimated:YES];
+        }else{
+            if ([response  isKindOfClass:[NSString class]]) {
+                [MBProgressHUD showError:(NSString *)response toView:self.view];
+            }
+        }
+    }];
+}
 #pragma mark 输出的代理
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:(AVCaptureConnection *)connection {
     if (metadataObjects.count > 0) {
@@ -230,12 +243,13 @@ UINavigationControllerDelegate
         _timer = nil;
         [_session stopRunning];
         AVMetadataMachineReadableCodeObject *metadataObject = [metadataObjects objectAtIndex: 0];
-        if (self.resultBlock) {
-            self.resultBlock(metadataObject.stringValue);
+//        if (self.resultBlock) {
+//            self.resultBlock(metadataObject.stringValue);
+            [self goodInfo:metadataObject.stringValue];
             [self scanSuccess];
-        }
+//        }
         //输出扫描字符串
-        [self.navigationController popViewControllerAnimated:YES];
+//        [self.navigationController popViewControllerAnimated:YES];
     }
 }
 //扫描成功的提示音

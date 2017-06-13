@@ -448,15 +448,11 @@
         NSString *code = [(NSDictionary*)response objectForKey:@"code"];
         if (code.integerValue == 0) {
             if (callBack) {
-                NSArray *arr = [(NSDictionary*)response objectForKey:@"data"];
+                NSDictionary *arr = [(NSDictionary*)response objectForKey:@"data"];
                 callBack(nil,arr);
             }
         }else{
-            if (code.integerValue == 401) {
-                callBack(nil,[NSArray array]);
-            }else{
                 callBack(nil,[(NSDictionary*)response objectForKey:@"msg"]);
-            };
         }
     } fail:^(NSError *error) {
         [DTNetManger requestFailedCallBack:callBack];

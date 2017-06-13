@@ -7,7 +7,7 @@
 //
 
 #import "DTBaseViewController.h"
-typedef void (^ResultAddBolck)(NSString *str);
+typedef void (^ResultAddBolck)(NSDictionary *dict);
 @interface ScanAddViewController : DTBaseViewController
 @property (nonatomic, copy) ResultAddBolck resultBlock;
 @end
