@@ -1,19 +1,21 @@
 //
-//  ScanCodeViewController.m
-//  01-ScanCode(OC)
+//  ScanAddViewController.m
+//  SellerPro
 //
-//  Created by 冯志浩 on 2017/4/10.
-//  Copyright © 2017年 冯志浩. All rights reserved.
+//  Created by leiganzheng on 2017/6/13.
+//  Copyright © 2017年 karashock. All rights reserved.
 //
+
+
 #define ScreenWidth [UIScreen mainScreen].bounds.size.width
 #define ScreenHeight [UIScreen mainScreen].bounds.size.height
-#import "ScanCodeViewController.h"
+#import "ScanAddViewController.h"
 #import <AVFoundation/AVFoundation.h>
 #import "ScanView.h"
 #import "LoadView.h"
 #import "ScanResultViewController.h"
 
-@interface ScanCodeViewController ()
+@interface ScanAddViewController ()
 <AVCaptureMetadataOutputObjectsDelegate,
 UIImagePickerControllerDelegate,
 UINavigationControllerDelegate
@@ -33,11 +35,11 @@ UINavigationControllerDelegate
 
 @end
 
-@implementation ScanCodeViewController
+@implementation ScanAddViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"开始接待";
+    self.title = @"扫一扫";
     [self setLeftBackNavItem];
     _viewWidth = 50.0;
     self.isOpen = NO;
@@ -57,7 +59,7 @@ UINavigationControllerDelegate
     //    设置扫面界面
     [self setupScanView];
     //    设置扫描线
-    [self setupTimer];
+//    [self setupTimer];
     [self.view addSubview:_bgView];
 }
 
@@ -99,7 +101,7 @@ UINavigationControllerDelegate
     _lightButton = [[UIButton alloc]initWithFrame:CGRectMake(100, 500, 50, 50)];
     [_lightButton setTitle:@"light" forState:UIControlStateNormal];
     [_lightButton addTarget:self action:@selector(lightButtonDidTouch) forControlEvents:UIControlEventTouchUpInside];
-//    [_scan addSubview:_lightButton];
+    //    [_scan addSubview:_lightButton];
     
     _imageButton = [[UIButton alloc]initWithFrame:CGRectMake(200, 500, 50, 50)];
     [_imageButton setTitle:@"拍照" forState:UIControlStateNormal];
@@ -134,17 +136,17 @@ UINavigationControllerDelegate
     UIStoryboard *board = [UIStoryboard storyboardWithName: @"Main" bundle: nil];
     ScanResultViewController *cvc = [board instantiateViewControllerWithIdentifier:@"ScanResultViewController"];
     [self.navigationController pushViewController:cvc animated:YES];
-
     
-//    UIImagePickerController *picker = [[UIImagePickerController alloc]init];
-//    //设置图片源(相簿)
-//    picker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
-//    //设置代理
-//    picker.delegate = self;
-//    //设置可以编辑
-//    picker.allowsEditing = YES;
-//    //打开拾取器界面
-//    [self presentViewController:picker animated:YES completion:nil];
+    
+    //    UIImagePickerController *picker = [[UIImagePickerController alloc]init];
+    //    //设置图片源(相簿)
+    //    picker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+    //    //设置代理
+    //    picker.delegate = self;
+    //    //设置可以编辑
+    //    picker.allowsEditing = YES;
+    //    //打开拾取器界面
+    //    [self presentViewController:picker animated:YES completion:nil];
 }
 
 - (void)setupAVFoundation {
@@ -243,5 +245,4 @@ UINavigationControllerDelegate
     AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
     AudioServicesPlaySystemSound(1109);
 }
-
 @end

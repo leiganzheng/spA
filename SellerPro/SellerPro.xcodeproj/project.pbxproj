@@ -32,7 +32,6 @@
 		71790F341ED71FF000E865E3 /* LCQrcodeUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 71790F331ED71FF000E865E3 /* LCQrcodeUtil.m */; };
 		71790F391ED721E900E865E3 /* LoadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 71790F361ED721E900E865E3 /* LoadView.m */; };
 		71790F3A1ED721E900E865E3 /* ScanView.m in Sources */ = {isa = PBXBuildFile; fileRef = 71790F381ED721E900E865E3 /* ScanView.m */; };
-		71790F3D1ED7220100E865E3 /* ScanCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71790F3C1ED7220100E865E3 /* ScanCodeViewController.m */; };
 		71AA0ECF1EBF67DD00D2ADD3 /* TabContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71AA0ECE1EBF67DD00D2ADD3 /* TabContainerViewController.m */; };
 		71AA0ED21EBF68E400D2ADD3 /* ContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71AA0ED11EBF68E400D2ADD3 /* ContentViewController.m */; };
 		71D31BB11EEED3A40083F688 /* ServiceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 71D31BAF1EEED3A40083F688 /* ServiceTableViewCell.m */; };
@@ -52,6 +51,9 @@
 		BB87F45B1EC173F700D67843 /* SFormTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB87F4591EC173F700D67843 /* SFormTableViewCell.xib */; };
 		BB87F45F1EC18E8200D67843 /* MBProgressHUD+Add.m in Sources */ = {isa = PBXBuildFile; fileRef = BB87F45E1EC18E8200D67843 /* MBProgressHUD+Add.m */; };
 		BB87F4941EC443D500D67843 /* UITableView+Empty.m in Sources */ = {isa = PBXBuildFile; fileRef = BB87F4931EC443D500D67843 /* UITableView+Empty.m */; };
+		BBD7AA871EEF739300E5F0C1 /* ScanAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBD7AA861EEF739300E5F0C1 /* ScanAddViewController.m */; };
+		BBD7AA8A1EEF862600E5F0C1 /* TakePhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBD7AA891EEF862600E5F0C1 /* TakePhotoViewController.m */; };
+		BBD7AA8D1EEF928000E5F0C1 /* ScanOtherView.m in Sources */ = {isa = PBXBuildFile; fileRef = BBD7AA8C1EEF928000E5F0C1 /* ScanOtherView.m */; };
 		BBE524B81ECAE4D600FCD703 /* UIViewController+BackButtonHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = BBE524B71ECAE4D600FCD703 /* UIViewController+BackButtonHandler.m */; };
 		BBFC3B391EE8E5DF00CB5F28 /* WorkTypeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BBFC3B371EE8E5DF00CB5F28 /* WorkTypeTableViewCell.m */; };
 		BBFC3B3A1EE8E5DF00CB5F28 /* WorkTypeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BBFC3B381EE8E5DF00CB5F28 /* WorkTypeTableViewCell.xib */; };
@@ -114,8 +116,6 @@
 		71790F361ED721E900E865E3 /* LoadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadView.m; sourceTree = "<group>"; };
 		71790F371ED721E900E865E3 /* ScanView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanView.h; sourceTree = "<group>"; };
 		71790F381ED721E900E865E3 /* ScanView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanView.m; sourceTree = "<group>"; };
-		71790F3B1ED7220100E865E3 /* ScanCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanCodeViewController.h; sourceTree = "<group>"; };
-		71790F3C1ED7220100E865E3 /* ScanCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanCodeViewController.m; sourceTree = "<group>"; };
 		71AA0ECD1EBF67DD00D2ADD3 /* TabContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabContainerViewController.h; sourceTree = "<group>"; };
 		71AA0ECE1EBF67DD00D2ADD3 /* TabContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabContainerViewController.m; sourceTree = "<group>"; };
 		71AA0ED01EBF68E400D2ADD3 /* ContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentViewController.h; sourceTree = "<group>"; };
@@ -152,6 +152,12 @@
 		BB87F45E1EC18E8200D67843 /* MBProgressHUD+Add.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+Add.m"; sourceTree = "<group>"; };
 		BB87F4921EC443D500D67843 /* UITableView+Empty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+Empty.h"; sourceTree = "<group>"; };
 		BB87F4931EC443D500D67843 /* UITableView+Empty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+Empty.m"; sourceTree = "<group>"; };
+		BBD7AA851EEF739300E5F0C1 /* ScanAddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanAddViewController.h; sourceTree = "<group>"; };
+		BBD7AA861EEF739300E5F0C1 /* ScanAddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanAddViewController.m; sourceTree = "<group>"; };
+		BBD7AA881EEF862600E5F0C1 /* TakePhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TakePhotoViewController.h; sourceTree = "<group>"; };
+		BBD7AA891EEF862600E5F0C1 /* TakePhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TakePhotoViewController.m; sourceTree = "<group>"; };
+		BBD7AA8B1EEF928000E5F0C1 /* ScanOtherView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanOtherView.h; sourceTree = "<group>"; };
+		BBD7AA8C1EEF928000E5F0C1 /* ScanOtherView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanOtherView.m; sourceTree = "<group>"; };
 		BBE524B61ECAE4D600FCD703 /* UIViewController+BackButtonHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+BackButtonHandler.h"; sourceTree = "<group>"; };
 		BBE524B71ECAE4D600FCD703 /* UIViewController+BackButtonHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+BackButtonHandler.m"; sourceTree = "<group>"; };
 		BBFC3B361EE8E5DF00CB5F28 /* WorkTypeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkTypeTableViewCell.h; sourceTree = "<group>"; };
@@ -202,12 +208,16 @@
 		7109ED431EBEF0F300C542AC /* Employee */ = {
 			isa = PBXGroup;
 			children = (
-				71790F3B1ED7220100E865E3 /* ScanCodeViewController.h */,
-				71790F3C1ED7220100E865E3 /* ScanCodeViewController.m */,
+				BBD7AA881EEF862600E5F0C1 /* TakePhotoViewController.h */,
+				BBD7AA891EEF862600E5F0C1 /* TakePhotoViewController.m */,
+				BBD7AA851EEF739300E5F0C1 /* ScanAddViewController.h */,
+				BBD7AA861EEF739300E5F0C1 /* ScanAddViewController.m */,
 				71790F351ED721E900E865E3 /* LoadView.h */,
 				71790F361ED721E900E865E3 /* LoadView.m */,
 				71790F371ED721E900E865E3 /* ScanView.h */,
 				71790F381ED721E900E865E3 /* ScanView.m */,
+				BBD7AA8B1EEF928000E5F0C1 /* ScanOtherView.h */,
+				BBD7AA8C1EEF928000E5F0C1 /* ScanOtherView.m */,
 				712952251EC0BC36005A16F0 /* StaffViewController.h */,
 				712952261EC0BC36005A16F0 /* StaffViewController.m */,
 				BB87F4481EC16A1D00D67843 /* EmployeeTableViewCell.h */,
@@ -545,7 +555,6 @@
 				710FEF5B1EBEE23C0064CC85 /* AppDelegate.m in Sources */,
 				71D31BB11EEED3A40083F688 /* ServiceTableViewCell.m in Sources */,
 				712952301EC0BE3B005A16F0 /* SFormViewController.m in Sources */,
-				71790F3D1ED7220100E865E3 /* ScanCodeViewController.m in Sources */,
 				BB87F4941EC443D500D67843 /* UITableView+Empty.m in Sources */,
 				7109ED5D1EBF4CB200C542AC /* DTNetManger.m in Sources */,
 				7109ED3B1EBEE84800C542AC /* MainViewController.m in Sources */,
@@ -560,6 +569,7 @@
 				71790F3A1ED721E900E865E3 /* ScanView.m in Sources */,
 				715117FA1EDDB53C005837C7 /* CarInfoViewController.m in Sources */,
 				71AA0ECF1EBF67DD00D2ADD3 /* TabContainerViewController.m in Sources */,
+				BBD7AA8D1EEF928000E5F0C1 /* ScanOtherView.m in Sources */,
 				BB87F43F1EC05A5E00D67843 /* FPPopoverView.m in Sources */,
 				7129525C1EC36751005A16F0 /* AddWorkTypeViewController.m in Sources */,
 				BBFC3B451EE8ED3000CB5F28 /* CustomFooterView.m in Sources */,
@@ -567,6 +577,7 @@
 				710FEF581EBEE23C0064CC85 /* main.m in Sources */,
 				71322E391EC09F0D003E0D23 /* Tools.m in Sources */,
 				BB87F45A1EC173F700D67843 /* SFormTableViewCell.m in Sources */,
+				BBD7AA8A1EEF862600E5F0C1 /* TakePhotoViewController.m in Sources */,
 				BBFC3B491EE9235100CB5F28 /* RecordTableViewCell.m in Sources */,
 				7109ED521EBEF21900C542AC /* LoginViewController.m in Sources */,
 				71AA0ED21EBF68E400D2ADD3 /* ContentViewController.m in Sources */,
@@ -581,6 +592,7 @@
 				BB28CE0F1EDFFF7A004CF012 /* WorkTypeViewController.m in Sources */,
 				BB87F43E1EC05A5E00D67843 /* FPPopoverController.m in Sources */,
 				BBFC3B421EE8E97B00CB5F28 /* AddCarSViewController.m in Sources */,
+				BBD7AA871EEF739300E5F0C1 /* ScanAddViewController.m in Sources */,
 				BBFC3B3E1EE8E8CC00CB5F28 /* CarInfoTableViewCell.m in Sources */,
 				71790F341ED71FF000E865E3 /* LCQrcodeUtil.m in Sources */,
 				7109ED581EBEF24400C542AC /* SettingPWViewController.m in Sources */,

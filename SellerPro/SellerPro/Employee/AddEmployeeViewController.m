@@ -30,7 +30,7 @@ static NSString *const kDTMyCellIdentifier1 = @"myCellIdentifier1";
         _myTableView.backgroundColor = [UIColor clearColor];
         _myTableView.separatorColor = DT_Base_LineColor;
         [_myTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kDTMyCellIdentifier];
-//        [_myTableView registerNib:[UINib nibWithNibName:@"ServiceTableViewCell" bundle:nil] forCellReuseIdentifier:kDTMyCellIdentifier];
+        [_myTableView registerNib:[UINib nibWithNibName:@"ServiceTableViewCell" bundle:nil] forCellReuseIdentifier:kDTMyCellIdentifier1];
     }
     return _myTableView;
 }
@@ -90,21 +90,21 @@ static NSString *const kDTMyCellIdentifier1 = @"myCellIdentifier1";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    if (indexPath.row==2) {
-//        ServiceTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kDTMyCellIdentifier1];
-//        cell.backgroundColor = [UIColor clearColor];
-//        return cell;
-//    }else{
+    if (indexPath.row==2) {
+        ServiceTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kDTMyCellIdentifier1];
+        cell.backgroundColor = [UIColor clearColor];
+        return cell;
+    }else{
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kDTMyCellIdentifier];
     cell.backgroundColor = [UIColor clearColor];
     return cell;
-//    }
+    }
 }
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    if (indexPath.row==2) {
-//        ServiceTableViewCell *myCell = (ServiceTableViewCell *)cell;
-//    }else{
+    if (indexPath.row==2) {
+        ServiceTableViewCell *myCell = (ServiceTableViewCell *)cell;
+    }else{
         UITableViewCell *myCell = (UITableViewCell *)cell;
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         [btn setTitle:@"¥45" forState:UIControlStateNormal];
@@ -112,7 +112,7 @@ static NSString *const kDTMyCellIdentifier1 = @"myCellIdentifier1";
         [btn setTitleColor:[UIColor redColor] forState:0];
         myCell.accessoryView = btn;
         myCell.textLabel.text = self.dataSource[indexPath.row];
-//    }
+    }
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     UIActionSheet *actionSheet = [[UIActionSheet alloc]

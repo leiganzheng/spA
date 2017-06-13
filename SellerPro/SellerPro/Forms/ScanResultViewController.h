@@ -9,5 +9,6 @@
 #import "DTBaseViewController.h"
 
 @interface ScanResultViewController : DTBaseViewController
-
+@property (nonatomic, strong) UIImage *licenseImage;
+@property (nonatomic, strong) NSString *plate_license;
 @end

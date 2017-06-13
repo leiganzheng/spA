@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="vfc-1e-Gi8">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="vfc-1e-Gi8">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -642,13 +642,22 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="customImage" destination="LoB-ke-bMC" id="U04-5Q-7Pm"/>
                         <outlet property="reTakePBtn" destination="i3a-La-1Rd" id="Mtd-1e-V5S"/>
+                        <outlet property="resultLb" destination="gUR-ld-gfd" id="XJp-g7-WRO"/>
                         <outlet property="saveBtn" destination="dGR-WI-rZN" id="i2D-JP-5OE"/>
+                        <outlet property="tf1" destination="lKc-l6-9Px" id="KNA-vt-sdg"/>
+                        <outlet property="tf2" destination="u5f-Dh-Udd" id="qqh-MR-y4I"/>
+                        <outlet property="tf3" destination="Iea-hk-TRn" id="uin-lZ-bn9"/>
+                        <outlet property="tf4" destination="uKR-ap-smn" id="VFv-21-0wj"/>
+                        <outlet property="tf5" destination="Kxw-Yw-S3F" id="kGq-ka-8TB"/>
+                        <outlet property="tf6" destination="tzS-Dh-rnF" id="9w3-uT-0cI"/>
+                        <outlet property="tf7" destination="Cnb-pq-GCe" id="rRr-M5-hEB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CL9-EH-rWp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="124.5" y="3501.5"/>
+            <point key="canvasLocation" x="139" y="3617"/>
         </scene>
         <!--Car Info View Controller-->
         <scene sceneID="JAV-fO-O7i">
