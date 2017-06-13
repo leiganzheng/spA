@@ -14,7 +14,7 @@
  CGFloat rectWidth = 30;
  CGFloat rectHeight = 200;
  CGContextRef context = UIGraphicsGetCurrentContext();
- CGFloat black[4] = {0.0, 0.0, 0.0, 0.8};
+ CGFloat black[4] = {0.0, 0.0, 0.0, 0.4};
  CGContextSetFillColor(context, black);
  //top
  CGRect rect1 = CGRectMake(0, 0, self.frame.size.width, rectHeight);

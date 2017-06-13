@@ -47,10 +47,8 @@ UINavigationControllerDelegate
     
     UIButton *_btn = [UIButton buttonWithType:UIButtonTypeCustom];
     [_btn setTitle:@"开灯" forState:UIControlStateNormal];
-    _btn.frame = CGRectMake(0, 0, 80, 44);
-    _btn.titleEdgeInsets = UIEdgeInsetsMake(0, -_btn.imageView.frame.size.width - _btn.frame.size.width + _btn.titleLabel.intrinsicContentSize.width, 0, 0);
-    _btn.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -_btn.titleLabel.frame.size.width - _btn.frame.size.width + _btn.imageView.frame.size.width);
-    _btn.titleLabel.font = [UIFont systemFontOfSize:15];
+    _btn.frame = CGRectMake(0, 0, 60, 44);
+    _btn.titleLabel.font = [UIFont systemFontOfSize:17];
     [_btn addTarget:self action:@selector(lightButtonDidTouch) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_btn];
     
@@ -59,7 +57,7 @@ UINavigationControllerDelegate
     //    设置扫面界面
     [self setupScanView];
     //    设置扫描线
-//    [self setupTimer];
+    [self setupTimer];
     [self.view addSubview:_bgView];
 }
 
@@ -84,7 +82,7 @@ UINavigationControllerDelegate
     _scan = [[ScanView alloc]initWithFrame:self.view.bounds];
     _scan.backgroundColor = [UIColor clearColor];
     
-    _slideLineView = [[UIView alloc]initWithFrame:CGRectMake(_viewWidth, 201, ScreenWidth - _viewWidth * 2, 1)];
+    _slideLineView = [[UIView alloc]initWithFrame:CGRectMake(_viewWidth, 151, ScreenWidth - _viewWidth * 2, 1)];
     _slideLineView.backgroundColor = [UIColor greenColor];
     [_scan addSubview:_slideLineView];
     [self.view addSubview:_scan];
@@ -92,7 +90,7 @@ UINavigationControllerDelegate
 }
 
 - (void)setupSubView {
-    _titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 400, ScreenWidth, 50.0)];
+    _titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 300, ScreenWidth, 50.0)];
     _titleLabel.text = @"请将二维码放入框内";
     _titleLabel.textAlignment = NSTextAlignmentCenter;
     _titleLabel.textColor = [UIColor whiteColor];
@@ -103,7 +101,7 @@ UINavigationControllerDelegate
     [_lightButton addTarget:self action:@selector(lightButtonDidTouch) forControlEvents:UIControlEventTouchUpInside];
     //    [_scan addSubview:_lightButton];
     
-    _imageButton = [[UIButton alloc]initWithFrame:CGRectMake(200, 500, 50, 50)];
+    _imageButton = [[UIButton alloc]initWithFrame:CGRectMake(self.view.center.x-30, KSCREEN_HEIGHT-160, 60, 60)];
     [_imageButton setTitle:@"拍照" forState:UIControlStateNormal];
     _imageButton.backgroundColor = RGB(17, 157, 255);
     _imageButton.layer.masksToBounds = YES;
@@ -184,7 +182,7 @@ UINavigationControllerDelegate
 
 - (void)animationView {
     [UIView animateWithDuration:1.5 animations:^{
-        _slideLineView.transform = CGAffineTransformMakeTranslation(0, 200);
+        _slideLineView.transform = CGAffineTransformMakeTranslation(0, 150);
     } completion:^(BOOL finished) {
         _slideLineView.transform = CGAffineTransformIdentity;
     }];

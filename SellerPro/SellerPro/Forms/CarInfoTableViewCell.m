@@ -13,6 +13,9 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    self.name.layer.masksToBounds = YES;
+    self.name.layer.cornerRadius = self.name.bounds.size.width/2;
+    self.name.backgroundColor = RGB(36, 201, 216);
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

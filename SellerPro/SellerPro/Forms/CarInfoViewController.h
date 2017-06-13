@@ -9,5 +9,5 @@
 #import "DTBaseViewController.h"
 
 @interface CarInfoViewController : DTBaseViewController
-
+@property (nonatomic, strong) NSString *plate_license;
 @end

@@ -30,7 +30,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
         _myTableView.delegate   = self;
         _myTableView.dataSource = self;
         _myTableView.backgroundColor = [UIColor clearColor];
-        _myTableView.separatorColor = [UIColor whiteColor];
+        _myTableView.separatorColor = [UIColor lightGrayColor];
         _myTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
             [self featchData];
             
@@ -71,16 +71,18 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     return 80;
 }
 -(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
-        UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0,0,KSCREEN_WIDTH,80)];
-        v.backgroundColor = [UIColor clearColor];
-        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        btn.frame = CGRectMake(0, 40, KSCREEN_WIDTH, 44);
-        [btn setTitle:@"添加服务" forState:UIControlStateNormal];
-        btn.backgroundColor = RGB(17, 157, 255);
-        [btn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
-        [v addSubview:btn];
-        return v;
-    return [UIView new];
+    UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0,0,177,80)];
+    v.backgroundColor = [UIColor clearColor];
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn.frame = CGRectMake(KSCREEN_WIDTH/2-88, 20, 177, 44);
+    [btn setTitle:@"添加服务" forState:UIControlStateNormal];
+    [btn setImage:[UIImage imageNamed:@"btn_add service1"] forState:0];
+    btn.backgroundColor = RGB(17, 157, 255);
+    [btn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
+    [v addSubview:btn];
+    [Tools configCornerOfView:btn with:3];
+    [Tools configCornerOfView:v with:3];
+    return v;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

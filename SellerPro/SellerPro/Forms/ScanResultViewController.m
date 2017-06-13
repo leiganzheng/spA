@@ -21,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UITextView *tf6;
 @property (weak, nonatomic) IBOutlet UITextView *tf7;
 @property (weak, nonatomic) IBOutlet UIButton *resultLb;
+@property (weak, nonatomic) IBOutlet UILabel *noticeLB;
 
 @end
 
@@ -33,8 +34,21 @@
     [Tools configCornerOfView:self.saveBtn with:3];
     [Tools configCornerOfView:self.reTakePBtn with:3];
     self.customImage.image = self.licenseImage;
+    [Tools configCornerOfView:self.tf1 with:2];
+     [Tools configCornerOfView:self.tf2 with:2];
+     [Tools configCornerOfView:self.tf3 with:2];
+    [Tools configCornerOfView:self.tf4 with:2];
+     [Tools configCornerOfView:self.tf5 with:2];
+     [Tools configCornerOfView:self.tf6 with:2];
+     [Tools configCornerOfView:self.tf7 with:2];
+    
+    
+    
     if (self.plate_license.length==7) {
         [self.resultLb setTitle:@"识别成功" forState:0];
+        self.noticeLB.textColor = [UIColor lightGrayColor];
+        [self.resultLb setTitleColor:[UIColor blackColor] forState:0];
+        [self.resultLb setImage:[UIImage imageNamed:@"icon_Identify success"] forState:0];
         self.tf1.text = [self.plate_license substringWithRange:NSMakeRange(0,1)];
         self.tf2.text = [self.plate_license substringWithRange:NSMakeRange(1,1)];
         self.tf3.text = [self.plate_license substringWithRange:NSMakeRange(2,1)];
@@ -44,6 +58,9 @@
         self.tf7.text = [self.plate_license substringWithRange:NSMakeRange(6,1)];
     }else{
         [self.resultLb setTitle:@"识别失败" forState:0];
+        self.noticeLB.textColor = RGB(236, 60, 60);
+        [self.resultLb setTitleColor:RGB(236, 60, 60) forState:0];
+        [self.resultLb setImage:[UIImage imageNamed:@"icon_Recognition failed"] forState:0];
     }
    
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap)];
@@ -57,6 +74,7 @@
 - (IBAction)saveAction:(id)sender {
     UIStoryboard *board = [UIStoryboard storyboardWithName: @"Main" bundle: nil];
     CarInfoViewController *cvc = [board instantiateViewControllerWithIdentifier:@"CarInfoViewController"];
+    cvc.plate_license = self.plate_license;
     [self.navigationController pushViewController:cvc animated:YES];
 
 }

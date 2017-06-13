@@ -12,7 +12,7 @@
 
 - (void)drawRect:(CGRect)rect {
     CGFloat rectWidth = 50;
-    CGFloat rectHeight = 200;
+    CGFloat rectHeight = 150;
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGFloat black[4] = {0.0, 0.0, 0.0, 0.8};
     CGContextSetFillColor(context, black);

@@ -11,6 +11,7 @@
 #import "AddWorkTypeViewController.h"
 #import "WorkTypeTableViewCell.h"
 #import "CustomFooterView.h"
+#import "ScanAddViewController.h"
 
 @interface WorkTypeViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -77,15 +78,20 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 }
 -(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
     if (!self.isAdd) {
-        UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0,0,KSCREEN_WIDTH,80)];
+        UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0,0,177,80)];
         v.backgroundColor = [UIColor clearColor];
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        btn.frame = CGRectMake(0, 40, KSCREEN_WIDTH, 44);
+        btn.frame = CGRectMake(KSCREEN_WIDTH/2-88, 20, 177, 44);
         [btn setTitle:@"添加商品" forState:UIControlStateNormal];
+        [btn setImage:[UIImage imageNamed:@"btn_scanning barcode"] forState:0];
         btn.backgroundColor = RGB(17, 157, 255);
         [btn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
         [v addSubview:btn];
+        [Tools configCornerOfView:btn with:3];
+        [Tools configCornerOfView:v with:3];
+
         return v;
+
     }
     return [UIView new];
 }
@@ -112,8 +118,12 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 #pragma mark -- private method
 - (void)save:(UIButton *)sender{
 //    UIStoryboard *board = [UIStoryboard storyboardWithName: @"Main" bundle: nil];
-    AddWorkTypeViewController *vc =[[AddWorkTypeViewController alloc] init];
+//    AddWorkTypeViewController *vc =[[AddWorkTypeViewController alloc] init];
+//    [self.navigationController pushViewController:vc animated:YES];
+    
+    ScanAddViewController *vc = [[ScanAddViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
+    
 }
 -(void)featchData{
     [DTNetManger orderGetDetail:^(NSError *error, id response) {

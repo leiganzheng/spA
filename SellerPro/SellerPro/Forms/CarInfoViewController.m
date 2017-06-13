@@ -34,7 +34,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
         _myTableView.delegate   = self;
         _myTableView.dataSource = self;
         _myTableView.backgroundColor = [UIColor clearColor];
-        _myTableView.separatorColor = [UIColor whiteColor];
+        _myTableView.separatorColor = [UIColor clearColor];
         _myTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
             [self featchData];
             
@@ -57,6 +57,12 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     [self.view addSubview:self.myTableView];
     self.title = @"车辆概况";
     [self setLeftBackNavItem];
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn.frame = CGRectMake(0, KSCREEN_HEIGHT-110, KSCREEN_WIDTH, 44);
+    [btn setTitle:@"录入服务内容" forState:UIControlStateNormal];
+    btn.backgroundColor = RGB(17, 157, 255);
+    [btn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btn];
     [self featchData];
 }
 - (void)viewWillAppear:(BOOL)animated{
@@ -66,28 +72,14 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 #pragma mark - tableView Delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    [tableView tableViewDisplayWitMsg:@"暂无数据" ifNecessaryForRowCount:self.dataSource.count];
     return 3;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     return 4;
 }
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
-{
-    return 80;
-}
--(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
-    UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0,0,KSCREEN_WIDTH,80)];
-    v.backgroundColor = [UIColor clearColor];
-    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn.frame = CGRectMake(0, 40, KSCREEN_WIDTH, 44);
-    [btn setTitle:@"录入服务内容" forState:UIControlStateNormal];
-    btn.backgroundColor = RGB(17, 157, 255);
-    [btn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
-    [v addSubview:btn];
-    return v;
-    return [UIView new];
-}
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -108,8 +100,8 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 }
 #pragma mark -- private method
 
--(void)featchData{
-    [DTNetManger customerGetWith:@"粤S777ML" callBack:^(NSError *error, id response) {
+-(void)featchData{//粤S777ML
+    [DTNetManger customerGetWith:self.plate_license callBack:^(NSError *error, id response) {
         if (response && [response isKindOfClass:[NSDictionary class]]) {
             NSDictionary *dict = (NSDictionary*)response;
             self.name.text = [dict objectForKey:@"name"];
@@ -126,8 +118,11 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
             self.vipimg.image = [UIImage imageNamed:str];
             [self.myTableView reloadData];
         }else{
-            
+            if ([response isKindOfClass:[NSString class]]) {
+                [MBProgressHUD showError:(NSString*)response toView:self.view];
+            }
         }
+        [self.myTableView.mj_header endRefreshing];
     }];
 }
 

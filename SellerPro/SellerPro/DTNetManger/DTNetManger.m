@@ -320,11 +320,7 @@
                 callBack(nil,dict);
             }
         }else{
-            if (code.integerValue == 401) {
-//                callBack(nil,[NSArray array]);
-            }else{
                 callBack(nil,[(NSDictionary*)response objectForKey:@"msg"]);
-            };
         }
     } fail:^(NSError *error) {
         [DTNetManger requestFailedCallBack:callBack];

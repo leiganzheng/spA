@@ -53,7 +53,7 @@
     if (self) {
         [self initialSession];
         [self initCameraShowView];
-//        [self initImageShowView];
+        [self initImageShowView];
         [self setupScanView];
         [self initButton];
     }
@@ -88,15 +88,23 @@
 
 - (void)initImageShowView
 {
-    self.imageShowView = [[UIImageView alloc] initWithFrame:CGRectMake(30, self.view.center.y - 100, KSCREEN_WIDTH-60, 200)];
+    self.imageShowView = [[UIImageView alloc] initWithFrame:self.view.frame];
     self.imageShowView.contentMode = UIViewContentModeScaleToFill;
-    self.imageShowView.backgroundColor = [UIColor colorWithWhite:0.f alpha:0.1];
+    self.imageShowView.backgroundColor = [UIColor whiteColor];
+    self.imageShowView.hidden = YES;
     [self.view addSubview:self.imageShowView];
 }
 - (void)setupScanView {
     _scan = [[ScanOtherView alloc]initWithFrame:self.view.bounds];
     _scan.backgroundColor = [UIColor clearColor];
+    
     [self.view addSubview:_scan];
+    
+    UILabel *_titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 160, KSCREEN_WIDTH, 20.0)];
+    _titleLabel.text = @"请将客户的车牌号对准拍照区域";
+    _titleLabel.textAlignment = NSTextAlignmentCenter;
+    _titleLabel.textColor = [UIColor whiteColor];
+    [_scan addSubview:_titleLabel];
 }
 - (void)initButton
 {
@@ -142,7 +150,7 @@
     [_btn setTitle:@"开灯" forState:UIControlStateNormal];
     _btn.frame = CGRectMake(0, 0, 60, 44);
 
-    _btn.titleLabel.font = [UIFont systemFontOfSize:15];
+    _btn.titleLabel.font = [UIFont systemFontOfSize:17];
     [_btn addTarget:self action:@selector(lightButtonDidTouch) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_btn];
     self.isOpen = NO;
@@ -151,7 +159,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
+    self.imageShowView.hidden = YES;
     [self setUpCameraLayer];
 }
 
@@ -193,6 +201,7 @@
 - (void)setUpCameraLayer
 {
     if (self.previewLayer == nil) {
+        self.imageShowView.hidden = YES;
         self.previewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:self.session];
         UIView * view = self.cameraShowView;
         CALayer * viewLayer = [view layer];
@@ -223,27 +232,33 @@
         NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
         UIImage *image = [UIImage imageWithData:imageData];
         NSLog(@"image size = %@", NSStringFromCGSize(image.size));
-  
-//        self.imageShowView.image = image;
-        [self ocrImage:nil];
+        
+        self.imageShowView.image = image;
+        self.imageShowView.hidden = NO;
+        [self ocrImage:image];
     }];
 }
 -(void)ocrImage:(UIImage *)originImage{
-    UIImage *tempImage = [UIImage imageNamed:@"3.pic_hd"];
-    NSData *data = UIImageJPEGRepresentation(tempImage, 1.0f);
+//    UIImage *tempImage = [UIImage imageNamed:@"3.pic_hd"];
+    NSData *data = UIImageJPEGRepresentation(originImage, 0.5f);
     NSString *encodedImageStr = [data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
     if (encodedImageStr.length!=0) {
         [MBProgressHUD showMessag:@"处理中" toView:self.view];
         [DTNetManger customerOcrWith:encodedImageStr callBack:^(NSError *error, id response) {
             [MBProgressHUD hiddenFromView:self.view];
+            UIStoryboard *board = [UIStoryboard storyboardWithName: @"Main" bundle: nil];
+            ScanResultViewController *cvc = [board instantiateViewControllerWithIdentifier:@"ScanResultViewController"];
             if (response && [response isKindOfClass:[NSDictionary class]]) {
                 NSDictionary *dic = (NSDictionary*)response;
-                UIStoryboard *board = [UIStoryboard storyboardWithName: @"Main" bundle: nil];
-                ScanResultViewController *cvc = [board instantiateViewControllerWithIdentifier:@"ScanResultViewController"];
+               
                 cvc.licenseImage = originImage;
                 cvc.plate_license = dic[@"plate_license"];
                 [self.navigationController pushViewController:cvc animated:YES];
             }else{
+                cvc.licenseImage = originImage;
+                cvc.plate_license = @"";
+                [self.navigationController pushViewController:cvc animated:YES];
+
                 if ([response  isKindOfClass:[NSString class]]) {
                     [MBProgressHUD showError:(NSString *)response toView:self.view];
                 }
