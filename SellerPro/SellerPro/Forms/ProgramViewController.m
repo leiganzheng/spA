@@ -77,7 +77,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
      [tableView tableViewDisplayWitMsg:@"暂无数据" ifNecessaryForRowCount:self.dataSource.count];
-    return self.dataSource.count;
+    return 8;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
@@ -100,6 +100,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(20, 40, 200, 40)];
     lb.textAlignment = NSTextAlignmentLeft;
     lb.textColor = [UIColor whiteColor];
+    lb.font = [UIFont boldSystemFontOfSize:20.0f];
     lb.text = @"余额";
     [v addSubview:lb];
     
@@ -108,13 +109,14 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     lb1.textAlignment = NSTextAlignmentLeft;
     lb1.textColor = [UIColor whiteColor];
     
-    UILabel *lb2 = [[UILabel alloc] initWithFrame:CGRectMake(KSCREEN_WIDTH-90, 40, 200, 40)];
+    UILabel *lb2 = [[UILabel alloc] initWithFrame:CGRectMake(KSCREEN_WIDTH-130, 40, 200, 40)];
     lb2.textAlignment = NSTextAlignmentLeft;
+    lb2.font = [UIFont boldSystemFontOfSize:20.0f];
     lb2.textColor = [UIColor whiteColor];
     lb2.text = @"累计佣金";
     [v addSubview:lb2];
     
-    UILabel *lb3 = [[UILabel alloc] initWithFrame:CGRectMake(KSCREEN_WIDTH-90, 70, 250, 40)];
+    UILabel *lb3 = [[UILabel alloc] initWithFrame:CGRectMake(KSCREEN_WIDTH-130, 70, 250, 40)];
     lb3.font = [UIFont boldSystemFontOfSize:28.0f];
     lb3.textAlignment = NSTextAlignmentLeft;
     lb3.textColor = [UIColor whiteColor];
@@ -138,9 +140,9 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     SprogramTableViewCell *myCell = (SprogramTableViewCell*)cell;
-    NSDictionary *dict = self.dataSource[indexPath.row];
-    myCell.name.text = [dict objectForKey:@"create_time"];
-    myCell.price.text = [dict objectForKey:@"money"];
+//    NSDictionary *dict = self.dataSource[indexPath.row];
+//    myCell.name.text = [dict objectForKey:@"create_time"];
+//    myCell.price.text = [dict objectForKey:@"money"];
 //        myCell.logo.text = [NSString stringWithFormat:@"%@",[dict objectForKey:@"order_count"]];
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

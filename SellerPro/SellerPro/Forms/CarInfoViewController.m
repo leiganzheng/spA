@@ -30,7 +30,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 {
     if (!_myTableView) {
         _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 241, KSCREEN_WIDTH, KSCREEN_HEIGHT-80) style:UITableViewStylePlain];
-        _myTableView.rowHeight = 44;
+        _myTableView.rowHeight = 50;
         _myTableView.delegate   = self;
         _myTableView.dataSource = self;
         _myTableView.backgroundColor = [UIColor clearColor];
@@ -58,7 +58,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     self.title = @"车辆概况";
     [self setLeftBackNavItem];
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn.frame = CGRectMake(0, KSCREEN_HEIGHT-110, KSCREEN_WIDTH, 44);
+    btn.frame = CGRectMake(0, KSCREEN_HEIGHT-108, KSCREEN_WIDTH, 44);
     [btn setTitle:@"录入服务内容" forState:UIControlStateNormal];
     btn.backgroundColor = RGB(17, 157, 255);
     [btn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
@@ -72,7 +72,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 #pragma mark - tableView Delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    [tableView tableViewDisplayWitMsg:@"暂无数据" ifNecessaryForRowCount:self.dataSource.count];
+//    [tableView tableViewDisplayWitMsg:@"暂无数据" ifNecessaryForRowCount:self.dataSource.count];
     return 3;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -84,15 +84,15 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     RecordTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kDTMyCellIdentifier];
-    cell.backgroundColor = [UIColor whiteColor];
+    cell.backgroundColor = [UIColor clearColor];
     return cell;
 }
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     RecordTableViewCell *myCell = (RecordTableViewCell *)cell;
-    NSDictionary *dict = self.dataSource[indexPath.row];
-    myCell.name.text = [dict objectForKey:@"name"];
-    myCell.time.text = [dict objectForKey:@"create_time"];
+//    NSDictionary *dict = self.dataSource[indexPath.row];
+//    myCell.name.text = [dict objectForKey:@"name"];
+//    myCell.time.text = [dict objectForKey:@"create_time"];
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];

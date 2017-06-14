@@ -9,18 +9,7 @@
 #import "AddCarSViewController.h"
 #import "AddEmployeeViewController.h"
 #import "Masonry.h"
-@implementation UIColor (Extensions)
 
-
-+ (instancetype)randomColor {
-    
-    CGFloat red = arc4random_uniform(255) / 255.0;
-    CGFloat green = arc4random_uniform(255) / 255.0;
-    CGFloat blue = arc4random_uniform(255) / 255.0;
-    return [self colorWithRed:red green:green blue:blue alpha:1.0];
-}
-
-@end
 @interface AddCarSViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView    *myTableView;
@@ -41,8 +30,8 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 - (UITableView *)myTableView
 {
     if (!_myTableView) {
-        _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KSCREEN_WIDTH, KSCREEN_HEIGHT-144) style:UITableViewStylePlain];
-        _myTableView.rowHeight = 60;
+        _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KSCREEN_WIDTH, KSCREEN_HEIGHT) style:UITableViewStylePlain];
+        _myTableView.rowHeight = 200;
         _myTableView.delegate   = self;
         _myTableView.dataSource = self;
         _myTableView.backgroundColor = [UIColor clearColor];
@@ -88,9 +77,16 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     NSArray *arr = [dict objectForKey:@"sub"];
     return arr.count;
 }
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSDictionary *dict = self.dataSource[indexPath.section];
+    NSArray *arr = [dict objectForKey:@"sub"];
+    NSDictionary *valueDict = arr[indexPath.row];
+    NSArray *servicesArr = valueDict[@"service"];
+    return 40+(servicesArr.count/3) * (60 +6);
+}
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 100;
+    return 40;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
@@ -116,23 +112,27 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     NSDictionary *dict = self.dataSource[indexPath.section];
     NSArray *arr = [dict objectForKey:@"sub"];
     NSDictionary *valueDict = arr[indexPath.row];
-    cell.textLabel.text = [valueDict objectForKey:@"name"];
+    
+    UILabel *lb= [[UILabel alloc] init];
+    lb.text = [valueDict objectForKey:@"name"];
+    lb.frame = CGRectMake(10, 10, 100, 24);
+    [cell.contentView addSubview:lb];
     UIButton *temp = [UIButton buttonWithType:UIButtonTypeCustom];
-    [temp setTitle:[dict objectForKey:@"name"] forState:UIControlStateNormal];
-    temp.frame = CGRectMake(KSCREEN_WIDTH-60, 10, 24, 24);
-//    cell.accessoryView = temp;
+    temp.frame = CGRectMake(KSCREEN_WIDTH-30, 10, 24, 24);
+    [temp setImage:[UIImage imageNamed:@"home_btn_next"] forState:0];
     [cell.contentView addSubview:temp];
-    [self subCell:cell.contentView];
+    
+    UIView *bgV = [[UIView alloc] init];
+    bgV.frame = CGRectMake(0, 42, KSCREEN_WIDTH, 160);
+    [cell.contentView addSubview:bgV];
+    NSArray *servicesArr = valueDict[@"service"];
+    [self gridWithCellWidth:(KSCREEN_WIDTH-32)/3 cellHeight:60 numPerRow:3 totalNum:servicesArr.count viewPadding:10 viewPaddingCell:6 superView:bgV dataSource:servicesArr];
     return cell;
 }
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *myCell = (UITableViewCell *)cell;
-    //    myCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    //    NSDictionary *dict = self.dataSource[indexPath.row];
-    //    myCell.name.text = [dict objectForKey:@"customer"];
-    //    myCell.time.text = [dict objectForKey:@"pay_time"];
-    //    myCell.logoName.text =[NSString stringWithFormat:@"消费¥:%@", [dict objectForKey:@"price"]];
+
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -143,6 +143,140 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
  
     
 }
+- (void)gridWithCellWidth:(CGFloat)cellWidth
+               cellHeight:(CGFloat)cellHeight
+                numPerRow:(NSInteger)numPerRow
+                 totalNum:(NSInteger)totalNum
+              viewPadding:(CGFloat)viewPadding
+          viewPaddingCell:(CGFloat)viewPaddingCell
+                superView:(UIView *)superView
+               dataSource:(NSArray *)data
+
+{
+    
+    __block UIButton *lastView = nil;// 创建一个空view 代表上一个view
+    __block UIButton *lastRowView;// 创建一个空view 代表上一行view
+    
+    __block NSInteger lastRowNo = 0;//上一行的行号
+    NSMutableArray *cells = [[NSMutableArray alloc] init];
+    
+    
+    for (int i = 0; i < totalNum; i++) {
+        NSDictionary *dict = data[i];
+        UIButton *aLabel = [UIButton buttonWithType:UIButtonTypeCustom];
+        [Tools configCornerOfView:aLabel with:3];
+        [aLabel setTitle:dict[@"name"] forState:0];
+        aLabel.titleLabel.textAlignment = NSTextAlignmentCenter;
+        [superView addSubview:aLabel];
+        aLabel.backgroundColor = RGB(211, 217, 222);
+        [cells addObject:aLabel];
+    }
+    
+    // 循环创建view
+    for (int i = 0; i < cells.count; i++)
+    {
+        
+        UIButton *lb = cells[i];
+        
+        
+        BOOL isFirstRow = [self isFirstRowWithIndex:i numOfRow:numPerRow];
+        BOOL isFirstCol = [self isFirstColumnWithIndex:i numOfRow:numPerRow];
+        
+        BOOL isLastCol = [self isLastColumnWithIndex:i numOfRow:numPerRow totalNum:totalNum];
+        BOOL isLastRow = [self isLastRowWithIndex:i numOfRow:numPerRow totalNum:totalNum];
+        
+        NSInteger curRowNo = i/numPerRow;
+        if (curRowNo != lastRowNo)
+        {//如果当前行与上一个view行不等，说明换行了
+            lastRowView = lastView;
+            lastRowNo = curRowNo;
+        }
+        
+        // 添加约束
+        [lb mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.width.equalTo(@(cellWidth));
+            make.height.equalTo(@(cellHeight));
+            
+            if (isFirstRow)
+            {
+                make.top.equalTo(superView.mas_top).with.offset(viewPadding);
+            }
+            else
+            {
+                if (lastRowView)
+                {
+                    make.top.equalTo(lastRowView.mas_bottom).with.offset(viewPaddingCell);
+                }
+            }
+            
+            if (isFirstCol)
+            {
+                make.left.equalTo(superView.mas_left).with.offset(viewPadding);
+            }
+            else
+            {
+                if (lastView)
+                {
+                    make.left.equalTo(lastView.mas_right).with.offset(viewPaddingCell);
+                }
+            }
+            
+            if (isFirstRow && isLastCol)
+            {
+                make.right.equalTo(superView.mas_right).with.offset(-viewPadding);
+            }
+            
+//            if (isLastRow && isFirstCol)
+//            {
+//                make.bottom.equalTo(superView.mas_bottom).with.offset(-viewPadding);
+//            }
+            
+        }];
+        
+        
+        
+        // 每次循环结束 此次的View为下次约束的基准
+        lastView = lb;
+    }
+}
+- (BOOL)isFirstRowWithIndex:(NSInteger)index numOfRow:(NSInteger)numOfRow
+{
+    if (numOfRow != 0)
+    {
+        return index/numOfRow == 0;
+    }
+    return NO;
+}
+- (BOOL)isFirstColumnWithIndex:(NSInteger)index numOfRow:(NSInteger)numOfRow
+{
+    if (numOfRow != 0)
+    {
+        return index%numOfRow == 0;
+    }
+    return NO;
+}
+- (BOOL)isLastRowWithIndex:(NSInteger)index numOfRow:(NSInteger)numOfRow totalNum:(NSInteger)totalNum
+{
+    NSInteger totalRow = ceil(totalNum/((CGFloat)numOfRow));//总行数
+    
+    if (numOfRow != 0)
+    {
+        return index/numOfRow == totalRow - 1;
+    }
+    return NO;
+}
+- (BOOL)isLastColumnWithIndex:(NSInteger)index numOfRow:(NSInteger)numOfRow totalNum:(NSInteger)totalNum
+{
+    if (numOfRow != 0)
+    {
+        if (totalNum < numOfRow)
+        {//总数小于每行最大个数时，如果index是最后一个，那么也是最后一列
+            return index == totalNum-1;
+        }
+        return index%numOfRow == numOfRow - 1;
+    }
+    return NO;
+}
 -(void)subCell:(UIView*)v{
     // 创建一个装载九宫格的容器
     UIView *containerView = [[UIView alloc] init];
@@ -152,19 +286,21 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     containerView.layer.borderColor = [UIColor grayColor].CGColor;
     // 给该容器添加布局代码
     [containerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(15);
-        make.top.mas_equalTo(66);
-        make.right.mas_equalTo(-15);
-        make.height.mas_equalTo(300);
+        make.left.mas_equalTo(0);
+        make.top.mas_equalTo(40);
+        make.right.mas_equalTo(0);
+        make.height.mas_equalTo(160);
     }];
     // 为该容器添加宫格View
-    for (int i = 0; i < 10; i++) {
-        UIView *view = [[UIView alloc] init];
-        view.backgroundColor = [UIColor randomColor];
-        [containerView addSubview:view];
+    for (int i = 0; i < 6; i++) {
+        UIButton *temp = [UIButton buttonWithType:UIButtonTypeCustom];
+//        temp.frame = CGRectMake(4, 45, containerView.bounds.size.width/3-8, 60);
+        temp.backgroundColor = [UIColor lightGrayColor];
+        [containerView addSubview:temp];
     }
     // 执行九宫格布局
-    [containerView.subviews mas_distributeViewsAlongAxis:MASAxisTypeVertical withFixedItemLength:10 leadSpacing:10 tailSpacing:10];
+//    [containerView.subviews mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedItemLength:4 leadSpacing:4 tailSpacing:4];
+    [containerView.subviews mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedSpacing:4 leadSpacing:4 tailSpacing:4];
 //    [containerView.subviews mas_distributeSudokuViewsWithFixedItemWidth:0 fixedItemHeight:0 fixedLineSpacing:10 fixedInteritemSpacing:20 warpCount:3 topSpacing:10 bottomSpacing:10 leadSpacing:10 tailSpacing:10];
 }
 -(void)featchData{

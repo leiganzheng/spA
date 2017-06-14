@@ -24,7 +24,7 @@
     [self setLeftBackNavItem];
     self.title = @"服务内容";
     self.numberOfTabs = 2;   ///////当设置数量时，去调用setter方法去加载控件
-    CustomFooterView *footer = [[CustomFooterView alloc]initWithFrame:CGRectMake(0, KSCREEN_HEIGHT-125, KSCREEN_WIDTH, 60)];
+    CustomFooterView *footer = [[CustomFooterView alloc]initWithFrame:CGRectMake(0, KSCREEN_HEIGHT-123, KSCREEN_WIDTH, 60)];
     [self.view addSubview:footer];
 }
 -(void)footerView{

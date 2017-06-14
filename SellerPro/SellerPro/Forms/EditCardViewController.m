@@ -24,6 +24,10 @@
     [self setLeftBackNavItem];
     self.bank.delegate = self;
     [Tools configCornerOfView:self.saveBtn with:3];
+    self.view.backgroundColor = RGB(243, 240, 246);
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap)];
+    [self.view addGestureRecognizer:tap];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -43,7 +47,7 @@
 }
 - (IBAction)saveAction:(id)sender {
     if (self.card.text.length==0 || self.bank.text.length==0) {
-        [MBProgressHUD showError:@"请输入卡号活着选择银行" toView:self.view];
+        [MBProgressHUD showError:@"请输入卡号或者选择银行" toView:self.view];
     }else{
         if (self.block) {
             self.block(self.bank.text, self.card.text);
@@ -53,5 +57,7 @@
     }
     
 }
-
+- (void)tap{
+    [self.card   resignFirstResponder];
+}
 @end

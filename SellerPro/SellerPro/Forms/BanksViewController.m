@@ -22,12 +22,12 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 - (UITableView *)myTableView
 {
     if (!_myTableView) {
-        _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KSCREEN_WIDTH, KSCREEN_HEIGHT-144) style:UITableViewStylePlain];
+        _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KSCREEN_WIDTH, KSCREEN_HEIGHT) style:UITableViewStylePlain];
         _myTableView.rowHeight = 60;
         _myTableView.delegate   = self;
         _myTableView.dataSource = self;
         _myTableView.backgroundColor = [UIColor clearColor];
-        _myTableView.separatorColor = [UIColor clearColor];
+        _myTableView.separatorColor = [UIColor lightGrayColor];
         [_myTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kDTMyCellIdentifier];
     }
     return _myTableView;
@@ -59,23 +59,11 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 40;
+    return 4;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     return 0.01;
-}
--(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    NSDictionary *dict = self.dataSource[section];
-    UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0,0,KSCREEN_WIDTH,40)];
-    v.backgroundColor = [UIColor lightGrayColor];
-    _btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [_btn setTitle:[dict objectForKey:@"name"] forState:UIControlStateNormal];
-    _btn.frame = CGRectMake(0, 10, 60, 24);
-    [_btn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
-    [v addSubview:_btn];
-    
-    return v;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -85,6 +73,13 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
    
     cell.textLabel.text = self.dataSource[indexPath.row];
     UIButton *arrBtn= [UIButton buttonWithType:UIButtonTypeCustom];
+    NSString *str = self.flagSource[indexPath.row];
+    if ([str isEqualToString:@"0"]) {
+         [arrBtn setImage:[UIImage imageNamed:@"staffmanagement_btn_option_seleted-1"] forState:0];
+    }else{
+         [arrBtn setImage:[UIImage imageNamed:@""] forState:0];
+    }
+   
     arrBtn.frame = CGRectMake(0, 10, 60, 24);
     cell.accessoryView = arrBtn;
 
@@ -99,6 +94,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     [_flagSource replaceObjectAtIndex:indexPath.row withObject:@"0"];
+    [self.myTableView reloadData];
     if (self.resultBlock) {
         self.resultBlock(self.dataSource[indexPath.row]);
     }

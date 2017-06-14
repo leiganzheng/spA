@@ -11,6 +11,7 @@
 #import "AddCarSViewController.h"
 #import "CarInfoTableViewCell.h"
 #import "CustomFooterView.h"
+#import "MGSwipeTableCell.h"
 
 @interface CarGoodViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -35,7 +36,8 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
             [self featchData];
             
         }];
-        [_myTableView registerNib:[UINib nibWithNibName:@"CarInfoTableViewCell" bundle:nil] forCellReuseIdentifier:kDTMyCellIdentifier];
+//        [_myTableView registerNib:[UINib nibWithNibName:@"CarInfoTableViewCell" bundle:nil] forCellReuseIdentifier:kDTMyCellIdentifier];
+         [_myTableView registerClass:[MGSwipeTableCell class] forCellReuseIdentifier:kDTMyCellIdentifier];
     }
     return _myTableView;
 }
@@ -87,17 +89,40 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CarInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kDTMyCellIdentifier];
+    MGSwipeTableCell *cell = [tableView dequeueReusableCellWithIdentifier:kDTMyCellIdentifier];
     cell.backgroundColor = [UIColor whiteColor];
+    UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(20, 20, 60, 60)];
+    lb.textAlignment = NSTextAlignmentCenter;
+    lb.layer.masksToBounds = YES;
+    lb.layer.cornerRadius = lb.bounds.size.width/2;
+    lb.backgroundColor = RGB(36, 201, 216);
+    lb.textColor = [UIColor whiteColor];
+    lb.text = @"洗";
+    [cell.contentView addSubview:lb];
+    
+    UILabel *lb1 = [[UILabel alloc] initWithFrame:CGRectMake(90, 30, 200, 40)];
+    lb1.textAlignment = NSTextAlignmentLeft;
+    lb1.textColor = [UIColor blackColor];
+    lb1.text = @"洗车服务一";
+    [cell.contentView addSubview:lb1];
+    
+    UILabel *lb2 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 40)];
+    lb2.textAlignment = NSTextAlignmentRight;
+    lb2.textColor = [UIColor redColor];
+    lb2.text = @"¥200";
+    cell.accessoryView = lb2;
+    
+    cell.rightButtons = @[[MGSwipeButton buttonWithTitle:@"" icon:[UIImage imageNamed:@"btn_delete service" ] backgroundColor:RGB(211, 217, 222)]];
+    cell.rightSwipeSettings.transition = MGSwipeTransition3D;
     return cell;
 }
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    CarInfoTableViewCell *myCell = (CarInfoTableViewCell *)cell;
-    NSDictionary *dict = self.dataSource[indexPath.row];
-    myCell.name.text = [dict objectForKey:@"name"];
-    myCell.price.text = [dict objectForKey:@"price"];
-}
+//- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    MGSwipeTableCell *myCell = (MGSwipeTableCell *)cell;
+//    NSDictionary *dict = self.dataSource[indexPath.row];
+////    myCell.name.text = [dict objectForKey:@"name"];
+////    myCell.price.text = [dict objectForKey:@"price"];
+//}
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     

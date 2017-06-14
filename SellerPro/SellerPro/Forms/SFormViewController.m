@@ -27,7 +27,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 {
     if (!_myTableView) {
         _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KSCREEN_WIDTH, KSCREEN_HEIGHT) style:UITableViewStylePlain];
-        _myTableView.rowHeight = 90;
+        _myTableView.rowHeight = 45;
         _myTableView.delegate   = self;
         _myTableView.dataSource = self;
         _myTableView.backgroundColor = [UIColor clearColor];
@@ -72,19 +72,19 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
 //    return ((NSArray*)self.dataSource[section]).count;
-    return _dataSource.count;
+    return 3;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 260;
+    return 320;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     return 0.01;
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0,0,KSCREEN_WIDTH,260)];
+    UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0,0,KSCREEN_WIDTH,320)];
     v.backgroundColor = RGB(243, 240, 246);
     
     UIImageView *img = [[UIImageView alloc] init];
@@ -93,45 +93,46 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     [v addSubview:img];
     
     
-    self.card = [[UILabel alloc] initWithFrame:CGRectMake(15, 30, 200, 40)];
+    self.card = [[UILabel alloc] initWithFrame:CGRectMake(20, 30, 200, 40)];
     self.card.textAlignment = NSTextAlignmentLeft;
     self.card.textColor = [UIColor whiteColor];
     self.card.text = @"88888888*****88888";
     [v addSubview:self.card];
     
-    self.bank = [[UILabel alloc] initWithFrame:CGRectMake(15, 90, 250, 40)];
+    self.bank = [[UILabel alloc] initWithFrame:CGRectMake(20, 90, 250, 40)];
      self.bank.textAlignment = NSTextAlignmentLeft;
      self.bank.text = @"中国招商银行";
      self.bank.textColor = [UIColor whiteColor];
     [v addSubview: self.bank];
     
     UIButton *btn1 = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn1.frame = CGRectMake(KSCREEN_WIDTH-30,30, 15, 44);
+    btn1.frame = CGRectMake(KSCREEN_WIDTH-35,30, 15, 44);
     [btn1 setImage:[UIImage imageNamed:@"btn_edit bankcard"] forState:0];
     [btn1 addTarget:self action:@selector(edit) forControlEvents:UIControlEventTouchUpInside];
     [v addSubview:btn1];
 
     
     UITextField *tf = [[UITextField alloc] init];
-    tf.frame = CGRectMake(10, 155, KSCREEN_WIDTH-20, 30);
+    tf.frame = CGRectMake(10, 165, KSCREEN_WIDTH-20, 44);
     tf.backgroundColor = [UIColor whiteColor];
     tf.text = @"¥88";
     [Tools configCornerOfView:tf with:3];
-    tf.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    tf.layer.borderColor = RGB(211, 217, 222).CGColor;
     tf.layer.borderWidth = 1;
     [v addSubview:tf];
     
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn.frame = CGRectMake(10,200, KSCREEN_WIDTH-20, 44);
+    btn.frame = CGRectMake(10,230, KSCREEN_WIDTH-20, 44);
     [btn setTitle:@"提交" forState:UIControlStateNormal];
     btn.backgroundColor = RGB(17, 157, 255);
     [Tools configCornerOfView:btn with:3];
 //    [btn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
     [v addSubview:btn];
     
-    UILabel *lb3 = [[UILabel alloc] initWithFrame:CGRectMake(10, 255, KSCREEN_WIDTH-20, 20)];
+    UILabel *lb3 = [[UILabel alloc] initWithFrame:CGRectMake(0, 290, KSCREEN_WIDTH, 20)];
     lb3.textAlignment = NSTextAlignmentCenter;
-    lb3.textColor = [UIColor blackColor];
+    lb3.font = [UIFont systemFontOfSize:16];
+    lb3.textColor = [UIColor lightGrayColor];
     lb3.text = @"--------结算记录-------";
     [v addSubview:lb3];
     
@@ -141,20 +142,20 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     SFormTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kDTMyCellIdentifier];
-    cell.backgroundColor = [UIColor clearColor];
+    cell.backgroundColor = RGB(243, 240, 246);
     return cell;
 }
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
     SFormTableViewCell *myCell = (SFormTableViewCell*)cell;
     NSDictionary *dict = self.dataSource[indexPath.row];
-    myCell.time.text = [dict objectForKey:@"pay_time"];
-    myCell.price.text = [dict objectForKey:@"price"];
-    NSArray *arr = (NSArray*)[dict objectForKey:@"service"];
-    NSMutableString *str = [[NSMutableString alloc]init];
-    for (NSDictionary *dic in arr) {
-        [str appendString:[dic objectForKey:@"name"]];
-    }
-    myCell.name.text = str;
+//    myCell.time.text = [dict objectForKey:@"pay_time"];
+//    myCell.price.text = [dict objectForKey:@"price"];
+//    NSArray *arr = (NSArray*)[dict objectForKey:@"service"];
+//    NSMutableString *str = [[NSMutableString alloc]init];
+//    for (NSDictionary *dic in arr) {
+//        [str appendString:[dic objectForKey:@"name"]];
+//    }
+//    myCell.name.text = str;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {

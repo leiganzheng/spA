@@ -234,6 +234,9 @@ UIAlertViewDelegate
             if ([response  isKindOfClass:[NSString class]]) {
                 [MBProgressHUD showError:(NSString *)response toView:self.view];
             }
+            if (!_session) {
+                [self setupAVFoundation];
+            }
         }
     }];
 }
