@@ -39,6 +39,7 @@
 		BB28CE0C1EDFFDBB004CF012 /* ServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB28CE0B1EDFFDBB004CF012 /* ServiceViewController.m */; };
 		BB28CE0F1EDFFF7A004CF012 /* WorkTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB28CE0E1EDFFF7A004CF012 /* WorkTypeViewController.m */; };
 		BB28CE121EE000A7004CF012 /* CarGoodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB28CE111EE000A7004CF012 /* CarGoodViewController.m */; };
+		BB4763C81EF1180700EC0F0E /* BanksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB4763C71EF1180700EC0F0E /* BanksViewController.m */; };
 		BB87F43E1EC05A5E00D67843 /* FPPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB87F4391EC05A5E00D67843 /* FPPopoverController.m */; };
 		BB87F43F1EC05A5E00D67843 /* FPPopoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = BB87F43B1EC05A5E00D67843 /* FPPopoverView.m */; };
 		BB87F4401EC05A5E00D67843 /* FPTouchView.m in Sources */ = {isa = PBXBuildFile; fileRef = BB87F43D1EC05A5E00D67843 /* FPTouchView.m */; };
@@ -130,6 +131,8 @@
 		BB28CE0E1EDFFF7A004CF012 /* WorkTypeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkTypeViewController.m; sourceTree = "<group>"; };
 		BB28CE101EE000A7004CF012 /* CarGoodViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarGoodViewController.h; sourceTree = "<group>"; };
 		BB28CE111EE000A7004CF012 /* CarGoodViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarGoodViewController.m; sourceTree = "<group>"; };
+		BB4763C61EF1180700EC0F0E /* BanksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BanksViewController.h; sourceTree = "<group>"; };
+		BB4763C71EF1180700EC0F0E /* BanksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BanksViewController.m; sourceTree = "<group>"; };
 		BB87F4371EC05A5E00D67843 /* ARCMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARCMacros.h; sourceTree = "<group>"; };
 		BB87F4381EC05A5E00D67843 /* FPPopoverController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPPopoverController.h; sourceTree = "<group>"; };
 		BB87F4391EC05A5E00D67843 /* FPPopoverController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPPopoverController.m; sourceTree = "<group>"; };
@@ -274,6 +277,8 @@
 				BBFC3B411EE8E97B00CB5F28 /* AddCarSViewController.m */,
 				BBFC3B431EE8ED3000CB5F28 /* CustomFooterView.h */,
 				BBFC3B441EE8ED3000CB5F28 /* CustomFooterView.m */,
+				BB4763C61EF1180700EC0F0E /* BanksViewController.h */,
+				BB4763C71EF1180700EC0F0E /* BanksViewController.m */,
 			);
 			path = Forms;
 			sourceTree = "<group>";
@@ -590,6 +595,7 @@
 				7109ED551EBEF23800C542AC /* ForgetPWViewController.m in Sources */,
 				BB87F45F1EC18E8200D67843 /* MBProgressHUD+Add.m in Sources */,
 				BB28CE0F1EDFFF7A004CF012 /* WorkTypeViewController.m in Sources */,
+				BB4763C81EF1180700EC0F0E /* BanksViewController.m in Sources */,
 				BB87F43E1EC05A5E00D67843 /* FPPopoverController.m in Sources */,
 				BBFC3B421EE8E97B00CB5F28 /* AddCarSViewController.m in Sources */,
 				BBD7AA871EEF739300E5F0C1 /* ScanAddViewController.m in Sources */,

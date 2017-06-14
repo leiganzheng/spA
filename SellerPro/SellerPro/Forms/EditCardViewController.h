@@ -7,7 +7,7 @@
 //
 
 #import "DTBaseViewController.h"
-
+typedef void (^RBolck)(NSString *bank,NSString *card);
 @interface EditCardViewController : DTBaseViewController
-
+@property (nonatomic, copy) RBolck block;
 @end

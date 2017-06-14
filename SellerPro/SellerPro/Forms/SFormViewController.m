@@ -17,6 +17,8 @@
 @property (nonatomic, strong) NSArray *iconSource;
 @property (nonatomic, assign) NSInteger page;
 @property (nonatomic, strong) NSString *date;
+@property (nonatomic, strong) UILabel *card;
+@property (nonatomic, strong) UILabel *bank;
 @end
 
 static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
@@ -91,17 +93,17 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     [v addSubview:img];
     
     
-    UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(15, 30, 200, 40)];
-    lb.textAlignment = NSTextAlignmentLeft;
-    lb.textColor = [UIColor whiteColor];
-    lb.text = @"88888888*****88888";
-    [v addSubview:lb];
+    self.card = [[UILabel alloc] initWithFrame:CGRectMake(15, 30, 200, 40)];
+    self.card.textAlignment = NSTextAlignmentLeft;
+    self.card.textColor = [UIColor whiteColor];
+    self.card.text = @"88888888*****88888";
+    [v addSubview:self.card];
     
-    UILabel *lb1 = [[UILabel alloc] initWithFrame:CGRectMake(15, 90, 250, 40)];
-    lb1.textAlignment = NSTextAlignmentLeft;
-    lb1.text = @"中国招商银行";
-    lb1.textColor = [UIColor whiteColor];
-    [v addSubview:lb1];
+    self.bank = [[UILabel alloc] initWithFrame:CGRectMake(15, 90, 250, 40)];
+     self.bank.textAlignment = NSTextAlignmentLeft;
+     self.bank.text = @"中国招商银行";
+     self.bank.textColor = [UIColor whiteColor];
+    [v addSubview: self.bank];
     
     UIButton *btn1 = [UIButton buttonWithType:UIButtonTypeCustom];
     btn1.frame = CGRectMake(KSCREEN_WIDTH-30,30, 15, 44);
@@ -166,6 +168,10 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 -(void)edit{
     UIStoryboard *board = [UIStoryboard storyboardWithName: @"Main" bundle: nil];
     EditCardViewController *cvc = [board instantiateViewControllerWithIdentifier:@"EditCardViewController"];
+    cvc.block = ^(NSString *bank, NSString *card) {
+        self.bank.text = bank;
+        self.card.text = card;
+    };
     [self.navigationController pushViewController:cvc animated:YES];
 }
 -(void)featchData{

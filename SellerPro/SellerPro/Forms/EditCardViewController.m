@@ -7,8 +7,9 @@
 //
 
 #import "EditCardViewController.h"
+#import "BanksViewController.h"
 
-@interface EditCardViewController ()
+@interface EditCardViewController ()<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *card;
 @property (weak, nonatomic) IBOutlet UITextField *bank;
 @property (weak, nonatomic) IBOutlet UIButton *saveBtn;
@@ -21,6 +22,7 @@
     [super viewDidLoad];
     self.title = @"编辑银行卡";
     [self setLeftBackNavItem];
+    self.bank.delegate = self;
     [Tools configCornerOfView:self.saveBtn with:3];
 }
 
@@ -28,18 +30,28 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+    //写你要实现的：页面跳转的相关代码
+    BanksViewController *bank = [[BanksViewController alloc]init];
+    bank.resultBlock = ^(NSString *name) {
+        if (name.length!=0) {
+            self.bank.text = name;
+        }
+    };
+    [self.navigationController pushViewController:bank animated:YES];
+    return NO;
+}
 - (IBAction)saveAction:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+    if (self.card.text.length==0 || self.bank.text.length==0) {
+        [MBProgressHUD showError:@"请输入卡号活着选择银行" toView:self.view];
+    }else{
+        if (self.block) {
+            self.block(self.bank.text, self.card.text);
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+        
+    }
+    
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

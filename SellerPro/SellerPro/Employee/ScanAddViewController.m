@@ -18,7 +18,8 @@
 @interface ScanAddViewController ()
 <AVCaptureMetadataOutputObjectsDelegate,
 UIImagePickerControllerDelegate,
-UINavigationControllerDelegate
+UINavigationControllerDelegate,
+UIAlertViewDelegate
 >
 @property (nonatomic, strong) AVCaptureSession *session;
 @property (nonatomic, strong) UIButton *lightButton;
@@ -32,7 +33,7 @@ UINavigationControllerDelegate
 @property (nonatomic, assign) BOOL isOpen;
 @property (nonatomic, strong) UIView *bgView;
 @property (nonatomic, strong) ScanView *scan;
-
+@property (nonatomic, strong) NSString *code;
 @end
 
 @implementation ScanAddViewController
@@ -107,7 +108,7 @@ UINavigationControllerDelegate
     _imageButton.layer.masksToBounds = YES;
     _imageButton.layer.cornerRadius = _imageButton.frame.size.width/2;
     [_imageButton addTarget:self action:@selector(imageButtonDidTouch) forControlEvents:UIControlEventTouchUpInside];
-    [_scan addSubview:_imageButton];
+//    [_scan addSubview:_imageButton];
 }
 
 - (void)lightButtonDidTouch {
@@ -236,6 +237,26 @@ UINavigationControllerDelegate
         }
     }];
 }
+-(void)showResult{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"扫码结果"
+                                                    message:@"是否添加"
+                                                   delegate:self
+                                          cancelButtonTitle:@"取消"
+                                          otherButtonTitles:@"添加",nil];
+    [alert show];
+}
+#pragma marks -- UIAlertViewDelegate
+//根据被点击按钮的索引处理点击事件
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex==0) {
+        if (!_session) {
+            [self setupAVFoundation];
+        }
+    }else{
+        [self goodInfo:self.code];
+    }
+}
 #pragma mark 输出的代理
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:(AVCaptureConnection *)connection {
     if (metadataObjects.count > 0) {
@@ -245,8 +266,9 @@ UINavigationControllerDelegate
         AVMetadataMachineReadableCodeObject *metadataObject = [metadataObjects objectAtIndex: 0];
 //        if (self.resultBlock) {
 //            self.resultBlock(metadataObject.stringValue);
-            [self goodInfo:metadataObject.stringValue];
             [self scanSuccess];
+        self.code =metadataObject.stringValue;
+        [self showResult];
 //        }
         //输出扫描字符串
 //        [self.navigationController popViewControllerAnimated:YES];

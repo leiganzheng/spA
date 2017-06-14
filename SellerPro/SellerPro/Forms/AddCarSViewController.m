@@ -7,9 +7,20 @@
 //
 
 #import "AddCarSViewController.h"
-#import "EmployeeTableViewCell.h"
 #import "AddEmployeeViewController.h"
+#import "Masonry.h"
+@implementation UIColor (Extensions)
 
+
++ (instancetype)randomColor {
+    
+    CGFloat red = arc4random_uniform(255) / 255.0;
+    CGFloat green = arc4random_uniform(255) / 255.0;
+    CGFloat blue = arc4random_uniform(255) / 255.0;
+    return [self colorWithRed:red green:green blue:blue alpha:1.0];
+}
+
+@end
 @interface AddCarSViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView    *myTableView;
@@ -79,7 +90,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 40;
+    return 100;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
@@ -108,8 +119,10 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     cell.textLabel.text = [valueDict objectForKey:@"name"];
     UIButton *temp = [UIButton buttonWithType:UIButtonTypeCustom];
     [temp setTitle:[dict objectForKey:@"name"] forState:UIControlStateNormal];
-    temp.frame = CGRectMake(0, 0, 24, 24);
-    cell.accessoryView = temp;
+    temp.frame = CGRectMake(KSCREEN_WIDTH-60, 10, 24, 24);
+//    cell.accessoryView = temp;
+    [cell.contentView addSubview:temp];
+    [self subCell:cell.contentView];
     return cell;
 }
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -130,7 +143,30 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
  
     
 }
-
+-(void)subCell:(UIView*)v{
+    // 创建一个装载九宫格的容器
+    UIView *containerView = [[UIView alloc] init];
+    [v addSubview:containerView];
+    containerView.backgroundColor = [UIColor whiteColor];
+    containerView.layer.borderWidth = 1;
+    containerView.layer.borderColor = [UIColor grayColor].CGColor;
+    // 给该容器添加布局代码
+    [containerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(15);
+        make.top.mas_equalTo(66);
+        make.right.mas_equalTo(-15);
+        make.height.mas_equalTo(300);
+    }];
+    // 为该容器添加宫格View
+    for (int i = 0; i < 10; i++) {
+        UIView *view = [[UIView alloc] init];
+        view.backgroundColor = [UIColor randomColor];
+        [containerView addSubview:view];
+    }
+    // 执行九宫格布局
+    [containerView.subviews mas_distributeViewsAlongAxis:MASAxisTypeVertical withFixedItemLength:10 leadSpacing:10 tailSpacing:10];
+//    [containerView.subviews mas_distributeSudokuViewsWithFixedItemWidth:0 fixedItemHeight:0 fixedLineSpacing:10 fixedInteritemSpacing:20 warpCount:3 topSpacing:10 bottomSpacing:10 leadSpacing:10 tailSpacing:10];
+}
 -(void)featchData{
     [DTNetManger serviceGetCategoryList:^(NSError *error, id response) {
         if (response && [response isKindOfClass:[NSArray class]]) {
