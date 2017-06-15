@@ -10,7 +10,8 @@
 #import "ScanResultViewController.h"
 #import <AVFoundation/AVFoundation.h>
 #import "ScanOtherView.h"
-
+#import "LoadCarInfoViewController.h"
+#import "UIImage+SubImage.h"
 @interface TakePhotoViewController ()
 {
     
@@ -244,23 +245,38 @@
     NSString *encodedImageStr = [data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
     if (encodedImageStr.length!=0) {
         [MBProgressHUD showMessag:@"处理中" toView:self.view];
+        
         [DTNetManger customerOcrWith:encodedImageStr callBack:^(NSError *error, id response) {
             [MBProgressHUD hiddenFromView:self.view];
             UIStoryboard *board = [UIStoryboard storyboardWithName: @"Main" bundle: nil];
             ScanResultViewController *cvc = [board instantiateViewControllerWithIdentifier:@"ScanResultViewController"];
             if (response && [response isKindOfClass:[NSDictionary class]]) {
                 NSDictionary *dic = (NSDictionary*)response;
-               
-                cvc.licenseImage = [self ct_imageFromImage:originImage inRect:CGRectMake(30, 200, KSCREEN_WIDTH-60, 100)];
+                cvc.licenseImage= [self imageFromImage:originImage inRect:CGRectMake(30, 200, KSCREEN_WIDTH-60, 100) transform:self.imageShowView.transform];
                 cvc.plate_license = dic[@"plate_license"];
                 [self.navigationController pushViewController:cvc animated:YES];
             }else{
-                cvc.licenseImage = originImage;
-                cvc.plate_license = @"";
-                [self.navigationController pushViewController:cvc animated:YES];
-
+               
                 if ([response  isKindOfClass:[NSString class]]) {
-                    [MBProgressHUD showError:(NSString *)response toView:self.view];
+                    NSString *temp = (NSString *)response;
+                    if ([temp isEqualToString:@"401"]) {
+                        [MBProgressHUD showError:@"不属于92俱乐部会员，请补充信息" toView:self.view];
+                        UIStoryboard *board = [UIStoryboard storyboardWithName: @"Main" bundle: nil];
+                        LoadCarInfoViewController *cvc = [board instantiateViewControllerWithIdentifier:@"LoadCarInfoViewController"];
+                        [self.navigationController pushViewController:cvc animated:YES];
+                    }else{
+                        [MBProgressHUD showError:@"不属于92俱乐部会员，请补充信息" toView:self.view];
+                        UIStoryboard *board = [UIStoryboard storyboardWithName: @"Main" bundle: nil];
+                        LoadCarInfoViewController *cvc = [board instantiateViewControllerWithIdentifier:@"LoadCarInfoViewController"];
+//                        cvc.licenseImage= [self imageFromImage:originImage inRect:CGRectMake(30, 200, KSCREEN_WIDTH-60, 100) transform:self.imageShowView.transform];
+                        cvc.licenseImage= [self imageFromView:self.imageShowView atFrame:CGRectMake(30, 200, KSCREEN_WIDTH-60, 75)];
+                        [self.navigationController pushViewController:cvc animated:YES];
+//                        [MBProgressHUD showError:(NSString *)response toView:self.view];
+//                        cvc.licenseImage= [self imageFromImage:originImage inRect:CGRectMake(30, 200, KSCREEN_WIDTH-60, 100) transform:self.imageShowView.transform];
+//                        cvc.plate_license = @"";
+//                        [self.navigationController pushViewController:cvc animated:YES];
+
+                    }
                 }
             }
         }];
@@ -268,18 +284,36 @@
         [MBProgressHUD showError:@"图片错误，请重试" toView:self.view];
     }
 }
-- (UIImage *)ct_imageFromImage:(UIImage *)image inRect:(CGRect)rect{
-    
-    //把像 素rect 转化为 点rect（如无转化则按原图像素取部分图片）
-    CGFloat scale = [UIScreen mainScreen].scale;
-    CGFloat x= rect.origin.x*scale,y=rect.origin.y*scale,w=rect.size.width*scale,h=rect.size.height*scale;
-    CGRect dianRect = CGRectMake(x, y, w, h);
-    
-    //截取部分图片并生成新图片
-    CGImageRef sourceImageRef = [image CGImage];
-    CGImageRef newImageRef = CGImageCreateWithImageInRect(sourceImageRef, dianRect);
-    UIImage *newImage = [UIImage imageWithCGImage:newImageRef scale:[UIScreen mainScreen].scale orientation:UIImageOrientationUp];
+-(UIImage*)imageFromImage:(UIImage*)image inRect:(CGRect)rect transform:(CGAffineTransform)transform{
+    CGSize newSize=rect.size;
+    UIGraphicsBeginImageContext(newSize);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextTranslateCTM(context, newSize.width / 2, newSize.height / 2);
+    CGContextConcatCTM(context, transform);
+    CGContextTranslateCTM(context, newSize.width / -2, newSize.height / -2);
+    [image drawInRect:CGRectMake(-rect.origin.x, -rect.origin.y, image.size.width, image.size.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
     return newImage;
+}
+- (UIImage *)imageFromView: (UIView *) theView   atFrame:(CGRect)r
+{
+    UIGraphicsBeginImageContext(theView.frame.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSaveGState(context);
+    UIRectClip(r);
+    [theView.layer renderInContext:context];
+    UIImage *theImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    NSLog(@"theImage.height = %f, error = %@, contextInfo = %@", theImage.size.height, @"", @"");
+    UIImageWriteToSavedPhotosAlbum(theImage, self, @selector(image:didFinishSavingWithError:contextInfo:), (__bridge void *)self);
+    
+    return  theImage;//[self getImageAreaFromImage:theImage atFrame:r];
+}
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
+{
+    
+    NSLog(@"image = %@, error = %@, contextInfo = %@", image, error, contextInfo);
 }
 
 - (void)didReceiveMemoryWarning {

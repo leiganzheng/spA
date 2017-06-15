@@ -11,6 +11,7 @@
 #import "AddEmployeeViewController.h"
 #import "FPPopoverController.h"
 #import "TimeViewController.h"
+#import "CarInfoDetailViewController.h"
 
 @interface StaffViewController ()<UITableViewDelegate,UITableViewDataSource,TimeViewControllerDelegate>
 
@@ -145,7 +146,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 //    NSDictionary *dict = self.dataSource[indexPath.row];
-    AddEmployeeViewController *vc = [[AddEmployeeViewController alloc] init];
+    CarInfoDetailViewController *vc = [[CarInfoDetailViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)save:(UIButton *)sender{

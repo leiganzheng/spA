@@ -295,7 +295,7 @@
             }
         }else{
             if (code.integerValue == 401) {
-                callBack(nil,nil);
+                callBack(nil,@"401");
             }else{
                 callBack(nil,[(NSDictionary*)response objectForKey:@"msg"]);
             };

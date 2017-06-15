@@ -40,6 +40,13 @@
 		BB28CE0F1EDFFF7A004CF012 /* WorkTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB28CE0E1EDFFF7A004CF012 /* WorkTypeViewController.m */; };
 		BB28CE121EE000A7004CF012 /* CarGoodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB28CE111EE000A7004CF012 /* CarGoodViewController.m */; };
 		BB4763C81EF1180700EC0F0E /* BanksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB4763C71EF1180700EC0F0E /* BanksViewController.m */; };
+		BB4763CB1EF2255400EC0F0E /* CarInfoDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB4763CA1EF2255400EC0F0E /* CarInfoDetailViewController.m */; };
+		BB4763CF1EF225C800EC0F0E /* CarInfoDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB4763CD1EF225C800EC0F0E /* CarInfoDetailTableViewCell.m */; };
+		BB4763D01EF225C800EC0F0E /* CarInfoDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB4763CE1EF225C800EC0F0E /* CarInfoDetailTableViewCell.xib */; };
+		BB4763D41EF2264400EC0F0E /* CarInfoDetailLongTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB4763D21EF2264400EC0F0E /* CarInfoDetailLongTableViewCell.m */; };
+		BB4763D51EF2264400EC0F0E /* CarInfoDetailLongTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB4763D31EF2264400EC0F0E /* CarInfoDetailLongTableViewCell.xib */; };
+		BB4763D81EF2286100EC0F0E /* LoadCarInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB4763D71EF2286100EC0F0E /* LoadCarInfoViewController.m */; };
+		BB4763DB1EF2633800EC0F0E /* UIImage+SubImage.m in Sources */ = {isa = PBXBuildFile; fileRef = BB4763DA1EF2633800EC0F0E /* UIImage+SubImage.m */; };
 		BB87F43E1EC05A5E00D67843 /* FPPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB87F4391EC05A5E00D67843 /* FPPopoverController.m */; };
 		BB87F43F1EC05A5E00D67843 /* FPPopoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = BB87F43B1EC05A5E00D67843 /* FPPopoverView.m */; };
 		BB87F4401EC05A5E00D67843 /* FPTouchView.m in Sources */ = {isa = PBXBuildFile; fileRef = BB87F43D1EC05A5E00D67843 /* FPTouchView.m */; };
@@ -133,6 +140,18 @@
 		BB28CE111EE000A7004CF012 /* CarGoodViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarGoodViewController.m; sourceTree = "<group>"; };
 		BB4763C61EF1180700EC0F0E /* BanksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BanksViewController.h; sourceTree = "<group>"; };
 		BB4763C71EF1180700EC0F0E /* BanksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BanksViewController.m; sourceTree = "<group>"; };
+		BB4763C91EF2255400EC0F0E /* CarInfoDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarInfoDetailViewController.h; sourceTree = "<group>"; };
+		BB4763CA1EF2255400EC0F0E /* CarInfoDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarInfoDetailViewController.m; sourceTree = "<group>"; };
+		BB4763CC1EF225C800EC0F0E /* CarInfoDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarInfoDetailTableViewCell.h; sourceTree = "<group>"; };
+		BB4763CD1EF225C800EC0F0E /* CarInfoDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarInfoDetailTableViewCell.m; sourceTree = "<group>"; };
+		BB4763CE1EF225C800EC0F0E /* CarInfoDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CarInfoDetailTableViewCell.xib; sourceTree = "<group>"; };
+		BB4763D11EF2264400EC0F0E /* CarInfoDetailLongTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarInfoDetailLongTableViewCell.h; sourceTree = "<group>"; };
+		BB4763D21EF2264400EC0F0E /* CarInfoDetailLongTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarInfoDetailLongTableViewCell.m; sourceTree = "<group>"; };
+		BB4763D31EF2264400EC0F0E /* CarInfoDetailLongTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CarInfoDetailLongTableViewCell.xib; sourceTree = "<group>"; };
+		BB4763D61EF2286100EC0F0E /* LoadCarInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadCarInfoViewController.h; sourceTree = "<group>"; };
+		BB4763D71EF2286100EC0F0E /* LoadCarInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadCarInfoViewController.m; sourceTree = "<group>"; };
+		BB4763D91EF2633800EC0F0E /* UIImage+SubImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+SubImage.h"; sourceTree = "<group>"; };
+		BB4763DA1EF2633800EC0F0E /* UIImage+SubImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+SubImage.m"; sourceTree = "<group>"; };
 		BB87F4371EC05A5E00D67843 /* ARCMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARCMacros.h; sourceTree = "<group>"; };
 		BB87F4381EC05A5E00D67843 /* FPPopoverController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPPopoverController.h; sourceTree = "<group>"; };
 		BB87F4391EC05A5E00D67843 /* FPPopoverController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPPopoverController.m; sourceTree = "<group>"; };
@@ -211,8 +230,12 @@
 		7109ED431EBEF0F300C542AC /* Employee */ = {
 			isa = PBXGroup;
 			children = (
+				BB4763D91EF2633800EC0F0E /* UIImage+SubImage.h */,
+				BB4763DA1EF2633800EC0F0E /* UIImage+SubImage.m */,
 				BBD7AA881EEF862600E5F0C1 /* TakePhotoViewController.h */,
 				BBD7AA891EEF862600E5F0C1 /* TakePhotoViewController.m */,
+				BB4763D61EF2286100EC0F0E /* LoadCarInfoViewController.h */,
+				BB4763D71EF2286100EC0F0E /* LoadCarInfoViewController.m */,
 				BBD7AA851EEF739300E5F0C1 /* ScanAddViewController.h */,
 				BBD7AA861EEF739300E5F0C1 /* ScanAddViewController.m */,
 				71790F351ED721E900E865E3 /* LoadView.h */,
@@ -265,6 +288,14 @@
 				71790F291ED4886100E865E3 /* ScanResultViewController.m */,
 				715117F81EDDB53C005837C7 /* CarInfoViewController.h */,
 				715117F91EDDB53C005837C7 /* CarInfoViewController.m */,
+				BB4763C91EF2255400EC0F0E /* CarInfoDetailViewController.h */,
+				BB4763CA1EF2255400EC0F0E /* CarInfoDetailViewController.m */,
+				BB4763CC1EF225C800EC0F0E /* CarInfoDetailTableViewCell.h */,
+				BB4763CD1EF225C800EC0F0E /* CarInfoDetailTableViewCell.m */,
+				BB4763CE1EF225C800EC0F0E /* CarInfoDetailTableViewCell.xib */,
+				BB4763D11EF2264400EC0F0E /* CarInfoDetailLongTableViewCell.h */,
+				BB4763D21EF2264400EC0F0E /* CarInfoDetailLongTableViewCell.m */,
+				BB4763D31EF2264400EC0F0E /* CarInfoDetailLongTableViewCell.xib */,
 				BBFC3B461EE9235100CB5F28 /* RecordTableViewCell.h */,
 				BBFC3B471EE9235100CB5F28 /* RecordTableViewCell.m */,
 				BBFC3B481EE9235100CB5F28 /* RecordTableViewCell.xib */,
@@ -496,9 +527,11 @@
 				710FEF631EBEE23D0064CC85 /* Assets.xcassets in Resources */,
 				BBFC3B4A1EE9235100CB5F28 /* RecordTableViewCell.xib in Resources */,
 				710FEF611EBEE23D0064CC85 /* Main.storyboard in Resources */,
+				BB4763D51EF2264400EC0F0E /* CarInfoDetailLongTableViewCell.xib in Resources */,
 				BBFC3B3F1EE8E8CC00CB5F28 /* CarInfoTableViewCell.xib in Resources */,
 				BBFC3B3A1EE8E5DF00CB5F28 /* WorkTypeTableViewCell.xib in Resources */,
 				71D31BB21EEED3A40083F688 /* ServiceTableViewCell.xib in Resources */,
+				BB4763D01EF225C800EC0F0E /* CarInfoDetailTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -559,6 +592,7 @@
 			files = (
 				710FEF5B1EBEE23C0064CC85 /* AppDelegate.m in Sources */,
 				71D31BB11EEED3A40083F688 /* ServiceTableViewCell.m in Sources */,
+				BB4763CB1EF2255400EC0F0E /* CarInfoDetailViewController.m in Sources */,
 				712952301EC0BE3B005A16F0 /* SFormViewController.m in Sources */,
 				BB87F4941EC443D500D67843 /* UITableView+Empty.m in Sources */,
 				7109ED5D1EBF4CB200C542AC /* DTNetManger.m in Sources */,
@@ -571,6 +605,7 @@
 				71790F391ED721E900E865E3 /* LoadView.m in Sources */,
 				712952271EC0BC36005A16F0 /* StaffViewController.m in Sources */,
 				BBE524B81ECAE4D600FCD703 /* UIViewController+BackButtonHandler.m in Sources */,
+				BB4763CF1EF225C800EC0F0E /* CarInfoDetailTableViewCell.m in Sources */,
 				71790F3A1ED721E900E865E3 /* ScanView.m in Sources */,
 				715117FA1EDDB53C005837C7 /* CarInfoViewController.m in Sources */,
 				71AA0ECF1EBF67DD00D2ADD3 /* TabContainerViewController.m in Sources */,
@@ -594,9 +629,12 @@
 				BB87F4551EC1722100D67843 /* SprogramTableViewCell.m in Sources */,
 				7109ED551EBEF23800C542AC /* ForgetPWViewController.m in Sources */,
 				BB87F45F1EC18E8200D67843 /* MBProgressHUD+Add.m in Sources */,
+				BB4763DB1EF2633800EC0F0E /* UIImage+SubImage.m in Sources */,
+				BB4763D41EF2264400EC0F0E /* CarInfoDetailLongTableViewCell.m in Sources */,
 				BB28CE0F1EDFFF7A004CF012 /* WorkTypeViewController.m in Sources */,
 				BB4763C81EF1180700EC0F0E /* BanksViewController.m in Sources */,
 				BB87F43E1EC05A5E00D67843 /* FPPopoverController.m in Sources */,
+				BB4763D81EF2286100EC0F0E /* LoadCarInfoViewController.m in Sources */,
 				BBFC3B421EE8E97B00CB5F28 /* AddCarSViewController.m in Sources */,
 				BBD7AA871EEF739300E5F0C1 /* ScanAddViewController.m in Sources */,
 				BBFC3B3E1EE8E8CC00CB5F28 /* CarInfoTableViewCell.m in Sources */,
