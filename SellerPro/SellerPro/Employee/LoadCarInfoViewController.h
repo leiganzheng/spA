@@ -10,4 +10,6 @@
 
 @interface LoadCarInfoViewController : DTBaseViewController
 @property(nonatomic,strong)UIImage *licenseImage;
+@property (nonatomic, strong) NSString *plate_license;
+
 @end

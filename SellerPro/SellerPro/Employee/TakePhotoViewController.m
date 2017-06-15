@@ -221,23 +221,28 @@
 // 这是拍照按钮的方法
 - (void)shutterCamera
 {
-    AVCaptureConnection *videoConnection = [self.stillImageOutput connectionWithMediaType:AVMediaTypeVideo];
-    if (!videoConnection) {
-        return;
-    }
-    
-    [self.stillImageOutput captureStillImageAsynchronouslyFromConnection:videoConnection completionHandler:^(CMSampleBufferRef imageDataSampleBuffer, NSError *error) {
-        if (imageDataSampleBuffer == NULL) {
-            return;
-        }
-        NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
-        UIImage *image = [UIImage imageWithData:imageData];
-        NSLog(@"image size = %@", NSStringFromCGSize(image.size));
-        
-        self.imageShowView.image = image;
-        self.imageShowView.hidden = NO;
-        [self ocrImage:image];
-    }];
+    UIStoryboard *board = [UIStoryboard storyboardWithName: @"Main" bundle: nil];
+    LoadCarInfoViewController *cvc = [board instantiateViewControllerWithIdentifier:@"LoadCarInfoViewController"];
+    cvc.licenseImage= [self imageFromView:self.imageShowView atFrame:CGRectMake(30, 200, KSCREEN_WIDTH-60, 75)];
+    [self.navigationController pushViewController:cvc animated:YES];
+
+//    AVCaptureConnection *videoConnection = [self.stillImageOutput connectionWithMediaType:AVMediaTypeVideo];
+//    if (!videoConnection) {
+//        return;
+//    }
+//    
+//    [self.stillImageOutput captureStillImageAsynchronouslyFromConnection:videoConnection completionHandler:^(CMSampleBufferRef imageDataSampleBuffer, NSError *error) {
+//        if (imageDataSampleBuffer == NULL) {
+//            return;
+//        }
+//        NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
+//        UIImage *image = [UIImage imageWithData:imageData];
+//        NSLog(@"image size = %@", NSStringFromCGSize(image.size));
+//        
+//        self.imageShowView.image = image;
+//        self.imageShowView.hidden = NO;
+//        [self ocrImage:image];
+//    }];
 }
 -(void)ocrImage:(UIImage *)originImage{
 //    UIImage *tempImage = [UIImage imageNamed:@"3.pic_hd"];

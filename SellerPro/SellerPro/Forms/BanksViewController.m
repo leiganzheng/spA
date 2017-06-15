@@ -22,7 +22,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 - (UITableView *)myTableView
 {
     if (!_myTableView) {
-        _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KSCREEN_WIDTH, KSCREEN_HEIGHT) style:UITableViewStylePlain];
+        _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KSCREEN_WIDTH, KSCREEN_HEIGHT-114) style:UITableViewStylePlain];
         _myTableView.rowHeight = 60;
         _myTableView.delegate   = self;
         _myTableView.dataSource = self;
@@ -93,7 +93,14 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    [_flagSource replaceObjectAtIndex:indexPath.row withObject:@"0"];
+    for (int i=0; i<self.flagSource.count; i++) {
+        if (i==indexPath.row) {
+            [_flagSource replaceObjectAtIndex:indexPath.row withObject:@"0"];
+        }else{
+            [_flagSource replaceObjectAtIndex:indexPath.row withObject:@"1"];
+        }
+    }
+    
     [self.myTableView reloadData];
     if (self.resultBlock) {
         self.resultBlock(self.dataSource[indexPath.row]);

@@ -94,7 +94,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     
     UIImageView *img = [[UIImageView alloc] init];
     img.frame = CGRectMake(0,0,KSCREEN_WIDTH,140);
-    img.image = [UIImage imageNamed:@"staffmanagement_img_bg"];
+    img.image = [[UIImage imageNamed:@"Rectangle"] stretchableImageWithLeftCapWidth:1 topCapHeight:70];
     [v addSubview:img];
     
     UIView *bgV = [[UIView alloc] initWithFrame:CGRectMake(KSCREEN_WIDTH-70, 8, 60, 24)];
@@ -107,6 +107,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     [_btn setTitle:[self.date substringFromIndex:5] forState:UIControlStateNormal];
     [_btn setImage:[UIImage imageNamed:@"btn_calendar"] forState:UIControlStateNormal];
     _btn.frame = CGRectMake(0, 0, 60, 24);
+    _btn.titleLabel.font = [UIFont systemFontOfSize:15];
     [_btn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
     [bgV addSubview:_btn];
     
@@ -146,7 +147,9 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 //    NSDictionary *dict = self.dataSource[indexPath.row];
-    CarInfoDetailViewController *vc = [[CarInfoDetailViewController alloc] init];
+    UIStoryboard *board = [UIStoryboard storyboardWithName: @"Main" bundle: nil];
+    CarInfoDetailViewController *vc = [board instantiateViewControllerWithIdentifier:@"CarInfoDetailViewController"];
+
     [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)save:(UIButton *)sender{

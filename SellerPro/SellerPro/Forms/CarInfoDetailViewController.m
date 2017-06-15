@@ -13,13 +13,11 @@
 @property (weak, nonatomic) IBOutlet UIImageView *profile;
 @property (weak, nonatomic) IBOutlet UILabel *name;
 @property (weak, nonatomic) IBOutlet UILabel *phone;
-@property (weak, nonatomic) IBOutlet UILabel *baoxian;
-@property (weak, nonatomic) IBOutlet UILabel *weizhang;
-@property (weak, nonatomic) IBOutlet UILabel *nianjian;
 @property (nonatomic, strong) UITableView    *myTableView;
 @property (weak, nonatomic) IBOutlet UIImageView *vipimg;
 @property (nonatomic, strong) NSArray *dataSource;
 @property (nonatomic, strong) NSArray *iconSource;
+@property (weak, nonatomic) IBOutlet UIImageView *bgView;
 
 @end
 
@@ -28,7 +26,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 - (UITableView *)myTableView
 {
     if (!_myTableView) {
-        _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 241, KSCREEN_WIDTH, KSCREEN_HEIGHT-80) style:UITableViewStylePlain];
+        _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 182, KSCREEN_WIDTH, KSCREEN_HEIGHT-80) style:UITableViewStylePlain];
         _myTableView.rowHeight = 44;
         _myTableView.delegate   = self;
         _myTableView.dataSource = self;
@@ -48,6 +46,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     [self.view addSubview:self.myTableView];
     self.title = @"订单详情";
     [self setLeftBackNavItem];
+    self.bgView.image = [[UIImage imageNamed:@"Rectangle"] stretchableImageWithLeftCapWidth:1 topCapHeight:70];
     [self featchData];
 }
 - (void)viewWillAppear:(BOOL)animated{
@@ -73,13 +72,13 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     
     UIImageView *img = [[UIImageView alloc] init];
     img.frame = CGRectMake(0,0,KSCREEN_WIDTH,140);
-   
-    img.image = [[UIImage imageNamed:@"staffmanagement_img_bg"] stretchableImageWithLeftCapWidth:9 topCapHeight:10];
+    img.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg_Consumption list"]];
     [v addSubview:img];
 
     UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(0, 20, KSCREEN_WIDTH, 40)];
     lb.textAlignment = NSTextAlignmentCenter;
-    lb.textColor = [UIColor whiteColor];
+    lb.textColor = [UIColor redColor];
+    lb.text = @"共消费：1888";
     [v addSubview:lb];
     
     return v;
@@ -108,18 +107,18 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     [DTNetManger customerGetWith:@"" callBack:^(NSError *error, id response) {
         if (response && [response isKindOfClass:[NSDictionary class]]) {
             NSDictionary *dict = (NSDictionary*)response;
-            self.name.text = [dict objectForKey:@"name"];
-            self.phone.text = [dict objectForKey:@"phone"];
-            self.baoxian.text = [dict objectForKey:@"insurance_end_time"];
-            self.nianjian.text = [dict objectForKey:@"yearly_inspection_end_time"];
-            self.dataSource = [dict objectForKey:@"records"];
-            self.weizhang.text = [NSString stringWithFormat:@"%@",[dict objectForKey:@"count_illegal"]];
-            NSString *state = [NSString stringWithFormat:@"%@",[dict objectForKey:@"status"]];
-            NSString *str = @"label_Non-VIP";
-            if ([state isEqualToString:@"1"]) {
-                str = @"label_VIP";
-            }
-            self.vipimg.image = [UIImage imageNamed:str];
+//            self.name.text = [dict objectForKey:@"name"];
+//            self.phone.text = [dict objectForKey:@"phone"];
+//            self.baoxian.text = [dict objectForKey:@"insurance_end_time"];
+//            self.nianjian.text = [dict objectForKey:@"yearly_inspection_end_time"];
+//            self.dataSource = [dict objectForKey:@"records"];
+//            self.weizhang.text = [NSString stringWithFormat:@"%@",[dict objectForKey:@"count_illegal"]];
+//            NSString *state = [NSString stringWithFormat:@"%@",[dict objectForKey:@"status"]];
+//            NSString *str = @"label_Non-VIP";
+//            if ([state isEqualToString:@"1"]) {
+//                str = @"label_VIP";
+//            }
+//            self.vipimg.image = [UIImage imageNamed:str];
             [self.myTableView reloadData];
         }else{
             if ([response isKindOfClass:[NSString class]]) {

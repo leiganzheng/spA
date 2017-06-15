@@ -17,7 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets = NO;
-    self.view.backgroundColor = RGB(243, 240, 246);
+    self.view.backgroundColor = RGB(242, 246, 249);
     if (!kStringIsEmpty(_navTitle)) {
         self.title = _navTitle;
     }
