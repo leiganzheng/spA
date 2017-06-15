@@ -868,7 +868,23 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SellerPro/Employee/TakePhotoViewController.m"
-            timestampString = "519204757.296228"
+            timestampString = "519205942.832969"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "307"
+            endingLineNumber = "307"
+            landmarkName = "-imageFromView:atFrame:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SellerPro/Employee/TakePhotoViewController.m"
+            timestampString = "519205942.832969"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "308"
@@ -884,27 +900,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SellerPro/Employee/TakePhotoViewController.m"
-            timestampString = "519204761.177567"
+            timestampString = "519205942.832969"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "309"
-            endingLineNumber = "309"
-            landmarkName = "-imageFromView:atFrame:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SellerPro/Employee/TakePhotoViewController.m"
-            timestampString = "519204798.122693"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "316"
-            endingLineNumber = "316"
+            startingLineNumber = "315"
+            endingLineNumber = "315"
             landmarkName = "-image:didFinishSavingWithError:contextInfo:"
             landmarkType = "7">
          </BreakpointContent>

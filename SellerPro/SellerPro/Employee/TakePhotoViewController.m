@@ -252,7 +252,7 @@
             ScanResultViewController *cvc = [board instantiateViewControllerWithIdentifier:@"ScanResultViewController"];
             if (response && [response isKindOfClass:[NSDictionary class]]) {
                 NSDictionary *dic = (NSDictionary*)response;
-                cvc.licenseImage= [self imageFromImage:originImage inRect:CGRectMake(30, 200, KSCREEN_WIDTH-60, 100) transform:self.imageShowView.transform];
+                cvc.licenseImage= [self imageFromView:self.imageShowView atFrame:CGRectMake(30, 200, KSCREEN_WIDTH-60, 75)];
                 cvc.plate_license = dic[@"plate_license"];
                 [self.navigationController pushViewController:cvc animated:YES];
             }else{
@@ -265,16 +265,15 @@
                         LoadCarInfoViewController *cvc = [board instantiateViewControllerWithIdentifier:@"LoadCarInfoViewController"];
                         [self.navigationController pushViewController:cvc animated:YES];
                     }else{
-                        [MBProgressHUD showError:@"不属于92俱乐部会员，请补充信息" toView:self.view];
-                        UIStoryboard *board = [UIStoryboard storyboardWithName: @"Main" bundle: nil];
-                        LoadCarInfoViewController *cvc = [board instantiateViewControllerWithIdentifier:@"LoadCarInfoViewController"];
-//                        cvc.licenseImage= [self imageFromImage:originImage inRect:CGRectMake(30, 200, KSCREEN_WIDTH-60, 100) transform:self.imageShowView.transform];
-                        cvc.licenseImage= [self imageFromView:self.imageShowView atFrame:CGRectMake(30, 200, KSCREEN_WIDTH-60, 75)];
-                        [self.navigationController pushViewController:cvc animated:YES];
-//                        [MBProgressHUD showError:(NSString *)response toView:self.view];
-//                        cvc.licenseImage= [self imageFromImage:originImage inRect:CGRectMake(30, 200, KSCREEN_WIDTH-60, 100) transform:self.imageShowView.transform];
-//                        cvc.plate_license = @"";
+//                        [MBProgressHUD showError:@"不属于92俱乐部会员，请补充信息" toView:self.view];
+//                        UIStoryboard *board = [UIStoryboard storyboardWithName: @"Main" bundle: nil];
+//                        LoadCarInfoViewController *cvc = [board instantiateViewControllerWithIdentifier:@"LoadCarInfoViewController"];
+//                        cvc.licenseImage= [self imageFromView:self.imageShowView atFrame:CGRectMake(30, 200, KSCREEN_WIDTH-60, 75)];
 //                        [self.navigationController pushViewController:cvc animated:YES];
+                        [MBProgressHUD showError:(NSString *)response toView:self.view];
+                        cvc.licenseImage= [self imageFromView:self.imageShowView atFrame:CGRectMake(30, 200, KSCREEN_WIDTH-60, 75)];
+                        cvc.plate_license = @"";
+                        [self.navigationController pushViewController:cvc animated:YES];
 
                     }
                 }
@@ -306,7 +305,7 @@
     UIImage *theImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     NSLog(@"theImage.height = %f, error = %@, contextInfo = %@", theImage.size.height, @"", @"");
-    UIImageWriteToSavedPhotosAlbum(theImage, self, @selector(image:didFinishSavingWithError:contextInfo:), (__bridge void *)self);
+//    UIImageWriteToSavedPhotosAlbum(theImage, self, @selector(image:didFinishSavingWithError:contextInfo:), (__bridge void *)self);
     
     return  theImage;//[self getImageAreaFromImage:theImage atFrame:r];
 }

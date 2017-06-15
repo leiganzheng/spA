@@ -549,7 +549,7 @@
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LoB-ke-bMC">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LoB-ke-bMC">
                                 <rect key="frame" x="8" y="80" width="360" height="75"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -860,6 +860,7 @@
                     </view>
                     <connections>
                         <outlet property="baoxian" destination="JwM-jJ-jw8" id="AKW-0J-2lM"/>
+                        <outlet property="bgview" destination="PlL-y8-I4U" id="nH6-mX-56s"/>
                         <outlet property="name" destination="tJT-FN-vhb" id="rZF-iI-b24"/>
                         <outlet property="nianjian" destination="aZn-rJ-LLX" id="nb8-l5-hOu"/>
                         <outlet property="phone" destination="he2-Zw-NO9" id="mhp-Qv-whq"/>

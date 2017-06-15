@@ -73,7 +73,8 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     
     UIImageView *img = [[UIImageView alloc] init];
     img.frame = CGRectMake(0,0,KSCREEN_WIDTH,140);
-    img.image = [UIImage imageNamed:@"staffmanagement_img_bg"];
+   
+    img.image = [[UIImage imageNamed:@"staffmanagement_img_bg"] stretchableImageWithLeftCapWidth:9 topCapHeight:10];
     [v addSubview:img];
 
     UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(0, 20, KSCREEN_WIDTH, 40)];

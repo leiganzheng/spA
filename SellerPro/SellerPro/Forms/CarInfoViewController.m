@@ -21,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *vipimg;
 @property (nonatomic, strong) NSArray *dataSource;
 @property (nonatomic, strong) NSArray *iconSource;
+@property (weak, nonatomic) IBOutlet UIImageView *bgview;
 
 @end
 
@@ -63,6 +64,8 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     btn.backgroundColor = RGB(17, 157, 255);
     [btn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn];
+    self.bgview.image = [[UIImage imageNamed:@"staffmanagement_img_bg"] stretchableImageWithLeftCapWidth:9 topCapHeight:10];
+
     [self featchData];
 }
 - (void)viewWillAppear:(BOOL)animated{

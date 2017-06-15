@@ -31,6 +31,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setLeftBackNavItem];
+    self.imgeV.contentMode = UIViewContentModeScaleAspectFit;
     self.imgeV.image = self.licenseImage;
     self.title =@"录入车辆信息";
     [Tools configCornerOfView:_nametf with:3];
