@@ -107,6 +107,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     [_btn setTitle:[self.date substringFromIndex:5] forState:UIControlStateNormal];
     [_btn setImage:[UIImage imageNamed:@"btn_calendar"] forState:UIControlStateNormal];
     _btn.frame = CGRectMake(0, 0, 60, 24);
+    [_btn setImageEdgeInsets:UIEdgeInsetsMake(0.0, -15, 0.0, 0.0)];
     _btn.titleLabel.font = [UIFont systemFontOfSize:15];
     [_btn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
     [bgV addSubview:_btn];

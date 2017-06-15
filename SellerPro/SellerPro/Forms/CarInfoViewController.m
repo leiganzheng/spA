@@ -64,7 +64,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     btn.backgroundColor = RGB(17, 157, 255);
     [btn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn];
-    self.bgview.image = [[UIImage imageNamed:@"staffmanagement_img_bg"] stretchableImageWithLeftCapWidth:9 topCapHeight:10];
+    self.bgview.image = [[UIImage imageNamed:@"Rectangle"] stretchableImageWithLeftCapWidth:1 topCapHeight:70];
 
     [self featchData];
 }

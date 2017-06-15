@@ -79,6 +79,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     btn.frame = CGRectMake(KSCREEN_WIDTH/2-88, 20, 177, 44);
     [btn setTitle:@"添加服务" forState:UIControlStateNormal];
     [btn setImage:[UIImage imageNamed:@"btn_add service1"] forState:0];
+    [btn setImageEdgeInsets:UIEdgeInsetsMake(0.0, -20, 0.0, 0.0)];
     btn.backgroundColor = RGB(17, 157, 255);
     [btn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
     [v addSubview:btn];

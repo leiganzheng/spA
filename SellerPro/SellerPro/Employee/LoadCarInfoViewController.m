@@ -7,6 +7,7 @@
 //
 
 #import "LoadCarInfoViewController.h"
+#import "IQKeyboardReturnKeyHandler.h"
 
 @interface LoadCarInfoViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *imgeV;
@@ -19,7 +20,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *submitBtn;
 @property (weak, nonatomic) IBOutlet UILabel *plase_num;
 @property (nonatomic,strong)UIView *mask;
-
+@property (nonatomic, strong) IQKeyboardReturnKeyHandler    *returnKeyHandler;
 @end
 
 @implementation LoadCarInfoViewController
@@ -40,6 +41,7 @@
      _juliTF.placeholder = @"行驶里程";
      _fdhTF.placeholder = @"发动机号";
      _cjhTF.placeholder = @"车架号";
+    self.plate_license = @"粤S777ML";
     
     [Tools configCornerOfView:_phonetf with:3];
     _phonetf.frame = CGRectMake(_phonetf.frame.origin.x, _phonetf.frame.origin.y, _phonetf.bounds.size.width, 44);
@@ -65,6 +67,8 @@
     _plase_num.layer.borderColor = RGB(211, 217, 222).CGColor;
     _plase_num.layer.borderWidth = 1;
     [self maskView];
+    self.returnKeyHandler = [[IQKeyboardReturnKeyHandler alloc] initWithViewController:self];
+    self.returnKeyHandler.lastTextFieldReturnKeyType = UIReturnKeyDone;
 }
 
 - (void)didReceiveMemoryWarning {

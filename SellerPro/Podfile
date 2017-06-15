@@ -9,4 +9,5 @@ pod 'HYBNetworking'
 pod 'MJExtension'
 pod 'MBProgressHUD'
 pod 'MGSwipeTableCell'
+pod 'IQKeyboardManager'
 end

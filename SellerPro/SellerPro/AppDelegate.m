@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "LoginViewController.h"
+#import "IQKeyboardManager.h"
 @interface AppDelegate ()<UIAlertViewDelegate>
 
 @end
@@ -24,6 +25,11 @@
     [navBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor] , NSFontAttributeName:DT_Nav_TitleFont}];
     navBar.barTintColor = [UIColor blackColor];
     [self setUpBaseNetwork];
+    IQKeyboardManager *manager = [IQKeyboardManager sharedManager];
+    manager.enable = YES;
+    manager.shouldResignOnTouchOutside = YES;
+    manager.shouldToolbarUsesTextFieldTintColor = YES;
+    manager.enableAutoToolbar = NO;
     return YES;
 }
 - (void)setUpBaseNetwork
