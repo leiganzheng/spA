@@ -65,8 +65,6 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     UIButton *_btn = [UIButton buttonWithType:UIButtonTypeCustom];
     [_btn setTitle:@"提取佣金" forState:UIControlStateNormal];
     _btn.frame = CGRectMake(0, 0, 80, 44);
-    _btn.titleEdgeInsets = UIEdgeInsetsMake(0, -_btn.imageView.frame.size.width - _btn.frame.size.width + _btn.titleLabel.intrinsicContentSize.width, 0, 0);
-    _btn.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -_btn.titleLabel.frame.size.width - _btn.frame.size.width + _btn.imageView.frame.size.width);
     [_btn addTarget:self action:@selector(select:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_btn];
     [self featchOrderSun];
@@ -77,7 +75,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
      [tableView tableViewDisplayWitMsg:@"暂无数据" ifNecessaryForRowCount:self.dataSource.count];
-    return 8;
+    return self.dataSource.count;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
@@ -109,14 +107,14 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     lb1.textAlignment = NSTextAlignmentLeft;
     lb1.textColor = [UIColor whiteColor];
     
-    UILabel *lb2 = [[UILabel alloc] initWithFrame:CGRectMake(KSCREEN_WIDTH-130, 40, 200, 40)];
+    UILabel *lb2 = [[UILabel alloc] initWithFrame:CGRectMake(KSCREEN_WIDTH-145, 40, 200, 40)];
     lb2.textAlignment = NSTextAlignmentLeft;
     lb2.font = [UIFont boldSystemFontOfSize:20.0f];
     lb2.textColor = [UIColor whiteColor];
     lb2.text = @"累计佣金";
     [v addSubview:lb2];
     
-    UILabel *lb3 = [[UILabel alloc] initWithFrame:CGRectMake(KSCREEN_WIDTH-130, 70, 250, 40)];
+    UILabel *lb3 = [[UILabel alloc] initWithFrame:CGRectMake(KSCREEN_WIDTH-145, 70, 250, 40)];
     lb3.font = [UIFont boldSystemFontOfSize:28.0f];
     lb3.textAlignment = NSTextAlignmentLeft;
     lb3.textColor = [UIColor whiteColor];
@@ -156,6 +154,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 }
 - (void)select:(UIButton *)sender{
     SFormViewController *vc = [[SFormViewController alloc]init];
+    vc.money = _dataDict[@"commission_valid"];
     [self.navigationController pushViewController:vc animated:YES];
 }
 -(void)featchOrderSun{

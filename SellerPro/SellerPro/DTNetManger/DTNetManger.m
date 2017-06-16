@@ -236,9 +236,12 @@
     
 }
 //获取服务单明细
-+(void)orderGetDetail:(callBack)callBack{
++(void)orderGetDetailWithID:(NSString *)customID callBack:(callBack)callBack{
     [Tools configOrignNetWork];
-    [HYBNetworking postWithUrl:kDTOrderGetDetailUrl refreshCache:YES params:nil success:^(id response) {
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
+                         customID,@"order_id",
+                         nil];
+    [HYBNetworking postWithUrl:kDTOrderGetDetailUrl refreshCache:YES params:dic success:^(id response) {
         NSString *code = [(NSDictionary*)response objectForKey:@"code"];
         if (code.integerValue == 0) {
             if (callBack) {
@@ -246,11 +249,11 @@
                 callBack(nil,dict);
             }
         }else{
-            if (code.integerValue == 401) {
-//                callBack(nil,[NSArray array]);
-            }else{
+//            if (code.integerValue == 401) {
+////                callBack(nil,[NSArray array]);
+//            }else{
                 callBack(nil,[(NSDictionary*)response objectForKey:@"msg"]);
-            };
+//            };
         }
     } fail:^(NSError *error) {
         [DTNetManger requestFailedCallBack:callBack];
@@ -415,15 +418,10 @@
         NSString *code = [(NSDictionary*)response objectForKey:@"code"];
         if (code.integerValue == 0) {
             if (callBack) {
-                NSArray *arr = [(NSDictionary*)response objectForKey:@"data"];
-                callBack(nil,arr);
+                callBack(nil,@"success");
             }
         }else{
-            if (code.integerValue == 401) {
-                callBack(nil,[NSArray array]);
-            }else{
-                callBack(nil,[(NSDictionary*)response objectForKey:@"msg"]);
-            };
+            callBack(nil,[(NSDictionary*)response objectForKey:@"msg"]);
         }
     } fail:^(NSError *error) {
         [DTNetManger requestFailedCallBack:callBack];

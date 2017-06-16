@@ -27,7 +27,8 @@
     self.view.backgroundColor = RGB(243, 240, 246);
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap)];
     [self.view addGestureRecognizer:tap];
-
+    self.bank.text = self.name;
+    self.card.text = self.cardNum;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -37,6 +38,7 @@
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
     //写你要实现的：页面跳转的相关代码
     BanksViewController *bank = [[BanksViewController alloc]init];
+    bank.name = self.bank.text;
     bank.resultBlock = ^(NSString *name) {
         if (name.length!=0) {
             self.bank.text = name;

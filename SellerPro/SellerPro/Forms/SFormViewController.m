@@ -19,6 +19,7 @@
 @property (nonatomic, strong) NSString *date;
 @property (nonatomic, strong) UILabel *card;
 @property (nonatomic, strong) UILabel *bank;
+@property (nonatomic,strong) UITextField *tf;
 @end
 
 static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
@@ -26,7 +27,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 - (UITableView *)myTableView
 {
     if (!_myTableView) {
-        _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KSCREEN_WIDTH, KSCREEN_HEIGHT) style:UITableViewStylePlain];
+        _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KSCREEN_WIDTH, KSCREEN_HEIGHT-64) style:UITableViewStylePlain];
         _myTableView.rowHeight = 45;
         _myTableView.delegate   = self;
         _myTableView.dataSource = self;
@@ -65,14 +66,15 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 }
 
 #pragma mark - tableView Delegate
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-     [tableView tableViewDisplayWitMsg:@"暂无数据" ifNecessaryForRowCount:self.dataSource.count];
-    return 1;
-}
+//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+////     [tableView tableViewDisplayWitMsg:@"暂无数据" ifNecessaryForRowCount:self.dataSource.count];
+//    return 1;
+//}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-//    return ((NSArray*)self.dataSource[section]).count;
-    return 3;
+       [tableView tableViewDisplayWitMsg:@"暂无数据" ifNecessaryForRowCount:self.dataSource.count];
+    return self.dataSource.count;
+
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -92,16 +94,19 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     img.image = [UIImage imageNamed:@"bg_bankcard_pressed"];
     [v addSubview:img];
     
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    NSString *bank = [userDefault objectForKey:@"bank"];
+    NSString *card = [userDefault objectForKey:@"card"];
     
     self.card = [[UILabel alloc] initWithFrame:CGRectMake(20, 30, 200, 40)];
     self.card.textAlignment = NSTextAlignmentLeft;
     self.card.textColor = [UIColor whiteColor];
-    self.card.text = @"88888888*****88888";
+    self.card.text = card.length==0 ? @"暂无卡号":card;
     [v addSubview:self.card];
     
     self.bank = [[UILabel alloc] initWithFrame:CGRectMake(20, 90, 250, 40)];
      self.bank.textAlignment = NSTextAlignmentLeft;
-     self.bank.text = @"中国招商银行";
+     self.bank.text = bank.length==0 ? @"暂无银行":bank;
      self.bank.textColor = [UIColor whiteColor];
     [v addSubview: self.bank];
     
@@ -112,21 +117,21 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     [v addSubview:btn1];
 
     
-    UITextField *tf = [[UITextField alloc] init];
-    tf.frame = CGRectMake(10, 165, KSCREEN_WIDTH-20, 44);
-    tf.backgroundColor = [UIColor whiteColor];
-    tf.text = @"¥88";
-    [Tools configCornerOfView:tf with:3];
-    tf.layer.borderColor = RGB(211, 217, 222).CGColor;
-    tf.layer.borderWidth = 1;
-    [v addSubview:tf];
+    self.tf= [[UITextField alloc] init];
+    self.tf.frame = CGRectMake(10, 165, KSCREEN_WIDTH-20, 44);
+    self.tf.backgroundColor = [UIColor whiteColor];
+    self.tf.text = self.money;
+    [Tools configCornerOfView:self.tf with:3];
+    self.tf.layer.borderColor = RGB(211, 217, 222).CGColor;
+    self.tf.layer.borderWidth = 1;
+    [v addSubview:self.tf];
     
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     btn.frame = CGRectMake(10,230, KSCREEN_WIDTH-20, 44);
     [btn setTitle:@"提交" forState:UIControlStateNormal];
     btn.backgroundColor = RGB(17, 157, 255);
     [Tools configCornerOfView:btn with:3];
-//    [btn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
+    [btn addTarget:self action:@selector(save) forControlEvents:UIControlEventTouchUpInside];
     [v addSubview:btn];
     
     UILabel *lb3 = [[UILabel alloc] initWithFrame:CGRectMake(0, 290, KSCREEN_WIDTH, 20)];
@@ -148,14 +153,9 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
     SFormTableViewCell *myCell = (SFormTableViewCell*)cell;
     NSDictionary *dict = self.dataSource[indexPath.row];
-//    myCell.time.text = [dict objectForKey:@"pay_time"];
-//    myCell.price.text = [dict objectForKey:@"price"];
-//    NSArray *arr = (NSArray*)[dict objectForKey:@"service"];
-//    NSMutableString *str = [[NSMutableString alloc]init];
-//    for (NSDictionary *dic in arr) {
-//        [str appendString:[dic objectForKey:@"name"]];
-//    }
-//    myCell.name.text = str;
+    myCell.time.text = [dict objectForKey:@"create_time"];
+    myCell.price.text = [NSString stringWithFormat:@"¥%@",[dict objectForKey:@"money"]];
+    myCell.name.text = @"";
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -166,12 +166,40 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     self.date = date;
     [self featchData];
 }
+-(void)save{
+    if (self.tf.text.length ==0) {
+         [MBProgressHUD showError:@"金额不能为空" toView:self.view];
+        return;
+    }
+    [MBProgressHUD showMessag:@"申请中" toView:self.view];
+    [DTNetManger staffWithdrawApply:@"" callBack:^(NSError *error, id response) {
+        [MBProgressHUD hiddenFromView:self.view];
+        if (response&&[response isKindOfClass:[NSString class]]) {
+            NSString *temp = (NSString *)response;
+            if ([temp isEqualToString:@"success"]) {
+                [MBProgressHUD showError:@"申请成功" toView:self.view];
+            }else{
+                [MBProgressHUD showError:temp toView:self.view];
+            }
+        }
+    }];
+}
 -(void)edit{
     UIStoryboard *board = [UIStoryboard storyboardWithName: @"Main" bundle: nil];
     EditCardViewController *cvc = [board instantiateViewControllerWithIdentifier:@"EditCardViewController"];
+    cvc.name = self.bank.text;
+     cvc.cardNum = self.card.text;
     cvc.block = ^(NSString *bank, NSString *card) {
         self.bank.text = bank;
         self.card.text = card;
+        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        //存储到UserDefault
+        if (bank.length!=0&&card.length!=0) {
+            [userDefaults setObject:bank forKey:@"bank"];
+            [userDefaults setObject:card forKey:@"card"];
+            [userDefaults synchronize];
+        }
+       
     };
     [self.navigationController pushViewController:cvc animated:YES];
 }

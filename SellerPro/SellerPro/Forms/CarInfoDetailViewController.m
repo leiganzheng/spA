@@ -7,7 +7,8 @@
 //
 
 #import "CarInfoDetailViewController.h"
-#import "RecordTableViewCell.h"
+#import "CarInfoDetailTableViewCell.h"
+#import "CarInfoDetailLongTableViewCell.h"
 
 @interface CarInfoDetailViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UIImageView *profile;
@@ -15,28 +16,30 @@
 @property (weak, nonatomic) IBOutlet UILabel *phone;
 @property (nonatomic, strong) UITableView    *myTableView;
 @property (weak, nonatomic) IBOutlet UIImageView *vipimg;
-@property (nonatomic, strong) NSArray *dataSource;
-@property (nonatomic, strong) NSArray *iconSource;
+@property (nonatomic, strong) NSMutableArray *dataSource;
 @property (weak, nonatomic) IBOutlet UIImageView *bgView;
+@property (nonatomic, strong) UILabel *price;
 
 @end
 
 static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
+static NSString *const kDTMyCellIdentifierLong = @"myCellIdentifier1";
 @implementation CarInfoDetailViewController
 - (UITableView *)myTableView
 {
     if (!_myTableView) {
         _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 182, KSCREEN_WIDTH, KSCREEN_HEIGHT-80) style:UITableViewStylePlain];
-        _myTableView.rowHeight = 44;
+//        _myTableView.rowHeight = 44;
         _myTableView.delegate   = self;
         _myTableView.dataSource = self;
         _myTableView.backgroundColor = [UIColor clearColor];
-        _myTableView.separatorColor = [UIColor clearColor];
+        _myTableView.separatorColor = RGB(211, 217, 222);
         _myTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
             [self featchData];
             
         }];
         [_myTableView registerNib:[UINib nibWithNibName:@"CarInfoDetailTableViewCell" bundle:nil] forCellReuseIdentifier:kDTMyCellIdentifier];
+        [_myTableView registerNib:[UINib nibWithNibName:@"CarInfoDetailLongTableViewCell" bundle:nil] forCellReuseIdentifier:kDTMyCellIdentifierLong];
     }
     return _myTableView;
 }
@@ -57,42 +60,65 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     [tableView tableViewDisplayWitMsg:@"暂无数据" ifNecessaryForRowCount:self.dataSource.count];
-    return 3;
+    return self.dataSource.count;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     return 4;
 }
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSDictionary *dict = self.dataSource[indexPath.row];
+    if (dict.allValues.count>2) {
+        return 44;
+    }else{
+        return 90;
+    }
+}
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    return 80;
+    return 76;
 }
 -(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
-    UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0,0,KSCREEN_WIDTH,80)];
-    v.backgroundColor = [UIColor lightGrayColor];
+    UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0,0,KSCREEN_WIDTH,76)];
+    v.backgroundColor = [UIColor clearColor];
     
     UIImageView *img = [[UIImageView alloc] init];
-    img.frame = CGRectMake(0,0,KSCREEN_WIDTH,140);
+    img.frame = CGRectMake(0,0,KSCREEN_WIDTH,76);
     img.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg_Consumption list"]];
     [v addSubview:img];
 
-    UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(0, 20, KSCREEN_WIDTH, 40)];
-    lb.textAlignment = NSTextAlignmentCenter;
-    lb.textColor = [UIColor redColor];
-    lb.text = @"共消费：1888";
-    [v addSubview:lb];
+    self.price = [[UILabel alloc] initWithFrame:CGRectMake(0, 20, KSCREEN_WIDTH, 40)];
+    self.price.textAlignment = NSTextAlignmentCenter;
+    self.price.textColor = [UIColor redColor];
+    self.price.text = @"共消费：1888";
+    [v addSubview:self.price];
     
     return v;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    RecordTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kDTMyCellIdentifier];
-    cell.backgroundColor = [UIColor clearColor];
-    return cell;
+    NSDictionary *dict = self.dataSource[indexPath.row];
+    if (dict.allValues.count>2) {
+        CarInfoDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kDTMyCellIdentifier];
+        cell.backgroundColor = [UIColor whiteColor];
+        cell.name.text = dict[@"name"];
+        cell.price.text = [NSString stringWithFormat:@"¥%@",dict[@"price"]];
+        return cell;
+    }else{
+        CarInfoDetailLongTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kDTMyCellIdentifierLong];
+        cell.backgroundColor = [UIColor whiteColor];
+        cell.name.text = dict[@"name"];
+        cell.price.text = [NSString stringWithFormat:@"¥%@",dict[@"price"]];
+        [cell.logo sd_setImageWithURL:[NSURL URLWithString:dict[@"picture"]] placeholderImage:[UIImage imageNamed:@""]];
+        return cell;
+
+    }
+
+   
 }
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    RecordTableViewCell *myCell = (RecordTableViewCell *)cell;
+//    RecordTableViewCell *myCell = (RecordTableViewCell *)cell;
     //    NSDictionary *dict = self.dataSource[indexPath.row];
     //    myCell.name.text = [dict objectForKey:@"name"];
     //    myCell.time.text = [dict objectForKey:@"create_time"];
@@ -104,21 +130,26 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 #pragma mark -- private method
 
 -(void)featchData{//粤S777ML
-    [DTNetManger customerGetWith:@"" callBack:^(NSError *error, id response) {
+//    self.customID = @"1";
+    [DTNetManger orderGetDetailWithID:self.customID callBack:^(NSError *error, id response) {
         if (response && [response isKindOfClass:[NSDictionary class]]) {
             NSDictionary *dict = (NSDictionary*)response;
-//            self.name.text = [dict objectForKey:@"name"];
-//            self.phone.text = [dict objectForKey:@"phone"];
-//            self.baoxian.text = [dict objectForKey:@"insurance_end_time"];
-//            self.nianjian.text = [dict objectForKey:@"yearly_inspection_end_time"];
-//            self.dataSource = [dict objectForKey:@"records"];
-//            self.weizhang.text = [NSString stringWithFormat:@"%@",[dict objectForKey:@"count_illegal"]];
-//            NSString *state = [NSString stringWithFormat:@"%@",[dict objectForKey:@"status"]];
-//            NSString *str = @"label_Non-VIP";
-//            if ([state isEqualToString:@"1"]) {
-//                str = @"label_VIP";
-//            }
-//            self.vipimg.image = [UIImage imageNamed:str];
+             NSDictionary *dictOther = [dict objectForKey:@"customer"];
+            self.name.text = [dictOther objectForKey:@"name"];
+            self.phone.text = [dictOther objectForKey:@"phone"];
+            
+            self.price.text = [NSString stringWithFormat:@"共消费：%@",[dict objectForKey:@"price"]];
+            NSString *state = [NSString stringWithFormat:@"%@",[dictOther objectForKey:@"status"]];
+            NSString *str = @"label_Non-VIP";
+            if ([state isEqualToString:@"1"]) {
+                str = @"label_VIP";
+            }
+            self.vipimg.image = [UIImage imageNamed:str];
+            
+            self.dataSource = [NSMutableArray array];
+           
+            [self.dataSource addObjectsFromArray:[dict objectForKey:@"good"]];
+            [self.dataSource addObjectsFromArray:[dict objectForKey:@"service"]];
             [self.myTableView reloadData];
         }else{
             if ([response isKindOfClass:[NSString class]]) {

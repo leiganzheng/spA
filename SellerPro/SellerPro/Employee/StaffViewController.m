@@ -78,7 +78,9 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 #pragma mark - tableView Delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 3;
+    [tableView tableViewDisplayWitMsg:@"暂无数据" ifNecessaryForRowCount:self.dataSource.count];
+    return self.dataSource.count;
+//    return 3;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
@@ -139,18 +141,18 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 {
     EmployeeTableViewCell *myCell = (EmployeeTableViewCell *)cell;
 //    myCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-//    NSDictionary *dict = self.dataSource[indexPath.row];
-//    myCell.name.text = [dict objectForKey:@"customer"];
-//    myCell.time.text = [dict objectForKey:@"pay_time"];
-//    myCell.logoName.text =[NSString stringWithFormat:@"消费¥:%@", [dict objectForKey:@"price"]];
+    NSDictionary *dict = self.dataSource[indexPath.row];
+    myCell.name.text = [dict objectForKey:@"customer"];
+    myCell.time.text = [dict objectForKey:@"pay_time"];
+    myCell.logoName.text =[NSString stringWithFormat:@"消费¥:%@", [dict objectForKey:@"price"]];
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-//    NSDictionary *dict = self.dataSource[indexPath.row];
+    NSDictionary *dict = self.dataSource[indexPath.row];
     UIStoryboard *board = [UIStoryboard storyboardWithName: @"Main" bundle: nil];
     CarInfoDetailViewController *vc = [board instantiateViewControllerWithIdentifier:@"CarInfoDetailViewController"];
-
+    vc.customID = dict[@"id"];
     [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)save:(UIButton *)sender{

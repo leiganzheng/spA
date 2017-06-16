@@ -48,7 +48,7 @@ typedef void(^detailCallBack) (NSError *error, NSArray *response, DTBaseModel *d
                        date:(NSString*)date
                  callBack:(callBack)callBack;
 //获取服务单明细
-+(void)orderGetDetail:(callBack)callBack;
++(void)orderGetDetailWithID:(NSString *)customID callBack:(callBack)callBack;
 //获取服务分类列表
 +(void)serviceGetCategoryList:(callBack)callBack;
 //车牌识别

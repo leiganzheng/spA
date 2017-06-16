@@ -135,16 +135,16 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     [self.navigationController pushViewController:vc animated:YES];
 }
 -(void)featchData{
-    [DTNetManger orderGetDetail:^(NSError *error, id response) {
-        if (response && [response isKindOfClass:[NSDictionary class]]) {
-            NSDictionary *dict = (NSDictionary*)response;
-            self.dataSource = [dict objectForKey:@"service"];
-            [self.myTableView reloadData];
-        }else{
-            
-        }
-        
-    }];
+//    [DTNetManger orderGetDetail:^(NSError *error, id response) {
+//        if (response && [response isKindOfClass:[NSDictionary class]]) {
+//            NSDictionary *dict = (NSDictionary*)response;
+//            self.dataSource = [dict objectForKey:@"service"];
+//            [self.myTableView reloadData];
+//        }else{
+//            
+//        }
+//        
+//    }];
 
 }
 

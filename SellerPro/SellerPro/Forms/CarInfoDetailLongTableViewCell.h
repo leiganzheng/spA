@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface CarInfoDetailLongTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UIImageView *logo;
+@property (weak, nonatomic) IBOutlet UITextView *name;
+@property (weak, nonatomic) IBOutlet UILabel *price;
 
 @end

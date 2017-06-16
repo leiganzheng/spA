@@ -9,5 +9,5 @@
 #import "DTBaseViewController.h"
 
 @interface CarInfoDetailViewController : DTBaseViewController
-
+@property(nonatomic,strong)NSString *customID;
 @end

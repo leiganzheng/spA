@@ -10,5 +10,6 @@
 typedef void (^MyResultBolck)(NSString *name);
 @interface BanksViewController : DTBaseViewController
 @property (nonatomic, copy) MyResultBolck resultBlock;
+@property (nonatomic, strong)NSString *name;
 
 @end

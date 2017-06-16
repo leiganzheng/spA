@@ -44,6 +44,12 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     [super viewDidLoad];
     self.title = @"银行列表";
     _flagSource = [NSMutableArray arrayWithObjects:@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1", nil];
+    for (int i=0; i<_dataSource.count; i++) {
+        NSString *temp = self.dataSource[i];
+        if ([self.name isEqualToString:temp]) {
+            [_flagSource replaceObjectAtIndex:i withObject:@"0"];
+        }
+    }
     [self.view addSubview:self.myTableView];
     [self setLeftBackNavItem];
     

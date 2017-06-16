@@ -10,4 +10,5 @@
 
 @interface SFormViewController : DTBaseViewController
 -(void)featchDataWithDate:(NSString *)date;
+@property(nonatomic,strong)NSString *money;
 @end

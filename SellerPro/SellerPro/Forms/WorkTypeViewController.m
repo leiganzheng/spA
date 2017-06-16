@@ -63,6 +63,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 #pragma mark - tableView Delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+//    [tableView tableViewDisplayWitMsg:@"暂无数据" ifNecessaryForRowCount:self.dataSource.count];
     return 3;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -130,16 +131,16 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     
 }
 -(void)featchData{
-    [DTNetManger orderGetDetail:^(NSError *error, id response) {
-        if (response && [response isKindOfClass:[NSDictionary class]]) {
-            NSDictionary *dict = (NSDictionary*)response;
-            self.dataSource = [dict objectForKey:@"good"];
-            [self.myTableView reloadData];
-        }else{
-            
-        }
-
-    }];
+//    [DTNetManger orderGetDetail:^(NSError *error, id response) {
+//        if (response && [response isKindOfClass:[NSDictionary class]]) {
+//            NSDictionary *dict = (NSDictionary*)response;
+//            self.dataSource = [dict objectForKey:@"good"];
+//            [self.myTableView reloadData];
+//        }else{
+//            
+//        }
+//
+//    }];
 }
 @end
 
