@@ -49,7 +49,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setLeftBackNavItem];
+//    [self setLeftBackNavItem];
     [self.view addSubview:self.myTableView];
     self.imgeV.backgroundColor = RGB(211, 217, 222);
     self.imgeV.contentMode = UIViewContentModeScaleAspectFit;
@@ -71,6 +71,12 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     _btn.frame = CGRectMake(0, 0, 60, 44);
     [_btn addTarget:self action:@selector(select) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_btn];
+    
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [btn setTitle:@"取消" forState:UIControlStateNormal];
+    btn.frame = CGRectMake(0, 0, 60, 44);
+    [btn addTarget:self action:@selector(cancel) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -128,6 +134,9 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 - (IBAction)submitAction:(id)sender {
     [self loadData];
     
+}
+-(void)cancel{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 -(void)maskView{
      self.mask= [[UIView alloc] initWithFrame:self.view.frame];
