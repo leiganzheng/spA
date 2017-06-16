@@ -82,7 +82,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     NSArray *arr = [dict objectForKey:@"sub"];
     NSDictionary *valueDict = arr[indexPath.row];
     NSArray *servicesArr = valueDict[@"service"];
-    return 40+(servicesArr.count/3) * (60 +6);
+    return 200;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
@@ -137,7 +137,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-   
+    
 }
 - (void)save:(UIButton *)sender{
  
@@ -165,7 +165,9 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
         NSDictionary *dict = data[i];
         UIButton *aLabel = [UIButton buttonWithType:UIButtonTypeCustom];
         [Tools configCornerOfView:aLabel with:3];
+        [aLabel addTarget:self action:@selector(select:) forControlEvents:UIControlEventTouchUpInside];
         [aLabel setTitle:dict[@"name"] forState:0];
+        aLabel.tag = i;
         aLabel.titleLabel.textAlignment = NSTextAlignmentCenter;
         [superView addSubview:aLabel];
         aLabel.backgroundColor = RGB(211, 217, 222);
@@ -302,6 +304,28 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 //    [containerView.subviews mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedItemLength:4 leadSpacing:4 tailSpacing:4];
     [containerView.subviews mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedSpacing:4 leadSpacing:4 tailSpacing:4];
 //    [containerView.subviews mas_distributeSudokuViewsWithFixedItemWidth:0 fixedItemHeight:0 fixedLineSpacing:10 fixedInteritemSpacing:20 warpCount:3 topSpacing:10 bottomSpacing:10 leadSpacing:10 tailSpacing:10];
+}
+-(void)select:(UIButton *)sender{
+    UITableViewCell *cell = (UITableViewCell*)[[sender superview]superview];
+    NSIndexPath *indexPath = [self.myTableView indexPathForCell:cell];
+    NSMutableDictionary *valueD = [NSMutableDictionary dictionary];
+    
+    NSDictionary *dict = self.dataSource[indexPath.section];
+    NSArray *arr = [dict objectForKey:@"sub"];
+    NSDictionary *valueDict = arr[indexPath.row];
+    
+    [valueD setObject:dict[@"short"] forKey:@"short"];
+    
+    NSArray *servicesArr = valueDict[@"service"];
+    NSDictionary *valueDict1 = servicesArr[sender.tag];
+    
+     [valueD setObject:valueDict1[@"name"] forKey:@"name"];
+    [valueD setObject:valueDict1[@"price"] forKey:@"price"];
+    if (_resultBlock) {
+        _resultBlock(valueD);
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+
 }
 -(void)featchData{
     [DTNetManger serviceGetCategoryList:^(NSError *error, id response) {

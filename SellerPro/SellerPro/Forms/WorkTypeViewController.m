@@ -16,8 +16,7 @@
 @interface WorkTypeViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView    *myTableView;
-@property (nonatomic, strong) NSArray *dataSource;
-@property (nonatomic, strong) NSArray *iconSource;
+@property (nonatomic, strong) NSMutableArray *dataSource;
 
 @end
 
@@ -41,17 +40,10 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     return _myTableView;
 }
 
-- (NSArray *)iconSource
-{
-    if (!_iconSource) {
-        _iconSource = @[@"home_icon_form",@"home_btn_staff",@"home_btn_servement",@"home_btn_password_setting"];
-    }
-    return _iconSource;
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view addSubview:self.myTableView];
+    self.dataSource = [NSMutableArray array];
     [self featchData];
 
     
@@ -64,7 +56,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
 //    [tableView tableViewDisplayWitMsg:@"暂无数据" ifNecessaryForRowCount:self.dataSource.count];
-    return 3;
+    return self.dataSource.count;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
@@ -125,7 +117,10 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     
     ScanAddViewController *vc = [[ScanAddViewController alloc] init];
     vc.resultBlock = ^(NSDictionary *dict) {
-        
+        if (dict) {
+            [self.dataSource addObject:dict];
+            [self.myTableView reloadData];
+        }
     };
     [self.navigationController pushViewController:vc animated:YES];
     

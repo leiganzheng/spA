@@ -29,19 +29,19 @@
     v.backgroundColor = [UIColor blackColor];
     [self addSubview:v];
     
-    UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(15, 10, 200, 20)];
-    lb.textAlignment = NSTextAlignmentLeft;
-    lb.textColor = [UIColor whiteColor];
-    lb.font = [UIFont systemFontOfSize:15];
-    lb.text = @"合计：¥321";
-    [v addSubview:lb];
+    self.lb = [[UILabel alloc] initWithFrame:CGRectMake(15, 10, 200, 20)];
+     self.lb.textAlignment = NSTextAlignmentLeft;
+     self.lb.textColor = [UIColor whiteColor];
+     self.lb.font = [UIFont systemFontOfSize:15];
+     self.lb.text = @"合计：¥0";
+    [v addSubview: self.lb];
     
-    UILabel *lb1 = [[UILabel alloc] initWithFrame:CGRectMake(15, 32, 200, 20)];
-    lb1.textAlignment = NSTextAlignmentLeft;
-    lb1.textColor = [UIColor whiteColor];
-    lb1.font = [UIFont systemFontOfSize:15];
-    lb1.text = @"商品：¥120 服务：¥130";
-    [v addSubview:lb1];
+    self.lb1 = [[UILabel alloc] initWithFrame:CGRectMake(15, 32, 200, 20)];
+    self.lb1.textAlignment = NSTextAlignmentLeft;
+    self.lb1.textColor = [UIColor whiteColor];
+    self.lb1.font = [UIFont systemFontOfSize:15];
+    self.lb1.text = @"商品：¥0 服务：¥0";
+    [v addSubview:self.lb1];
     
     UIView *v1 = [[UIView alloc] initWithFrame:CGRectMake(KSCREEN_WIDTH/2, 0, KSCREEN_WIDTH/2, 60)];
     v1.backgroundColor = RGB(17, 157, 255);
@@ -52,7 +52,12 @@
     btn.backgroundColor = RGB(17, 156, 254);
     btn.frame = CGRectMake(0, 0, KSCREEN_WIDTH/2, 60);
     btn.titleLabel.textAlignment = NSTextAlignmentCenter;
-    [btn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
+    [btn addTarget:self action:@selector(save) forControlEvents:UIControlEventTouchUpInside];
     [v1 addSubview:btn];
+}
+-(void)save{
+    if (_resultBlock) {
+        _resultBlock([NSString stringWithFormat:@"%li",[self.goodTotal integerValue] + [self.ServiceTotal integerValue]]);
+    }
 }
 @end

@@ -7,7 +7,8 @@
 //
 
 #import "DTBaseViewController.h"
+typedef void (^CarGoodBolck)(NSDictionary *dict);
 
 @interface AddCarSViewController : DTBaseViewController
-
+@property (nonatomic, copy) CarGoodBolck resultBlock;
 @end

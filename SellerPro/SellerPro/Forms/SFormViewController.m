@@ -66,10 +66,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 }
 
 #pragma mark - tableView Delegate
-//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-////     [tableView tableViewDisplayWitMsg:@"暂无数据" ifNecessaryForRowCount:self.dataSource.count];
-//    return 1;
-//}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
        [tableView tableViewDisplayWitMsg:@"暂无数据" ifNecessaryForRowCount:self.dataSource.count];
@@ -172,7 +169,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
         return;
     }
     [MBProgressHUD showMessag:@"申请中" toView:self.view];
-    [DTNetManger staffWithdrawApply:@"" callBack:^(NSError *error, id response) {
+    [DTNetManger staffWithdrawApply:self.tf.text callBack:^(NSError *error, id response) {
         [MBProgressHUD hiddenFromView:self.view];
         if (response&&[response isKindOfClass:[NSString class]]) {
             NSString *temp = (NSString *)response;

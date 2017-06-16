@@ -16,8 +16,7 @@
 @interface CarGoodViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView    *myTableView;
-@property (nonatomic, strong) NSArray *dataSource;
-@property (nonatomic, strong) NSArray *iconSource;
+@property (nonatomic, strong) NSMutableArray *dataSource;
 
 @end
 
@@ -42,17 +41,11 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     return _myTableView;
 }
 
-- (NSArray *)iconSource
-{
-    if (!_iconSource) {
-        _iconSource = @[@"home_icon_form",@"home_btn_staff",@"home_btn_servement",@"home_btn_password_setting"];
-    }
-    return _iconSource;
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view addSubview:self.myTableView];
+    self.dataSource = [NSMutableArray array];
     [self featchData];
 }
 - (void)viewWillAppear:(BOOL)animated{
@@ -62,7 +55,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 #pragma mark - tableView Delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 3;
+    return self.dataSource.count;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
@@ -92,38 +85,35 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 {
     MGSwipeTableCell *cell = [tableView dequeueReusableCellWithIdentifier:kDTMyCellIdentifier];
     cell.backgroundColor = [UIColor whiteColor];
+    
+    NSDictionary *dict = self.dataSource[indexPath.row];
+    
     UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(20, 20, 60, 60)];
     lb.textAlignment = NSTextAlignmentCenter;
     lb.layer.masksToBounds = YES;
     lb.layer.cornerRadius = lb.bounds.size.width/2;
     lb.backgroundColor = RGB(36, 201, 216);
     lb.textColor = [UIColor whiteColor];
-    lb.text = @"洗";
+    lb.text = dict[@"short"];
     [cell.contentView addSubview:lb];
     
     UILabel *lb1 = [[UILabel alloc] initWithFrame:CGRectMake(90, 30, 200, 40)];
     lb1.textAlignment = NSTextAlignmentLeft;
     lb1.textColor = [UIColor blackColor];
-    lb1.text = @"洗车服务一";
+    lb1.text = dict[@"name"];
     [cell.contentView addSubview:lb1];
     
     UILabel *lb2 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 40)];
     lb2.textAlignment = NSTextAlignmentRight;
     lb2.textColor = [UIColor redColor];
-    lb2.text = @"¥200";
+    lb2.text = [NSString stringWithFormat:@"¥%@",dict[@"price"]];
     cell.accessoryView = lb2;
     
     cell.rightButtons = @[[MGSwipeButton buttonWithTitle:@"" icon:[UIImage imageNamed:@"btn_delete service" ] backgroundColor:RGB(211, 217, 222)]];
     cell.rightSwipeSettings.transition = MGSwipeTransition3D;
     return cell;
 }
-//- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    MGSwipeTableCell *myCell = (MGSwipeTableCell *)cell;
-//    NSDictionary *dict = self.dataSource[indexPath.row];
-////    myCell.name.text = [dict objectForKey:@"name"];
-////    myCell.price.text = [dict objectForKey:@"price"];
-//}
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
@@ -132,6 +122,19 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 - (void)save:(UIButton *)sender{
     //    UIStoryboard *board = [UIStoryboard storyboardWithName: @"Main" bundle: nil];
     AddCarSViewController *vc =[[AddCarSViewController alloc] init];
+    vc.resultBlock = ^(NSDictionary *dict) {
+        if (dict) {
+            [self.dataSource addObject:dict];
+            if (self.resultBlock) {
+                NSInteger num = 0;
+                for (NSDictionary *dict in self.dataSource) {
+                      num = num + [[dict objectForKey:@"price"] integerValue];
+                }
+                _resultBlock([NSString stringWithFormat:@"%li",(long)num]);
+            }
+            [self.myTableView reloadData];
+        }
+    };
     [self.navigationController pushViewController:vc animated:YES];
 }
 -(void)featchData{

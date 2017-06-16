@@ -13,6 +13,7 @@
 
 @interface ServiceViewController () <TabContainerDelegate,TabContainerDataSource>
 @property (nonatomic) NSUInteger numberOfTabs;
+@property (nonatomic,strong) CustomFooterView *footer;
 @end
 
 @implementation ServiceViewController
@@ -24,8 +25,27 @@
     [self setLeftBackNavItem];
     self.title = @"服务内容";
     self.numberOfTabs = 2;   ///////当设置数量时，去调用setter方法去加载控件
-    CustomFooterView *footer = [[CustomFooterView alloc]initWithFrame:CGRectMake(0, KSCREEN_HEIGHT-123, KSCREEN_WIDTH, 60)];
-    [self.view addSubview:footer];
+    self.footer= [[CustomFooterView alloc]initWithFrame:CGRectMake(0, KSCREEN_HEIGHT-123, KSCREEN_WIDTH, 60)];
+    self.footer.resultBlock = ^(NSString *name) {
+            if (name.length ==0) {
+                [MBProgressHUD showError:@"金额不能为空" toView:self.view];
+                return;
+            }
+        [MBProgressHUD showMessag:@"申请中" toView:self.view];
+        [DTNetManger staffWithdrawApply:name callBack:^(NSError *error, id response) {
+            [MBProgressHUD hiddenFromView:self.view];
+            if (response&&[response isKindOfClass:[NSString class]]) {
+                NSString *temp = (NSString *)response;
+                if ([temp isEqualToString:@"success"]) {
+                    [MBProgressHUD showError:@"申请成功" toView:self.view];
+                }else{
+                    [MBProgressHUD showError:temp toView:self.view];
+                }
+            }
+        }];
+
+    };
+    [self.view addSubview:self.footer];
 }
 -(void)footerView{
 
@@ -82,9 +102,22 @@
 -(UIViewController *)tabContainer:(TabContainerViewController *)tabContainer contentViewControllerForTabAtIndex:(NSUInteger)index{
     if (index == 0) {
         WorkTypeViewController *cvc = [[WorkTypeViewController alloc] init];
+        cvc.resultBlock = ^(NSString *num) {
+            self.footer.ServiceTotal = num;
+            
+            NSString *temp = self.footer.goodTotal.length == 0 ? @"0" :  self.footer.goodTotal;
+            self.footer.lb1.text = [NSString stringWithFormat:@"商品：¥%@ 服务：¥%@",temp,self.footer.ServiceTotal];
+            self.footer.lb.text = [NSString stringWithFormat:@"合计：¥%li",[self.footer.goodTotal integerValue] + [self.footer.ServiceTotal integerValue]];
+        };
         return cvc;
     }else{
         CarGoodViewController *cvc = [[CarGoodViewController alloc] init];
+        cvc.resultBlock = ^(NSString *num) {
+            self.footer.goodTotal = num;
+            NSString *temp = self.footer.ServiceTotal.length == 0 ? @"0" :  self.footer.ServiceTotal;
+            self.footer.lb1.text = [NSString stringWithFormat:@"商品：¥%@ 服务：¥%@",self.footer.goodTotal,temp];
+             self.footer.lb.text = [NSString stringWithFormat:@"合计：¥%li",[self.footer.goodTotal integerValue] + [self.footer.ServiceTotal integerValue]];
+        };
         return cvc;
     }
 }
@@ -107,6 +140,7 @@
             return color;
     }
 }
+
 
 
 

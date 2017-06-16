@@ -8,72 +8,121 @@
 
 #import "LoadCarInfoViewController.h"
 #import "IQKeyboardReturnKeyHandler.h"
+#import "CarInfoViewController.h"
 
-@interface LoadCarInfoViewController ()
+@interface LoadCarInfoViewController ()<UITableViewDelegate,UITableViewDataSource>
+@property (nonatomic, strong) UITableView    *myTableView;
+@property (nonatomic, strong) NSArray *dataSource;
+@property (nonatomic, strong) NSMutableArray *data;
 @property (weak, nonatomic) IBOutlet UIImageView *imgeV;
 
-@property (weak, nonatomic) IBOutlet UITextField *nametf;
-@property (weak, nonatomic) IBOutlet UITextField *phonetf;
-@property (weak, nonatomic) IBOutlet UITextField *juliTF;
-@property (weak, nonatomic) IBOutlet UITextField *fdhTF;
-@property (weak, nonatomic) IBOutlet UITextField *cjhTF;
-@property (weak, nonatomic) IBOutlet UIButton *submitBtn;
 @property (weak, nonatomic) IBOutlet UILabel *plase_num;
 @property (nonatomic,strong)UIView *mask;
 @property (nonatomic, strong) IQKeyboardReturnKeyHandler    *returnKeyHandler;
-@end
 
+@property (nonatomic, strong)NSString *name ;
+@property (nonatomic, strong)NSString *car_type;
+
+@end
+static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 @implementation LoadCarInfoViewController
+- (UITableView *)myTableView
+{
+    if (!_myTableView) {
+        _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 125, KSCREEN_WIDTH, KSCREEN_HEIGHT-184) style:UITableViewStylePlain];
+        _myTableView.rowHeight = 50;
+        _myTableView.delegate   = self;
+        _myTableView.dataSource = self;
+        _myTableView.backgroundColor = [UIColor clearColor];
+        _myTableView.separatorColor = [UIColor clearColor];
+        [_myTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kDTMyCellIdentifier];
+    }
+    return _myTableView;
+}
+- (NSArray *)dataSource
+{
+    if (!_dataSource) {
+        _dataSource = @[@" 车主姓名",@" 联系方式",@" 车辆类型",@" 车辆品牌",@" 车辆型号",@" 车牌号",@" 发动机号",@" 车架号",@" 注册日期",@" 行驶证照片",@" 年检地点",@" 年检到期时间",@" 保险公司名称",@" 保险到期时间"];
+    }
+    return _dataSource;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setLeftBackNavItem];
+    [self.view addSubview:self.myTableView];
+    self.imgeV.backgroundColor = RGB(211, 217, 222);
     self.imgeV.contentMode = UIViewContentModeScaleAspectFit;
     self.imgeV.image = self.licenseImage;
+    
     self.title =@"资料补充";
-    [Tools configCornerOfView:_nametf with:3];
-    [Tools configCornerOfView:_submitBtn with:3];
-    _nametf.frame = CGRectMake(_nametf.frame.origin.x, _nametf.frame.origin.y, _nametf.bounds.size.width, 44);
-    _nametf.layer.borderColor = RGB(211, 217, 222).CGColor;
-    _nametf.layer.borderWidth = 1;
-    _nametf.placeholder = @"车主姓名";
-     _phonetf.placeholder = @"联系方式";
-     _juliTF.placeholder = @"行驶里程";
-     _fdhTF.placeholder = @"发动机号";
-     _cjhTF.placeholder = @"车架号";
+    self.data = [NSMutableArray array];
     self.plate_license = @"粤S777ML";
-    
-    [Tools configCornerOfView:_phonetf with:3];
-    _phonetf.frame = CGRectMake(_phonetf.frame.origin.x, _phonetf.frame.origin.y, _phonetf.bounds.size.width, 44);
-    _phonetf.layer.borderColor = RGB(211, 217, 222).CGColor;
-    _phonetf.layer.borderWidth = 1;
-    
-    [Tools configCornerOfView:_juliTF with:3];
-    _juliTF.frame = CGRectMake(_juliTF.frame.origin.x, _juliTF.frame.origin.y, _juliTF.bounds.size.width, 44);
-    _juliTF.layer.borderColor = RGB(211, 217, 222).CGColor;
-    _juliTF.layer.borderWidth = 1;
-    
-    [Tools configCornerOfView:_fdhTF with:3];
-    _fdhTF.frame = CGRectMake(_fdhTF.frame.origin.x, _fdhTF.frame.origin.y, _fdhTF.bounds.size.width, 44);
-    _fdhTF.layer.borderColor = RGB(211, 217, 222).CGColor;
-    _fdhTF.layer.borderWidth = 1;
-    
-    [Tools configCornerOfView:_cjhTF with:3];
-    _cjhTF.frame = CGRectMake(_cjhTF.frame.origin.x, _cjhTF.frame.origin.y, _cjhTF.bounds.size.width, 44);
-    _cjhTF.layer.borderColor = RGB(211, 217, 222).CGColor;
-    _cjhTF.layer.borderWidth = 1;
-    
+    self.plase_num.backgroundColor = RGB(211, 217, 222);
     [Tools configCornerOfView:_plase_num with:3];
     _plase_num.layer.borderColor = RGB(211, 217, 222).CGColor;
     _plase_num.layer.borderWidth = 1;
     [self maskView];
     self.returnKeyHandler = [[IQKeyboardReturnKeyHandler alloc] initWithViewController:self];
     self.returnKeyHandler.lastTextFieldReturnKeyType = UIReturnKeyDone;
+    
+    UIButton *_btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [_btn setTitle:@"跳过" forState:UIControlStateNormal];
+    _btn.frame = CGRectMake(0, 0, 60, 44);
+    [_btn addTarget:self action:@selector(select) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_btn];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+#pragma mark - tableView Delegate
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.dataSource.count;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 0.01;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 80;
+}
+-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0,0,KSCREEN_WIDTH,80)];
+    v.backgroundColor = RGB(242, 246, 249);
+    
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn.frame = CGRectMake(15,18, KSCREEN_WIDTH-30, 44);
+    [btn setTitle:@"提交" forState:UIControlStateNormal];
+    btn.backgroundColor = RGB(17, 157, 255);
+    [Tools configCornerOfView:btn with:3];
+    [btn addTarget:self action:@selector(loadData) forControlEvents:UIControlEventTouchUpInside];
+    [v addSubview:btn];
+    
+    return v;
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kDTMyCellIdentifier];
+    cell.backgroundColor = [UIColor clearColor];
+    cell.textLabel.text = self.dataSource[indexPath.row];
+    for (UIView *f in cell.contentView.subviews) {
+        if ([f isKindOfClass:[UITextField class]]) {
+            [f removeFromSuperview];
+        }
+    }
+    UITextField *tf = [[UITextField alloc]initWithFrame:CGRectMake(15, 3, KSCREEN_WIDTH-30, 44)];
+    [cell.contentView addSubview:tf];
+    tf.backgroundColor = [UIColor whiteColor];
+    [Tools configCornerOfView:tf with:3];
+    tf.placeholder = self.dataSource[indexPath.row];
+    tf.layer.borderColor = RGB(211, 217, 222).CGColor;
+    tf.layer.borderWidth = 1;
+    return cell;
 }
 
 - (IBAction)submitAction:(id)sender {
@@ -90,7 +139,7 @@
     UIImageView *imageV = [[UIImageView alloc] initWithFrame:CGRectMake(100, 100, 236, 300)];
     imageV.center = CGPointMake( self.mask.center.x,  self.mask.center.y-50);
     imageV.backgroundColor = [UIColor clearColor];
-    imageV.image = [[UIImage imageNamed:@"BG_Red envelopes"] stretchableImageWithLeftCapWidth:140 topCapHeight:120];
+    imageV.image = [UIImage imageNamed:@"Group 2"];
     [ self.mask addSubview:imageV];
     
     UITextView *tf = [[UITextView alloc] initWithFrame:CGRectMake(58, 100, 140, 60)];
@@ -119,17 +168,26 @@
 -(void)tap{
     self.mask.hidden = YES;
 }
+-(void)select{
+    [self dismissViewControllerAnimated:NO completion:^{
+        UIStoryboard *board = [UIStoryboard storyboardWithName: @"Main" bundle: nil];
+        CarInfoViewController *cvc = [board instantiateViewControllerWithIdentifier:@"CarInfoViewController"];
+        cvc.plate_license = self.plate_license;
+        [self.vc.navigationController pushViewController:cvc animated:YES];
+    }];
+}
 -(void)loadData{
-    if (_nametf.text.length ==0 ||_phonetf.text.length ==0 ||_cjhTF.text.length ==0 ||_fdhTF.text.length ==0 ||self.plate_license.length ==0 ) {
+    
+    if (self.name.length ==0 ||self.car_type.length ==0 ||self.plate_license.length ==0) {
         [MBProgressHUD showError:@"请输入内容" toView:self.view];
     }else{
         NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-        [dict setObject:_nametf.text forKey:@"name"];
-        [dict setObject:_phonetf.text forKey:@"phone"];
-        [dict setObject:self.plate_license forKey:@"plate_license"];
-        [dict setObject:_fdhTF.text forKey:@"engine_number"];
-        [dict setObject:_cjhTF.text forKey:@"frame_number"];
-        
+//        [dict setObject:_nametf.text forKey:@"name"];
+//        [dict setObject:_phonetf.text forKey:@"phone"];
+//        [dict setObject:self.plate_license forKey:@"plate_license"];
+//        [dict setObject:_fdhTF.text forKey:@"engine_number"];
+//        [dict setObject:_cjhTF.text forKey:@"frame_number"];
+    
         [MBProgressHUD showMessag:@"提交中" toView:self.view];
         [DTNetManger customerAddWith:dict callBack:^(NSError *error, id response) {
             [MBProgressHUD hiddenFromView:self.view];

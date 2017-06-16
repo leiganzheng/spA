@@ -7,7 +7,7 @@
 //
 
 #import "DTBaseViewController.h"
-
+typedef void (^GoodBolck)(NSString *num);
 @interface CarGoodViewController : DTBaseViewController
-
+@property (nonatomic, copy) GoodBolck resultBlock;
 @end

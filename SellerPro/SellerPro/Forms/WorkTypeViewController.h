@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "DTBaseViewController.h"
+typedef void (^ServiceBolck)(NSString *num);
 @interface WorkTypeViewController : DTBaseViewController
 @property(nonatomic,assign) BOOL isAdd;
+@property (nonatomic, copy) ServiceBolck resultBlock;
+
 @end

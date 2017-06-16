@@ -252,7 +252,7 @@
             ScanResultViewController *cvc = [board instantiateViewControllerWithIdentifier:@"ScanResultViewController"];
             if (response && [response isKindOfClass:[NSDictionary class]]) {
                 NSDictionary *dic = (NSDictionary*)response;
-                cvc.licenseImage= [self imageFromView:self.imageShowView atFrame:CGRectMake(30, 200, KSCREEN_WIDTH-60, 75)];
+                cvc.licenseImage= [self imageFromImage:originImage inRect:CGRectMake(30, 200, KSCREEN_WIDTH-60, 75) transform:self.imageShowView.transform];
                 cvc.plate_license = dic[@"plate_license"];
                 [self.navigationController pushViewController:cvc animated:YES];
             }else{
@@ -263,17 +263,22 @@
                         [MBProgressHUD showError:@"不属于92俱乐部会员，请补充信息" toView:self.view];
                         UIStoryboard *board = [UIStoryboard storyboardWithName: @"Main" bundle: nil];
                         LoadCarInfoViewController *cvc = [board instantiateViewControllerWithIdentifier:@"LoadCarInfoViewController"];
-                        [self.navigationController pushViewController:cvc animated:YES];
+                         cvc.licenseImage= [self imageFromImage:originImage inRect:CGRectMake(30, 200, KSCREEN_WIDTH-60, 75) transform:self.imageShowView.transform];
+                         cvc.vc = self;
+                        UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:cvc];
+                        [self presentViewController:nav animated:YES completion:nil];
                     }else{
-//                        [MBProgressHUD showError:@"不属于92俱乐部会员，请补充信息" toView:self.view];
-//                        UIStoryboard *board = [UIStoryboard storyboardWithName: @"Main" bundle: nil];
-//                        LoadCarInfoViewController *cvc = [board instantiateViewControllerWithIdentifier:@"LoadCarInfoViewController"];
+                        [MBProgressHUD showError:@"不属于92俱乐部会员，请补充信息" toView:self.view];
+                        UIStoryboard *board = [UIStoryboard storyboardWithName: @"Main" bundle: nil];
+                        LoadCarInfoViewController *cvc = [board instantiateViewControllerWithIdentifier:@"LoadCarInfoViewController"];
+                        cvc.vc = self;
+                        cvc.licenseImage= [self imageFromImage:originImage inRect:CGRectMake(30, 200, KSCREEN_WIDTH-60, 75) transform:self.imageShowView.transform];
+                        UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:cvc];
+                        [self presentViewController:nav animated:YES completion:nil];
+//                        [MBProgressHUD showError:(NSString *)response toView:self.view];
 //                        cvc.licenseImage= [self imageFromView:self.imageShowView atFrame:CGRectMake(30, 200, KSCREEN_WIDTH-60, 75)];
+//                        cvc.plate_license = @"";
 //                        [self.navigationController pushViewController:cvc animated:YES];
-                        [MBProgressHUD showError:(NSString *)response toView:self.view];
-                        cvc.licenseImage= [self imageFromView:self.imageShowView atFrame:CGRectMake(30, 200, KSCREEN_WIDTH-60, 75)];
-                        cvc.plate_license = @"";
-                        [self.navigationController pushViewController:cvc animated:YES];
 
                     }
                 }
@@ -284,37 +289,32 @@
     }
 }
 -(UIImage*)imageFromImage:(UIImage*)image inRect:(CGRect)rect transform:(CGAffineTransform)transform{
-    CGSize newSize=rect.size;
-    UIGraphicsBeginImageContext(newSize);
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextTranslateCTM(context, newSize.width / 2, newSize.height / 2);
-    CGContextConcatCTM(context, transform);
-    CGContextTranslateCTM(context, newSize.width / -2, newSize.height / -2);
+//    CGSize newSize=rect.size;
+//    UIGraphicsBeginImageContext(newSize);
+//    CGContextRef context = UIGraphicsGetCurrentContext();
+//    CGContextTranslateCTM(context, newSize.width / 2, newSize.height / 2);
+//    CGContextConcatCTM(context, transform);
+//    CGContextTranslateCTM(context, newSize.width / -2, newSize.height / -2);
+//    [image drawInRect:CGRectMake(-rect.origin.x, -rect.origin.y, image.size.width, image.size.height)];
+//    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+//    UIGraphicsEndImageContext();
+
+     CGFloat scale = image.size.width / self.view.frame.size.width;
+    rect.origin.x = (rect.origin.x - self.imageShowView.frame.origin.x) * scale;
+    rect.origin.y = (rect.origin.y - self.imageShowView.frame.origin.y) * scale;
+    rect.size.width *= scale;
+    rect.size.height *= scale;
+    
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef c = UIGraphicsGetCurrentContext();
+    CGContextConcatCTM(c, transform);
+    CGContextClipToRect(c, CGRectMake(0, 0, rect.size.width, rect.size.height));
     [image drawInRect:CGRectMake(-rect.origin.x, -rect.origin.y, image.size.width, image.size.height)];
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
+    
     return newImage;
 }
-- (UIImage *)imageFromView: (UIView *) theView   atFrame:(CGRect)r
-{
-    UIGraphicsBeginImageContext(theView.frame.size);
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSaveGState(context);
-    UIRectClip(r);
-    [theView.layer renderInContext:context];
-    UIImage *theImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    NSLog(@"theImage.height = %f, error = %@, contextInfo = %@", theImage.size.height, @"", @"");
-//    UIImageWriteToSavedPhotosAlbum(theImage, self, @selector(image:didFinishSavingWithError:contextInfo:), (__bridge void *)self);
-    
-    return  theImage;//[self getImageAreaFromImage:theImage atFrame:r];
-}
-- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
-{
-    
-    NSLog(@"image = %@, error = %@, contextInfo = %@", image, error, contextInfo);
-}
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

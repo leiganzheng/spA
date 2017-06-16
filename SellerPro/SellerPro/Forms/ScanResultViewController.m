@@ -33,7 +33,7 @@
     [self setLeftBackNavItem];
     [Tools configCornerOfView:self.saveBtn with:3];
     [Tools configCornerOfView:self.reTakePBtn with:3];
-    self.customImage.contentMode = UIViewContentModeLeft;
+    self.customImage.contentMode = UIViewContentModeScaleAspectFit;
     self.customImage.image = self.licenseImage;
     [Tools configCornerOfView:self.tf1 with:2];
      [Tools configCornerOfView:self.tf2 with:2];
