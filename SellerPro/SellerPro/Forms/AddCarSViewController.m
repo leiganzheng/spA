@@ -31,7 +31,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 {
     if (!_myTableView) {
         _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KSCREEN_WIDTH, KSCREEN_HEIGHT) style:UITableViewStylePlain];
-        _myTableView.rowHeight = 200;
+//        _myTableView.rowHeight = 200;
         _myTableView.delegate   = self;
         _myTableView.dataSource = self;
         _myTableView.backgroundColor = [UIColor clearColor];
@@ -82,7 +82,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     NSArray *arr = [dict objectForKey:@"sub"];
     NSDictionary *valueDict = arr[indexPath.row];
     NSArray *servicesArr = valueDict[@"service"];
-    return 200;
+    return 42+ (servicesArr.count/3+servicesArr.count%3)*(60+3);
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
@@ -278,32 +278,6 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
         return index%numOfRow == numOfRow - 1;
     }
     return NO;
-}
--(void)subCell:(UIView*)v{
-    // 创建一个装载九宫格的容器
-    UIView *containerView = [[UIView alloc] init];
-    [v addSubview:containerView];
-    containerView.backgroundColor = [UIColor whiteColor];
-    containerView.layer.borderWidth = 1;
-    containerView.layer.borderColor = [UIColor grayColor].CGColor;
-    // 给该容器添加布局代码
-    [containerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(0);
-        make.top.mas_equalTo(40);
-        make.right.mas_equalTo(0);
-        make.height.mas_equalTo(160);
-    }];
-    // 为该容器添加宫格View
-    for (int i = 0; i < 6; i++) {
-        UIButton *temp = [UIButton buttonWithType:UIButtonTypeCustom];
-//        temp.frame = CGRectMake(4, 45, containerView.bounds.size.width/3-8, 60);
-        temp.backgroundColor = [UIColor lightGrayColor];
-        [containerView addSubview:temp];
-    }
-    // 执行九宫格布局
-//    [containerView.subviews mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedItemLength:4 leadSpacing:4 tailSpacing:4];
-    [containerView.subviews mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedSpacing:4 leadSpacing:4 tailSpacing:4];
-//    [containerView.subviews mas_distributeSudokuViewsWithFixedItemWidth:0 fixedItemHeight:0 fixedLineSpacing:10 fixedInteritemSpacing:20 warpCount:3 topSpacing:10 bottomSpacing:10 leadSpacing:10 tailSpacing:10];
 }
 -(void)select:(UIButton *)sender{
     UITableViewCell *cell = (UITableViewCell*)[[sender superview]superview];
