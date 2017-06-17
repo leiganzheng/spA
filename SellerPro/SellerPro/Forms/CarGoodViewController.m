@@ -109,14 +109,27 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     lb2.text = [NSString stringWithFormat:@"¥%@",dict[@"price"]];
     cell.accessoryView = lb2;
     
-    cell.rightButtons = @[[MGSwipeButton buttonWithTitle:@"" icon:[UIImage imageNamed:@"btn_delete service" ] backgroundColor:RGB(211, 217, 222)]];
-    cell.rightSwipeSettings.transition = MGSwipeTransition3D;
+    cell.rightButtons = @[[MGSwipeButton buttonWithTitle:@"" icon:[UIImage imageNamed:@"btn_delete service"] backgroundColor:RGB(211, 217, 222) callback:^BOOL(MGSwipeTableCell * _Nonnull cell) {
+        NSIndexPath *index = [tableView indexPathForCell:cell];
+        NSDictionary *d = self.dataSource[index.row];
+        [self.dataSource removeObject:d];
+        if (self.resultBlock) {
+            NSInteger num = 0;
+            for (NSDictionary *dict in self.dataSource) {
+                num = num + [[dict objectForKey:@"price"] integerValue];
+            }
+            _resultBlock([NSString stringWithFormat:@"%li",(long)num]);
+        }
+        [self.myTableView reloadData];
+        return  YES;
+    }]];
+
+     cell.rightSwipeSettings.transition = MGSwipeTransition3D;
     return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
 }
 #pragma mark -- private method
 - (void)save:(UIButton *)sender{

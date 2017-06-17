@@ -88,8 +88,12 @@ static NSString *const kDTMyCellIdentifierLong = @"myCellIdentifier1";
 
     self.price = [[UILabel alloc] initWithFrame:CGRectMake(0, 20, KSCREEN_WIDTH, 40)];
     self.price.textAlignment = NSTextAlignmentCenter;
-    self.price.textColor = [UIColor redColor];
-    self.price.text = @"共消费：1888";
+    self.price.textColor = RGB(220, 107, 107);
+    NSInteger num = 0;
+    for (NSDictionary *dict in self.dataSource) {
+        num = num + [[dict objectForKey:@"price"] integerValue];
+    }
+    self.price.text = [NSString stringWithFormat:@"共消费：%li",(long)num];
     [v addSubview:self.price];
     
     return v;
@@ -102,12 +106,14 @@ static NSString *const kDTMyCellIdentifierLong = @"myCellIdentifier1";
         CarInfoDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kDTMyCellIdentifier];
         cell.backgroundColor = [UIColor whiteColor];
         cell.name.text = dict[@"name"];
+        cell.price.textColor = RGB(220, 107, 107);
         cell.price.text = [NSString stringWithFormat:@"¥%@",dict[@"price"]];
         return cell;
     }else{
         CarInfoDetailLongTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kDTMyCellIdentifierLong];
         cell.backgroundColor = [UIColor whiteColor];
         cell.name.text = dict[@"name"];
+        cell.price.textColor = RGB(220, 107, 107);
         cell.price.text = [NSString stringWithFormat:@"¥%@",dict[@"price"]];
         [cell.logo sd_setImageWithURL:[NSURL URLWithString:dict[@"picture"]] placeholderImage:[UIImage imageNamed:@""]];
         return cell;

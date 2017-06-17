@@ -14,7 +14,7 @@
     [super awakeFromNib];
     self.dotB.layer.masksToBounds = YES;
     self.dotB.layer.cornerRadius = self.dotB.bounds.size.width/2;
-    self.dotB.backgroundColor = RGB(17, 156, 254);
+    self.dotB.backgroundColor = RGB(138, 206, 255);
     UIImage *img=[UIImage imageNamed:@"bg_history record"];
     self.bgImag.image = [img stretchableImageWithLeftCapWidth:9 topCapHeight:10];
 }

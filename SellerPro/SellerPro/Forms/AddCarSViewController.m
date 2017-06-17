@@ -15,9 +15,6 @@
 @property (nonatomic, strong) UITableView    *myTableView;
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, strong) NSDictionary *dataDict;
-@property (nonatomic, strong) NSArray *iconSource;
-@property (nonatomic, strong) NSString *date;
-@property (nonatomic, assign) NSInteger page;
 @property (nonatomic, strong) UILabel *sum;
 @property (nonatomic, strong) UILabel *customerSum;
 @property (nonatomic,strong)UIButton *btn;
@@ -31,13 +28,11 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 {
     if (!_myTableView) {
         _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KSCREEN_WIDTH, KSCREEN_HEIGHT) style:UITableViewStylePlain];
-//        _myTableView.rowHeight = 200;
         _myTableView.delegate   = self;
         _myTableView.dataSource = self;
         _myTableView.backgroundColor = [UIColor clearColor];
         _myTableView.separatorColor = [UIColor clearColor];
         _myTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-            self.page = 1;
             [self featchData];
             
         }];
@@ -45,22 +40,12 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     }
     return _myTableView;
 }
-- (NSArray *)iconSource
-{
-    if (!_iconSource) {
-        _iconSource = @[@"home_icon_form",@"home_btn_staff",@"home_btn_servement",@"home_btn_password_setting"];
-    }
-    return _iconSource;
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"个人业绩";
+    self.title = @"选择服务";
     
     [self.view addSubview:self.myTableView];
     [self setLeftBackNavItem];
-    self.page = 1;
-    self.date =[NSString stringWithFormat:@"%@-%@", [Tools nowDateofYear] , [Tools nowDateofMonth]];
     [self featchData];
     
 }
@@ -82,7 +67,13 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     NSArray *arr = [dict objectForKey:@"sub"];
     NSDictionary *valueDict = arr[indexPath.row];
     NSArray *servicesArr = valueDict[@"service"];
-    return 42+ (servicesArr.count/3+servicesArr.count%3)*(60+3);
+    if (servicesArr.count>2) {
+        return 42+ (servicesArr.count/3+servicesArr.count%3)*(60+3)+10;
+    }else if(servicesArr.count==2){
+        return 42+60+8;
+    }else{
+        return 42;
+    }
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
@@ -95,10 +86,11 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     NSDictionary *dict = self.dataSource[section];
     UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0,0,KSCREEN_WIDTH,40)];
-    v.backgroundColor = [UIColor lightGrayColor];
+    v.backgroundColor = RGB(211, 217, 222);
     _btn = [UIButton buttonWithType:UIButtonTypeCustom];
     [_btn setTitle:[dict objectForKey:@"name"] forState:UIControlStateNormal];
     _btn.frame = CGRectMake(0, 10, 60, 24);
+    [_btn setTitleColor:[UIColor lightGrayColor] forState:0];
     [_btn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
     [v addSubview:_btn];
     
@@ -126,13 +118,14 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     bgV.frame = CGRectMake(0, 42, KSCREEN_WIDTH, 160);
     [cell.contentView addSubview:bgV];
     NSArray *servicesArr = valueDict[@"service"];
-    [self gridWithCellWidth:(KSCREEN_WIDTH-32)/3 cellHeight:60 numPerRow:3 totalNum:servicesArr.count viewPadding:10 viewPaddingCell:6 superView:bgV dataSource:servicesArr];
-    return cell;
-}
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    UITableViewCell *myCell = (UITableViewCell *)cell;
+    if (servicesArr.count>2) {
+        [self gridWithCellWidth:(KSCREEN_WIDTH-32)/3 cellHeight:60 numPerRow:3 totalNum:servicesArr.count viewPadding:10 viewPaddingCell:6 superView:bgV dataSource:servicesArr];
 
+    }else{
+        [self gridWithCellWidth:(KSCREEN_WIDTH-32)/2 cellHeight:60 numPerRow:2 totalNum:servicesArr.count viewPadding:10 viewPaddingCell:6 superView:bgV dataSource:servicesArr];
+
+    }
+       return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -165,6 +158,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
         NSDictionary *dict = data[i];
         UIButton *aLabel = [UIButton buttonWithType:UIButtonTypeCustom];
         [Tools configCornerOfView:aLabel with:3];
+        [aLabel setTitleColor:[UIColor blackColor] forState:0];
         [aLabel addTarget:self action:@selector(select:) forControlEvents:UIControlEventTouchUpInside];
         [aLabel setTitle:dict[@"name"] forState:0];
         aLabel.tag = i;

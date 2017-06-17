@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface WorkTypeTableViewCell : UITableViewCell
+@interface WorkTypeTableViewCell : MGSwipeTableCell
 @property (weak, nonatomic) IBOutlet UIImageView *img;
 @property (weak, nonatomic) IBOutlet UILabel *nameTitel;
 @property (weak, nonatomic) IBOutlet UILabel *price;

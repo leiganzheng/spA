@@ -75,8 +75,8 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 #pragma mark - tableView Delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-//    [tableView tableViewDisplayWitMsg:@"暂无数据" ifNecessaryForRowCount:self.dataSource.count];
-    return 3;
+    [tableView tableViewDisplayWitMsg:@"改车主暂无消费记录" ifNecessaryForRowCount:self.dataSource.count];
+    return self.dataSource.count;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
@@ -88,14 +88,20 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 {
     RecordTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kDTMyCellIdentifier];
     cell.backgroundColor = [UIColor clearColor];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    if ((self.dataSource.count - 1)==indexPath.row) {
+        cell.lastlIne.hidden = YES;
+    }else{
+        cell.lastlIne.hidden = NO;
+    }
     return cell;
 }
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     RecordTableViewCell *myCell = (RecordTableViewCell *)cell;
-//    NSDictionary *dict = self.dataSource[indexPath.row];
-//    myCell.name.text = [dict objectForKey:@"name"];
-//    myCell.time.text = [dict objectForKey:@"create_time"];
+    NSDictionary *dict = self.dataSource[indexPath.row];
+    myCell.name.text = [dict objectForKey:@"name"];
+    myCell.time.text = [dict objectForKey:@"create_time"];
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -104,7 +110,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 #pragma mark -- private method
 
 -(void)featchData{//粤S777ML
-    [DTNetManger customerGetWith:self.plate_license callBack:^(NSError *error, id response) {
+    [DTNetManger customerGetWith:@"粤S777ML" callBack:^(NSError *error, id response) {
         if (response && [response isKindOfClass:[NSDictionary class]]) {
             NSDictionary *dict = (NSDictionary*)response;
             self.name.text = [dict objectForKey:@"name"];

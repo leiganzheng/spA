@@ -108,7 +108,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     [v addSubview: self.bank];
     
     UIButton *btn1 = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn1.frame = CGRectMake(KSCREEN_WIDTH-35,30, 15, 44);
+    btn1.frame = CGRectMake(KSCREEN_WIDTH-50,30, 44, 44);
     [btn1 setImage:[UIImage imageNamed:@"btn_edit bankcard"] forState:0];
     [btn1 addTarget:self action:@selector(edit) forControlEvents:UIControlEventTouchUpInside];
     [v addSubview:btn1];
@@ -118,6 +118,9 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     self.tf.frame = CGRectMake(10, 165, KSCREEN_WIDTH-20, 44);
     self.tf.backgroundColor = [UIColor whiteColor];
     self.tf.text = self.money;
+    self.tf.leftView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 8, 0)];
+    //设置显示模式为永远显示(默认不显示)
+    self.tf.leftViewMode = UITextFieldViewModeAlways;
     [Tools configCornerOfView:self.tf with:3];
     self.tf.layer.borderColor = RGB(211, 217, 222).CGColor;
     self.tf.layer.borderWidth = 1;

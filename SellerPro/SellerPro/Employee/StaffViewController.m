@@ -140,7 +140,6 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     EmployeeTableViewCell *myCell = (EmployeeTableViewCell *)cell;
-//    myCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     NSDictionary *dict = self.dataSource[indexPath.row];
     myCell.name.text = [dict objectForKey:@"customer"];
     myCell.time.text = [dict objectForKey:@"pay_time"];

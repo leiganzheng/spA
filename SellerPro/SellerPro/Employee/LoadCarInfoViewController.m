@@ -24,7 +24,7 @@
 @property (nonatomic, strong)NSString *car_type;
 
 @end
-static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
+//static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 @implementation LoadCarInfoViewController
 - (UITableView *)myTableView
 {
@@ -35,7 +35,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
         _myTableView.dataSource = self;
         _myTableView.backgroundColor = [UIColor clearColor];
         _myTableView.separatorColor = [UIColor clearColor];
-        [_myTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kDTMyCellIdentifier];
+//        [_myTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kDTMyCellIdentifier];
     }
     return _myTableView;
 }
@@ -57,8 +57,9 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     
     self.title =@"资料补充";
     self.data = [NSMutableArray array];
-    self.plate_license = @"粤S777ML";
+//    self.plate_license = @"粤S777ML";
     self.plase_num.backgroundColor = RGB(211, 217, 222);
+    self.plase_num.text = self.plate_license.length==0 ? @"无数据": self.plate_license;
     [Tools configCornerOfView:_plase_num with:3];
     _plase_num.layer.borderColor = RGB(211, 217, 222).CGColor;
     _plase_num.layer.borderWidth = 1;
@@ -113,14 +114,13 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kDTMyCellIdentifier];
-    cell.backgroundColor = [UIColor clearColor];
-    cell.textLabel.text = self.dataSource[indexPath.row];
-    for (UIView *f in cell.contentView.subviews) {
-        if ([f isKindOfClass:[UITextField class]]) {
-            [f removeFromSuperview];
-        }
-    }
+    
+     NSString *CMainCell = [NSString stringWithFormat:@"CMainCell%li",(long)indexPath.row];     //  0
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CMainCell];  //  1
+//    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault  reuseIdentifier: CMainCell];// 2
+//    }
     UITextField *tf = [[UITextField alloc]initWithFrame:CGRectMake(15, 3, KSCREEN_WIDTH-30, 44)];
     [cell.contentView addSubview:tf];
     tf.backgroundColor = [UIColor whiteColor];
@@ -129,12 +129,25 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     tf.layer.borderColor = RGB(211, 217, 222).CGColor;
     tf.layer.borderWidth = 1;
     return cell;
+    
+//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kDTMyCellIdentifier];
+//    cell.backgroundColor = [UIColor clearColor];
+//    cell.textLabel.text = self.dataSource[indexPath.row];
+//    for (UIView *f in cell.contentView.subviews) {
+//        if ([f isKindOfClass:[UITextField class]]) {
+//            [f removeFromSuperview];
+//        }
+//    }
+//    UITextField *tf = [[UITextField alloc]initWithFrame:CGRectMake(15, 3, KSCREEN_WIDTH-30, 44)];
+//    [cell.contentView addSubview:tf];
+//    tf.backgroundColor = [UIColor whiteColor];
+//    [Tools configCornerOfView:tf with:3];
+//    tf.placeholder = self.dataSource[indexPath.row];
+//    tf.layer.borderColor = RGB(211, 217, 222).CGColor;
+//    tf.layer.borderWidth = 1;
+//    return cell;
 }
 
-- (IBAction)submitAction:(id)sender {
-    [self loadData];
-    
-}
 -(void)cancel{
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -145,27 +158,28 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap)];
     [self.mask addGestureRecognizer:tap];
 
-    UIImageView *imageV = [[UIImageView alloc] initWithFrame:CGRectMake(100, 100, 236, 300)];
+    UIImageView *imageV = [[UIImageView alloc] initWithFrame:CGRectMake(100, 100, 286, 276)];
     imageV.center = CGPointMake( self.mask.center.x,  self.mask.center.y-50);
     imageV.backgroundColor = [UIColor clearColor];
     imageV.image = [UIImage imageNamed:@"Group 2"];
     [ self.mask addSubview:imageV];
     
-    UITextView *tf = [[UITextView alloc] initWithFrame:CGRectMake(58, 100, 140, 60)];
+    UITextView *tf = [[UITextView alloc] initWithFrame:CGRectMake(50, 100, 196, 60)];
     tf.textColor = [UIColor whiteColor];
     tf.backgroundColor = [UIColor clearColor];
+    tf.font = [UIFont systemFontOfSize:15];
     tf.text = @"提交成功，感谢您的录入，您将获得来自92汽车俱乐部的佣金！";
     [imageV addSubview:tf];
     
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn.frame = CGRectMake(36, 200, 80, 40);
+    btn.frame = CGRectMake(36, 220, 80, 40);
     [btn setTitle:@"我的业绩" forState:0];
-    btn.center = CGPointMake(imageV.center.x, 180);
+    btn.center = CGPointMake(imageV.center.x-50, 200);
     [imageV addSubview:btn];
     
     UIButton *btn1 = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn1.frame = CGRectMake(36, 240, 80, 40);
-    btn1.center = CGPointMake(imageV.center.x, 220);
+    btn1.frame = CGRectMake(36, 260, 80, 40);
+    btn1.center = CGPointMake(imageV.center.x-50, 240);
     [btn1 setTitle:@"回首页" forState:0];
     [btn1 addTarget:self action:@selector(homeAction) forControlEvents:UIControlEventTouchUpInside];
     [imageV addSubview:btn1];
@@ -186,8 +200,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     }];
 }
 -(void)loadData{
-    
-    if (self.name.length ==0 ||self.car_type.length ==0 ||self.plate_license.length ==0) {
+    if (self.name.length ==0 ||self.car_type.length ==0 ||self.plase_num.text.length ==0) {
         [MBProgressHUD showError:@"请输入内容" toView:self.view];
     }else{
         NSMutableDictionary *dict = [NSMutableDictionary dictionary];
@@ -203,6 +216,8 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
             if (response&&[response isKindOfClass:[NSString class]]) {
                 NSString *temp = (NSString *)response;
                 if ([temp isEqualToString:@"success"]) {
+                    self.mask.hidden = YES;
+                }else{
                     self.mask.hidden = NO;
                 }
             }

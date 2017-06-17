@@ -32,7 +32,6 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
         _myTableView.backgroundColor = [UIColor clearColor];
         _myTableView.separatorColor = [UIColor lightGrayColor];
         _myTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-            [self featchData];
             
         }];
         [_myTableView registerNib:[UINib nibWithNibName:@"WorkTypeTableViewCell" bundle:nil] forCellReuseIdentifier:kDTMyCellIdentifier];
@@ -44,13 +43,11 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     [super viewDidLoad];
     [self.view addSubview:self.myTableView];
     self.dataSource = [NSMutableArray array];
-    [self featchData];
 
     
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self featchData];
 }
 #pragma mark - tableView Delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -94,6 +91,22 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 {
     WorkTypeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kDTMyCellIdentifier];
     cell.backgroundColor = [UIColor whiteColor];
+    cell.rightButtons = @[[MGSwipeButton buttonWithTitle:@"" icon:[UIImage imageNamed:@"btn_delete service"] backgroundColor:RGB(211, 217, 222) callback:^BOOL(MGSwipeTableCell * _Nonnull cell) {
+        NSIndexPath *index = [tableView indexPathForCell:cell];
+        NSDictionary *d = self.dataSource[index.row];
+        [self.dataSource removeObject:d];
+        if (self.resultBlock) {
+            NSInteger num = 0;
+            for (NSDictionary *dict in self.dataSource) {
+                num = num + [[dict objectForKey:@"price"] integerValue];
+            }
+            _resultBlock([NSString stringWithFormat:@"%li",(long)num]);
+        }
+        [self.myTableView reloadData];
+        return  YES;
+    }]];
+    
+    cell.rightSwipeSettings.transition = MGSwipeTransition3D;
     return cell;
 }
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -119,6 +132,13 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     vc.resultBlock = ^(NSDictionary *dict) {
         if (dict) {
             [self.dataSource addObject:dict];
+            if (self.resultBlock) {
+                NSInteger num = 0;
+                for (NSDictionary *dict in self.dataSource) {
+                    num = num + [[dict objectForKey:@"price"] integerValue];
+                }
+                _resultBlock([NSString stringWithFormat:@"%li",(long)num]);
+            }
             [self.myTableView reloadData];
         }
     };
@@ -126,16 +146,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     
 }
 -(void)featchData{
-//    [DTNetManger orderGetDetail:^(NSError *error, id response) {
-//        if (response && [response isKindOfClass:[NSDictionary class]]) {
-//            NSDictionary *dict = (NSDictionary*)response;
-//            self.dataSource = [dict objectForKey:@"good"];
-//            [self.myTableView reloadData];
-//        }else{
-//            
-//        }
-//
-//    }];
+
 }
 @end
 

@@ -22,7 +22,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 - (UITableView *)myTableView
 {
     if (!_myTableView) {
-        _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KSCREEN_WIDTH, KSCREEN_HEIGHT-114) style:UITableViewStylePlain];
+        _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KSCREEN_WIDTH, KSCREEN_HEIGHT-64) style:UITableViewStylePlain];
         _myTableView.rowHeight = 60;
         _myTableView.delegate   = self;
         _myTableView.dataSource = self;
@@ -44,7 +44,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     [super viewDidLoad];
     self.title = @"银行列表";
     _flagSource = [NSMutableArray arrayWithObjects:@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1", nil];
-    for (int i=0; i<_dataSource.count; i++) {
+    for (int i=0; i<_flagSource.count; i++) {
         NSString *temp = self.dataSource[i];
         if ([self.name isEqualToString:temp]) {
             [_flagSource replaceObjectAtIndex:i withObject:@"0"];
@@ -86,7 +86,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
          [arrBtn setImage:[UIImage imageNamed:@""] forState:0];
     }
    
-    arrBtn.frame = CGRectMake(0, 10, 60, 24);
+    arrBtn.frame = CGRectMake(0, 10, 24, 24);
     cell.accessoryView = arrBtn;
 
     return cell;
@@ -103,7 +103,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
         if (i==indexPath.row) {
             [_flagSource replaceObjectAtIndex:indexPath.row withObject:@"0"];
         }else{
-            [_flagSource replaceObjectAtIndex:indexPath.row withObject:@"1"];
+            [_flagSource replaceObjectAtIndex:i withObject:@"1"];
         }
     }
     

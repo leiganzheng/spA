@@ -13,5 +13,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *time;
 @property (weak, nonatomic) IBOutlet UIImageView *bgImag;
 @property (weak, nonatomic) IBOutlet UIView *dotB;
+@property (weak, nonatomic) IBOutlet UIView *lastlIne;
 
 @end
