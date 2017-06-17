@@ -20,7 +20,6 @@
 @property (nonatomic, strong) UITableView    *myTableView;
 @property (weak, nonatomic) IBOutlet UIImageView *vipimg;
 @property (nonatomic, strong) NSArray *dataSource;
-@property (nonatomic, strong) NSArray *iconSource;
 @property (weak, nonatomic) IBOutlet UIImageView *bgview;
 
 @end
@@ -45,13 +44,6 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     return _myTableView;
 }
 
-- (NSArray *)iconSource
-{
-    if (!_iconSource) {
-        _iconSource = @[@"home_icon_form",@"home_btn_staff",@"home_btn_servement",@"home_btn_password_setting"];
-    }
-    return _iconSource;
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -66,7 +58,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     [self.view addSubview:btn];
     self.bgview.image = [[UIImage imageNamed:@"Rectangle"] stretchableImageWithLeftCapWidth:1 topCapHeight:70];
 
-    [self featchData];
+//    [self featchData];
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -75,7 +67,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 #pragma mark - tableView Delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    [tableView tableViewDisplayWitMsg:@"改车主暂无消费记录" ifNecessaryForRowCount:self.dataSource.count];
+    [tableView tableViewDisplayWitMsg:@"该车主暂无消费记录" ifNecessaryForRowCount:self.dataSource.count];
     return self.dataSource.count;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section

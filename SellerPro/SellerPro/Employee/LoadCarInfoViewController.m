@@ -73,7 +73,7 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_btn];
     
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [btn setTitle:@"取消" forState:UIControlStateNormal];
+    [btn setImage:[UIImage imageNamed:@"staffmanagement_btn_back"] forState:UIControlStateNormal];
     btn.frame = CGRectMake(0, 0, 60, 44);
     [btn addTarget:self action:@selector(cancel) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
