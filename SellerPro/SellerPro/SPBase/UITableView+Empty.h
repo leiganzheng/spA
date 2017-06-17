@@ -10,4 +10,5 @@
 
 @interface UITableView (Empty)
 - (void) tableViewDisplayWitMsg:(NSString *) message ifNecessaryForRowCount:(NSUInteger) rowCount;
+- (void) tableViewOtherDisplayWitMsg:(NSString *) message ifNecessaryForRowCount:(NSUInteger) rowCount;
 @end

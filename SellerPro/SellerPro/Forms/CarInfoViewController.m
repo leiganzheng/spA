@@ -110,7 +110,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 #pragma mark -- private method
 
 -(void)featchData{//粤S777ML
-    [DTNetManger customerGetWith:@"粤S777ML" callBack:^(NSError *error, id response) {
+    [DTNetManger customerGetWith:self.plate_license callBack:^(NSError *error, id response) {
         if (response && [response isKindOfClass:[NSDictionary class]]) {
             NSDictionary *dict = (NSDictionary*)response;
             self.name.text = [dict objectForKey:@"name"];

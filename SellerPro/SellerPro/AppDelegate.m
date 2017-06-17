@@ -30,6 +30,7 @@
     manager.shouldResignOnTouchOutside = YES;
     manager.shouldToolbarUsesTextFieldTintColor = YES;
     manager.enableAutoToolbar = NO;
+    manager.toolbarManageBehaviour =IQAutoToolbarByTag;
     return YES;
 }
 - (void)setUpBaseNetwork

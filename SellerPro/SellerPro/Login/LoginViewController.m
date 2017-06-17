@@ -28,8 +28,8 @@
     _phoneTF.text = @"13800138000";
     _pwTF.text = @"123";
     [Tools configCornerOfView:_login with:3];
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap)];
-    [self.view addGestureRecognizer:tap];
+//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap)];
+//    [self.view addGestureRecognizer:tap];
     [self.logo sd_setImageWithURL:[NSURL URLWithString:((AppDelegate*)[UIApplication sharedApplication].delegate).logo] placeholderImage:[UIImage imageNamed:@"LOGO"] options:SDWebImageProgressiveDownload];
 }
 

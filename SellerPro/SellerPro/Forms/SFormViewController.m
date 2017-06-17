@@ -118,7 +118,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     self.tf.frame = CGRectMake(10, 165, KSCREEN_WIDTH-20, 44);
     self.tf.backgroundColor = [UIColor whiteColor];
     self.tf.text = self.money;
-    self.tf.leftView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 8, 0)];
+    self.tf.leftView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 12, 0)];
     //设置显示模式为永远显示(默认不显示)
     self.tf.leftViewMode = UITextFieldViewModeAlways;
     [Tools configCornerOfView:self.tf with:3];

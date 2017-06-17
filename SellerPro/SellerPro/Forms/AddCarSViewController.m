@@ -68,7 +68,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     NSDictionary *valueDict = arr[indexPath.row];
     NSArray *servicesArr = valueDict[@"service"];
     if (servicesArr.count>2) {
-        return 42+ (servicesArr.count/3+servicesArr.count%3)*(60+3)+10;
+        return 42+ (servicesArr.count/3+servicesArr.count%3)*(60+10);
     }else if(servicesArr.count==2){
         return 42+60+8;
     }else{
@@ -101,6 +101,8 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kDTMyCellIdentifier];
     cell.backgroundColor = [UIColor clearColor];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
     NSDictionary *dict = self.dataSource[indexPath.section];
     NSArray *arr = [dict objectForKey:@"sub"];
     NSDictionary *valueDict = arr[indexPath.row];
@@ -130,7 +132,6 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
 }
 - (void)save:(UIButton *)sender{
  

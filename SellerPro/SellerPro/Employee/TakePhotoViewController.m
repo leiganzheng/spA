@@ -268,17 +268,10 @@
                         UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:cvc];
                         [self presentViewController:nav animated:YES completion:nil];
                     }else{
-                        [MBProgressHUD showError:@"不属于92俱乐部会员，请补充信息" toView:self.view];
-                        UIStoryboard *board = [UIStoryboard storyboardWithName: @"Main" bundle: nil];
-                        LoadCarInfoViewController *cvc = [board instantiateViewControllerWithIdentifier:@"LoadCarInfoViewController"];
-                        cvc.vc = self;
+                        [MBProgressHUD showError:(NSString *)response toView:self.view];
                         cvc.licenseImage= [self imageFromImage:originImage inRect:CGRectMake(30, 200, KSCREEN_WIDTH-60, 75) transform:self.imageShowView.transform];
-                        UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:cvc];
-                        [self presentViewController:nav animated:YES completion:nil];
-//                        [MBProgressHUD showError:(NSString *)response toView:self.view];
-//                        cvc.licenseImage= [self imageFromView:self.imageShowView atFrame:CGRectMake(30, 200, KSCREEN_WIDTH-60, 75)];
-//                        cvc.plate_license = @"";
-//                        [self.navigationController pushViewController:cvc animated:YES];
+                        cvc.plate_license = @"";
+                        [self.navigationController pushViewController:cvc animated:YES];
 
                     }
                 }
@@ -289,16 +282,6 @@
     }
 }
 -(UIImage*)imageFromImage:(UIImage*)image inRect:(CGRect)rect transform:(CGAffineTransform)transform{
-//    CGSize newSize=rect.size;
-//    UIGraphicsBeginImageContext(newSize);
-//    CGContextRef context = UIGraphicsGetCurrentContext();
-//    CGContextTranslateCTM(context, newSize.width / 2, newSize.height / 2);
-//    CGContextConcatCTM(context, transform);
-//    CGContextTranslateCTM(context, newSize.width / -2, newSize.height / -2);
-//    [image drawInRect:CGRectMake(-rect.origin.x, -rect.origin.y, image.size.width, image.size.height)];
-//    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
-//    UIGraphicsEndImageContext();
-
      CGFloat scale = image.size.width / self.view.frame.size.width;
     rect.origin.x = (rect.origin.x - self.imageShowView.frame.origin.x) * scale;
     rect.origin.y = (rect.origin.y - self.imageShowView.frame.origin.y) * scale;
