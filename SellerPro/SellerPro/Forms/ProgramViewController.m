@@ -74,8 +74,8 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 #pragma mark - tableView Delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-     [tableView tableViewOtherDisplayWitMsg:@"暂无数据" ifNecessaryForRowCount:self.dataSource.count];
-    return self.dataSource.count;
+//     [tableView tableViewOtherDisplayWitMsg:@"暂无数据" ifNecessaryForRowCount:self.dataSource.count];
+    return 3;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {

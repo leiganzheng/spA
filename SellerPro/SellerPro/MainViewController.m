@@ -15,6 +15,7 @@
 #import "AppDelegate.h"
 #import "ScanResultViewController.h"
 #import "TakePhotoViewController.h"
+#import "LoadCarInfoViewController.h"
 
 @interface MainViewController ()<UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate>
 
@@ -181,6 +182,11 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 }
 -(void)save:(UIButton *)sender
 {
+//    UIStoryboard *board = [UIStoryboard storyboardWithName: @"Main" bundle: nil];
+//    LoadCarInfoViewController *cvc = [board instantiateViewControllerWithIdentifier:@"LoadCarInfoViewController"];
+//    
+//    UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:cvc];
+//    [self presentViewController:nav animated:YES completion:nil];
 //    UIStoryboard *board = [UIStoryboard storyboardWithName: @"Main" bundle: nil];
 //    ScanResultViewController *cvc = [board instantiateViewControllerWithIdentifier:@"ScanResultViewController"];
 //    [self.navigationController pushViewController:cvc animated:YES];

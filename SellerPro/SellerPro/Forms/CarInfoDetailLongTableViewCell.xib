@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -18,27 +19,44 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="89.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="I1Z-Qr-eOX">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="I1Z-Qr-eOX">
                         <rect key="frame" x="8" y="9" width="70" height="70"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="0.87843137250000003" green="0.87843137250000003" blue="0.87843137250000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="70" id="K0q-fw-P2y"/>
+                            <constraint firstAttribute="width" constant="70" id="PWp-rY-Iso"/>
+                        </constraints>
                     </imageView>
-                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="德国全动力超级汽油fm，多是是带裤黑色测试" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="vc2-Nu-ScO">
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="德国全动力超级汽油fm，多是是带裤黑色测试" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="vc2-Nu-ScO">
                         <rect key="frame" x="86" y="9" width="247" height="48"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="48" id="uuX-DL-iod"/>
+                        </constraints>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="¥0.0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uGQ-0p-ALg">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¥0.0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uGQ-0p-ALg">
                         <rect key="frame" x="307" y="58" width="60" height="21"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="XKN-Xt-QC4"/>
+                            <constraint firstAttribute="width" constant="60" id="wuT-JP-SjU"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" red="0.80392156859999997" green="0.32156862749999998" blue="0.1215686275" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="uGQ-0p-ALg" firstAttribute="top" secondItem="vc2-Nu-ScO" secondAttribute="bottom" constant="1" id="1ch-5x-r6F"/>
+                    <constraint firstItem="vc2-Nu-ScO" firstAttribute="leading" secondItem="I1Z-Qr-eOX" secondAttribute="trailing" constant="8" id="2jE-hc-31B"/>
+                    <constraint firstItem="uGQ-0p-ALg" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="8wa-U2-C8y"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="vc2-Nu-ScO" secondAttribute="trailing" constant="34" id="CxY-z9-Ses"/>
+                    <constraint firstItem="I1Z-Qr-eOX" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="1" id="Mev-iZ-C1Z"/>
+                    <constraint firstItem="I1Z-Qr-eOX" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="cdz-Cs-7CV"/>
+                    <constraint firstItem="vc2-Nu-ScO" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="1" id="yUu-Hm-I15"/>
+                </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="logo" destination="I1Z-Qr-eOX" id="2Ql-bF-GfX"/>
