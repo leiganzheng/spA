@@ -13,6 +13,13 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    self.deBtn.layer.borderColor = RGB(211, 217, 222).CGColor;
+    self.deBtn.layer.borderWidth = 1;
+    [self.deBtn setTitleColor:RGB(220, 107, 107) forState:0];
+    self.addBtn.layer.borderColor = RGB(211, 217, 222).CGColor;
+    self.addBtn.layer.borderWidth = 1;
+    self.resultBtn.layer.borderColor = RGB(211, 217, 222).CGColor;
+    self.resultBtn.layer.borderWidth = 1;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

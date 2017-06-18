@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *price;
 @property (weak, nonatomic) IBOutlet UIButton *deBtn;
 @property (weak, nonatomic) IBOutlet UIButton *addBtn;
+@property (weak, nonatomic) IBOutlet UITextView *nameT;
 @property (weak, nonatomic) IBOutlet UIButton *resultBtn;
 
 @end

@@ -174,12 +174,18 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 
 }
 #pragma mark - private action
+-(void)goOhterVC{
+    StaffViewController *cvc = [[StaffViewController alloc]init];
+    [self.navigationController pushViewController:cvc animated:YES];
+
+}
 -(void)save:(UIButton *)sender
 {
 //    UIStoryboard *board = [UIStoryboard storyboardWithName: @"Main" bundle: nil];
 //    ScanResultViewController *cvc = [board instantiateViewControllerWithIdentifier:@"ScanResultViewController"];
 //    [self.navigationController pushViewController:cvc animated:YES];
     TakePhotoViewController *vc = [[TakePhotoViewController alloc]init];
+     vc.vc = self;
      [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)logOut:(UIButton *)sender{

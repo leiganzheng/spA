@@ -25,8 +25,8 @@
     [super viewDidLoad];
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
     NSString *name = [userDefault objectForKey:@"Pusername"];
-    _phoneTF.text = @"13800138000";
-    _pwTF.text = @"123";
+    _phoneTF.text = name;
+//    _pwTF.text = @"123";
     [Tools configCornerOfView:_login with:3];
 //    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap)];
 //    [self.view addGestureRecognizer:tap];

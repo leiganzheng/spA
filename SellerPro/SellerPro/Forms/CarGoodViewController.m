@@ -31,10 +31,10 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
         _myTableView.dataSource = self;
         _myTableView.backgroundColor = [UIColor clearColor];
         _myTableView.separatorColor = [UIColor lightGrayColor];
-        _myTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-            [self featchData];
-            
-        }];
+//        _myTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+//            [self featchData];
+//            
+//        }];
 //        [_myTableView registerNib:[UINib nibWithNibName:@"CarInfoTableViewCell" bundle:nil] forCellReuseIdentifier:kDTMyCellIdentifier];
          [_myTableView registerClass:[MGSwipeTableCell class] forCellReuseIdentifier:kDTMyCellIdentifier];
     }
@@ -109,10 +109,10 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     lb2.text = [NSString stringWithFormat:@"¥%@",dict[@"price"]];
     cell.accessoryView = lb2;
     
-    cell.rightButtons = @[[MGSwipeButton buttonWithTitle:@"" icon:[UIImage imageNamed:@"btn_delete service"] backgroundColor:RGB(211, 217, 222) callback:^BOOL(MGSwipeTableCell * _Nonnull cell) {
+    cell.rightButtons = @[[MGSwipeButton buttonWithTitle:@"" icon:[UIImage imageNamed:@"btn_delete service"] backgroundColor:RGB(217, 230, 239) callback:^BOOL(MGSwipeTableCell * _Nonnull cell) {
         NSIndexPath *index = [tableView indexPathForCell:cell];
         NSDictionary *d = self.dataSource[index.row];
-        [self.dataSource removeObject:d];
+        [self.dataSource removeObjectAtIndex:indexPath.row];
         if (self.resultBlock) {
             NSInteger num = 0;
             for (NSDictionary *dict in self.dataSource) {

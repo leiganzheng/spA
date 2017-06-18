@@ -68,9 +68,9 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     NSDictionary *valueDict = arr[indexPath.row];
     NSArray *servicesArr = valueDict[@"service"];
     if (servicesArr.count>2) {
-        return 42+ (servicesArr.count/3+servicesArr.count%3)*(60+10);
+        return 42+ (servicesArr.count/3+servicesArr.count%3)*(50+10)+20;
     }else if(servicesArr.count==2){
-        return 42+60+8;
+        return 42+50+8;
     }else{
         return 42;
     }
@@ -121,10 +121,10 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     [cell.contentView addSubview:bgV];
     NSArray *servicesArr = valueDict[@"service"];
     if (servicesArr.count>2) {
-        [self gridWithCellWidth:(KSCREEN_WIDTH-32)/3 cellHeight:60 numPerRow:3 totalNum:servicesArr.count viewPadding:10 viewPaddingCell:6 superView:bgV dataSource:servicesArr];
+        [self gridWithCellWidth:(KSCREEN_WIDTH-32)/3 cellHeight:50 numPerRow:3 totalNum:servicesArr.count viewPadding:10 viewPaddingCell:6 superView:bgV dataSource:servicesArr];
 
     }else{
-        [self gridWithCellWidth:(KSCREEN_WIDTH-32)/2 cellHeight:60 numPerRow:2 totalNum:servicesArr.count viewPadding:10 viewPaddingCell:6 superView:bgV dataSource:servicesArr];
+        [self gridWithCellWidth:(KSCREEN_WIDTH-32)/2 cellHeight:50 numPerRow:2 totalNum:servicesArr.count viewPadding:10 viewPaddingCell:6 superView:bgV dataSource:servicesArr];
 
     }
        return cell;
@@ -275,7 +275,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     return NO;
 }
 -(void)select:(UIButton *)sender{
-    UITableViewCell *cell = (UITableViewCell*)[[sender superview]superview];
+    UITableViewCell *cell = (UITableViewCell*)[[[sender superview]superview] superview];
     NSIndexPath *indexPath = [self.myTableView indexPathForCell:cell];
     NSMutableDictionary *valueD = [NSMutableDictionary dictionary];
     

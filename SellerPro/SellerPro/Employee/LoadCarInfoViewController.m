@@ -28,7 +28,7 @@
 - (UITableView *)myTableView
 {
     if (!_myTableView) {
-        _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 125, KSCREEN_WIDTH, KSCREEN_HEIGHT-224) style:UITableViewStylePlain];
+        _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 125, KSCREEN_WIDTH, KSCREEN_HEIGHT-240) style:UITableViewStylePlain];
         _myTableView.rowHeight = 50;
         _myTableView.delegate   = self;
         _myTableView.dataSource = self;
@@ -41,7 +41,7 @@
 - (NSArray *)dataSource
 {
     if (!_dataSource) {
-        _dataSource = @[@" 车主姓名",@" 联系方式",@" 车辆类型",@" 车辆品牌",@" 车辆型号",@" 车牌号",@" 发动机号",@" 车架号",@" 注册日期",@" 行驶证照片",@" 年检地点",@" 年检到期时间",@" 保险公司名称",@" 保险到期时间"];
+        _dataSource = @[@" 车主姓名",@" 联系方式（必填）",@" 车辆类型（必填）",@" 车辆品牌",@" 车辆型号",@" 车牌号（必填）",@" 发动机号",@" 车架号",@" 注册日期",@" 行驶证照片",@" 年检地点",@" 年检到期时间",@" 保险公司名称",@" 保险到期时间"];
     }
     return _dataSource;
 }
@@ -62,7 +62,7 @@
     [Tools configCornerOfView:_plase_num with:3];
     _plase_num.layer.borderColor = RGB(211, 217, 222).CGColor;
     _plase_num.layer.borderWidth = 1;
-    [self maskView];
+   
     self.returnKeyHandler = [[IQKeyboardReturnKeyHandler alloc] initWithViewController:self];
     self.returnKeyHandler.lastTextFieldReturnKeyType = UIReturnKeyDone;
     
@@ -85,6 +85,8 @@
     [Tools configCornerOfView:btn2 with:3];
     [btn2 addTarget:self action:@selector(loadData) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn2];
+    
+     [self maskView];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -144,17 +146,17 @@
     return cell;
     
 }
-- (void)textFieldDidEndEditing:(UITextField *)textField
-{
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     //get cell
     UITableViewCell *cell  = (UITableViewCell *)[[textField superview] superview];
     NSIndexPath *indexPath = [self.myTableView indexPathForCell:cell];
     switch (indexPath.row) {
         case 0:
-            self.name = textField.text;
+    
             [self.dataDict setObject:textField.text forKey:@"name"];
             break;
         case 1:
+            self.name = textField.text;
             [self.dataDict setObject:textField.text forKey:@"phone"];
             break;
         case 2:
@@ -198,6 +200,7 @@
         default:
             break;
     }
+    return  YES;
 }
 -(void)cancel{
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -220,29 +223,36 @@
     tf.textColor = [UIColor whiteColor];
     tf.backgroundColor = [UIColor clearColor];
     tf.font = [UIFont systemFontOfSize:15];
+    tf.editable = NO;
     tf.text = @"提交成功，感谢您的录入，您将获得来自92汽车俱乐部的佣金！";
     [imageV addSubview:tf];
     
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     btn.frame = CGRectMake(36, 220, 80, 40);
     [btn setTitle:@"我的业绩" forState:0];
-    btn.center = CGPointMake(imageV.center.x-50, 200);
+    btn.center = CGPointMake(self.mask.center.x, imageV.center.y+60);
     [btn addTarget:self action:@selector(homeAction1) forControlEvents:UIControlEventTouchUpInside];
-    [imageV addSubview:btn];
+    [self.mask addSubview:btn];
     
     UIButton *btn1 = [UIButton buttonWithType:UIButtonTypeCustom];
     btn1.frame = CGRectMake(36, 260, 80, 40);
-    btn1.center = CGPointMake(imageV.center.x-50, 240);
+    btn1.center = CGPointMake(self.mask.center.x, imageV.center.y+90);
     [btn1 setTitle:@"回首页" forState:0];
     [btn1 addTarget:self action:@selector(homeAction) forControlEvents:UIControlEventTouchUpInside];
-    [imageV addSubview:btn1];
+    [self.mask addSubview:btn1];
     [self.view addSubview: self.mask];
 }
 -(void)homeAction{
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:^{
+        [self.vc.navigationController popToRootViewControllerAnimated:YES];
+    }];
+    
 }
 -(void)homeAction1{
-    [self.navigationController popToRootViewControllerAnimated:NO];
+    [self dismissViewControllerAnimated:YES completion:^{
+        [self.vc.navigationController popToRootViewControllerAnimated:YES];
+        [self.vc.vc goOhterVC];
+    }];
 }
 -(void)tap{
     self.mask.hidden = YES;
@@ -262,9 +272,19 @@
     }];
 }
 -(void)loadData{
-    if (self.name.length ==0 ||self.car_type.length ==0 ||self.plase_num.text.length ==0) {
-        [MBProgressHUD showError:@"请输入内容" toView:self.view];
-    }else{
+    
+        if (self.car_type.length ==0 ) {
+             [MBProgressHUD showError:@"联系方式必填" toView:self.view];
+            return;
+        }
+        if (self.car_type.length ==0 ) {
+            [MBProgressHUD showError:@"车辆类型必填" toView:self.view];
+            return;
+        }
+        if (self.car_type.length ==0 ) {
+            [MBProgressHUD showError:@"车牌必填" toView:self.view];
+            return;
+        }
         [MBProgressHUD showMessag:@"提交中" toView:self.view];
         [DTNetManger customerAddWith:self.dataDict callBack:^(NSError *error, id response) {
             [MBProgressHUD hiddenFromView:self.view];
@@ -277,7 +297,6 @@
                 }
             }
         }];
-    }
    
 }
 @end

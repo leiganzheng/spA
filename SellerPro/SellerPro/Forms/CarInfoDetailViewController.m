@@ -105,12 +105,14 @@ static NSString *const kDTMyCellIdentifierLong = @"myCellIdentifier1";
     if (dict.allValues.count>2) {
         CarInfoDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kDTMyCellIdentifier];
         cell.backgroundColor = [UIColor whiteColor];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.name.text = dict[@"name"];
         cell.price.textColor = RGB(220, 107, 107);
         cell.price.text = [NSString stringWithFormat:@"¥%@",dict[@"price"]];
         return cell;
     }else{
         CarInfoDetailLongTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kDTMyCellIdentifierLong];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.backgroundColor = [UIColor whiteColor];
         cell.name.text = dict[@"name"];
         cell.price.textColor = RGB(220, 107, 107);

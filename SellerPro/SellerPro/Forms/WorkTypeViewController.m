@@ -17,7 +17,7 @@
 
 @property (nonatomic, strong) UITableView    *myTableView;
 @property (nonatomic, strong) NSMutableArray *dataSource;
-
+@property (nonatomic, assign) NSInteger totalMoney;
 @end
 
 static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
@@ -31,9 +31,9 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
         _myTableView.dataSource = self;
         _myTableView.backgroundColor = [UIColor clearColor];
         _myTableView.separatorColor = [UIColor lightGrayColor];
-        _myTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-            
-        }];
+//        _myTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+//            
+//        }];
         [_myTableView registerNib:[UINib nibWithNibName:@"WorkTypeTableViewCell" bundle:nil] forCellReuseIdentifier:kDTMyCellIdentifier];
     }
     return _myTableView;
@@ -89,45 +89,87 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    WorkTypeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kDTMyCellIdentifier];
-    cell.backgroundColor = [UIColor whiteColor];
-    cell.rightButtons = @[[MGSwipeButton buttonWithTitle:@"" icon:[UIImage imageNamed:@"btn_delete service"] backgroundColor:RGB(211, 217, 222) callback:^BOOL(MGSwipeTableCell * _Nonnull cell) {
+    WorkTypeTableViewCell *cell1 = [tableView dequeueReusableCellWithIdentifier:kDTMyCellIdentifier];
+    cell1.backgroundColor = [UIColor whiteColor];
+    cell1.selectionStyle =  UITableViewCellSelectionStyleNone;
+    cell1.rightButtons = @[[MGSwipeButton buttonWithTitle:@"" icon:[UIImage imageNamed:@"btn_delete service"] backgroundColor:RGB(211, 217, 222) callback:^BOOL(MGSwipeTableCell * _Nonnull cell) {
         NSIndexPath *index = [tableView indexPathForCell:cell];
         NSDictionary *d = self.dataSource[index.row];
-        [self.dataSource removeObject:d];
+        [self.dataSource removeObjectAtIndex:indexPath.row];
         if (self.resultBlock) {
             NSInteger num = 0;
             for (NSDictionary *dict in self.dataSource) {
-                num = num + [[dict objectForKey:@"price"] integerValue];
+                num = num + [[dict objectForKey:@"price"] integerValue]*(cell1.resultBtn.titleLabel.text.integerValue);
             }
-            _resultBlock([NSString stringWithFormat:@"%li",(long)num]);
+            self.totalMoney = num;
+            _resultBlock([NSString stringWithFormat:@"%li",(long)self.totalMoney]);
         }
         [self.myTableView reloadData];
         return  YES;
     }]];
-    
-    cell.rightSwipeSettings.transition = MGSwipeTransition3D;
-    return cell;
+
+    cell1.rightSwipeSettings.transition = MGSwipeTransition3D;
+    [cell1.deBtn addTarget:self action:@selector(delete:) forControlEvents:UIControlEventTouchUpInside];
+    [cell1.addBtn addTarget:self action:@selector(add:) forControlEvents:UIControlEventTouchUpInside];
+    return cell1;
 }
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     WorkTypeTableViewCell *myCell = (WorkTypeTableViewCell *)cell;
     NSDictionary *dict = self.dataSource[indexPath.row];
-    myCell.nameTitel.text = [dict objectForKey:@"name"];
+    myCell.nameT.text = [dict objectForKey:@"name"];
     myCell.price.text = [NSString stringWithFormat:@"¥%@",[dict objectForKey:@"price"]];
     [myCell.img sd_setImageWithURL:[NSURL URLWithString:[dict objectForKey:@"picture"]] placeholderImage:[UIImage imageNamed:@"" ]];
-    [myCell.resultBtn setTitle:[NSString stringWithFormat:@"¥%@",[dict objectForKey:@"quantity"]] forState:0];
+    [myCell.resultBtn setTitle:@"1" forState:0];
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+}
+-(void)delete:(UIButton *)sender{
+    WorkTypeTableViewCell *cell = (WorkTypeTableViewCell*)[[sender superview]superview];
+    NSInteger num = cell.resultBtn.titleLabel.text.integerValue;
+    NSIndexPath *indexPath = [self.myTableView indexPathForCell:cell];
+    [cell.resultBtn setTitle:[NSString stringWithFormat:@"%li",(long)(num-1==0 ? 0 : num-1)] forState:0];
+    if (self.resultBlock) {
+        NSDictionary *dict = self.dataSource[indexPath.row];
+        self.totalMoney = self.totalMoney - [[dict objectForKey:@"price"] integerValue];
+        _resultBlock([NSString stringWithFormat:@"%li",(long)self.totalMoney]);
+    }
+
+}
+-(void)add:(UIButton *)sender{
+    WorkTypeTableViewCell *cell = (WorkTypeTableViewCell*)[[sender superview]superview];
+    NSIndexPath *indexPath = [self.myTableView indexPathForCell:cell];
+    NSInteger num = cell.resultBtn.titleLabel.text.integerValue;
+    [cell.resultBtn setTitle:[NSString stringWithFormat:@"%li",(long)(num+1)] forState:0];
+    if (self.resultBlock) {
+        NSDictionary *dict = self.dataSource[indexPath.row];
+        self.totalMoney = self.totalMoney + [[dict objectForKey:@"price"] integerValue];
+        _resultBlock([NSString stringWithFormat:@"%li",(long)self.totalMoney]);
+    }
+
+
 }
 #pragma mark -- private method
 - (void)save:(UIButton *)sender{
 //    UIStoryboard *board = [UIStoryboard storyboardWithName: @"Main" bundle: nil];
 //    AddWorkTypeViewController *vc =[[AddWorkTypeViewController alloc] init];
 //    [self.navigationController pushViewController:vc animated:YES];
-    
+//    NSMutableDictionary *valueD = [NSMutableDictionary dictionary];
+//    [valueD setObject:@"金装美孚1号全合成机油1L 0W-40" forKey:@"name"];
+//    [valueD setObject:@"100" forKey:@"price"];
+//    [valueD setObject:@"price" forKey:@"picture"];
+//    [self.dataSource addObject:valueD];
+//    if (self.resultBlock) {
+//        NSInteger num = 0;
+//        for (NSDictionary *dict in self.dataSource) {
+//            num = num + [[dict objectForKey:@"price"] integerValue];
+//        }
+//        self.totalMoney = num;
+//        _resultBlock([NSString stringWithFormat:@"%li",(long)self.totalMoney]);
+//    }
+//    [self.myTableView reloadData];
     ScanAddViewController *vc = [[ScanAddViewController alloc] init];
     vc.resultBlock = ^(NSDictionary *dict) {
         if (dict) {
@@ -137,7 +179,8 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
                 for (NSDictionary *dict in self.dataSource) {
                     num = num + [[dict objectForKey:@"price"] integerValue];
                 }
-                _resultBlock([NSString stringWithFormat:@"%li",(long)num]);
+                self.totalMoney = num;
+                _resultBlock([NSString stringWithFormat:@"%li",(long)self.totalMoney]);
             }
             [self.myTableView reloadData];
         }

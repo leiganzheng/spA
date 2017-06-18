@@ -7,7 +7,7 @@
 //
 
 #import "DTBaseViewController.h"
-
+#import "MainViewController.h"
 @interface TakePhotoViewController : DTBaseViewController
-
+@property(nonatomic,strong)MainViewController *vc;
 @end

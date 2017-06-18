@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 #import "DTBaseViewController.h"
 @interface MainViewController : DTBaseViewController
-
+-(void)goOhterVC;
 @end
