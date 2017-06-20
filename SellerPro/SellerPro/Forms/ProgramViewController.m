@@ -74,8 +74,8 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 #pragma mark - tableView Delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-//     [tableView tableViewOtherDisplayWitMsg:@"暂无数据" ifNecessaryForRowCount:self.dataSource.count];
-    return 3;
+     [tableView tableViewOtherDisplayWitMsg:@"暂无数据" ifNecessaryForRowCount:self.dataSource.count];
+    return self.dataSource.count;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
@@ -138,10 +138,10 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     SprogramTableViewCell *myCell = (SprogramTableViewCell*)cell;
-//    NSDictionary *dict = self.dataSource[indexPath.row];
-//    myCell.name.text = [dict objectForKey:@"create_time"];
-//    myCell.price.text = [dict objectForKey:@"money"];
-//        myCell.logo.text = [NSString stringWithFormat:@"%@",[dict objectForKey:@"order_count"]];
+    NSDictionary *dict = self.dataSource[indexPath.row];
+    myCell.name.text = [dict objectForKey:@"create_time"];
+    myCell.price.text = [dict objectForKey:@"money"];
+    myCell.logo.text = [NSString stringWithFormat:@"%@",[dict objectForKey:@"order_count"]];
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
