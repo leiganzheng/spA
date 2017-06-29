@@ -244,11 +244,13 @@
 }
 -(void)homeAction{
     [self dismissViewControllerAnimated:YES completion:^{
+        
         [self.vc.navigationController popToRootViewControllerAnimated:YES];
     }];
     
 }
 -(void)homeAction1{
+    
     [self dismissViewControllerAnimated:YES completion:^{
         [self.vc.navigationController popToRootViewControllerAnimated:YES];
         [self.vc.vc goOhterVC];
@@ -264,12 +266,16 @@
     return YES;
 }
 -(void)select{
-    [self dismissViewControllerAnimated:NO completion:^{
+    if (self.vc == nil) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }else{
+        [self dismissViewControllerAnimated:NO completion:^{
         UIStoryboard *board = [UIStoryboard storyboardWithName: @"Main" bundle: nil];
         CarInfoViewController *cvc = [board instantiateViewControllerWithIdentifier:@"CarInfoViewController"];
         cvc.plate_license = self.plate_license;
         [self.vc.navigationController pushViewController:cvc animated:YES];
     }];
+    }
 }
 -(void)loadData{
     

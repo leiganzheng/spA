@@ -9,6 +9,7 @@
 #import "CarInfoViewController.h"
 #import "ServiceViewController.h"
 #import "RecordTableViewCell.h"
+#import "LoadCarInfoViewController.h"
 
 @interface CarInfoViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UIImageView *profile;
@@ -57,7 +58,15 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     [btn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn];
     self.bgview.image = [[UIImage imageNamed:@"Rectangle"] stretchableImageWithLeftCapWidth:1 topCapHeight:70];
-
+//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(updateInfo)];
+//    [self.profile addGestureRecognizer:tap];
+//    
+    UIButton *btn1 = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn1.frame = CGRectMake(0, 0, self.profile.bounds.size.width, self.profile.bounds.size.height);
+    btn1.backgroundColor = [UIColor clearColor];
+    [btn1 addTarget:self action:@selector(updateInfo) forControlEvents:UIControlEventTouchUpInside];
+    [self.profile addSubview:btn1];
+    
 //    [self featchData];
 }
 - (void)viewWillAppear:(BOOL)animated{
@@ -100,7 +109,15 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     
 }
 #pragma mark -- private method
+-(void)updateInfo{
+    UIStoryboard *board = [UIStoryboard storyboardWithName: @"Main" bundle: nil];
+    LoadCarInfoViewController *cvc = [board instantiateViewControllerWithIdentifier:@"LoadCarInfoViewController"];
+    cvc.licenseImage= self.licenseImage;
+    cvc.plate_license = self.plate_license;
+    UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:cvc];
+    [self presentViewController:nav animated:YES completion:nil];
 
+}
 -(void)featchData{//粤S777ML
     [DTNetManger customerGetWith:self.plate_license callBack:^(NSError *error, id response) {
         if (response && [response isKindOfClass:[NSDictionary class]]) {

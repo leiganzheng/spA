@@ -76,6 +76,7 @@
     UIStoryboard *board = [UIStoryboard storyboardWithName: @"Main" bundle: nil];
     CarInfoViewController *cvc = [board instantiateViewControllerWithIdentifier:@"CarInfoViewController"];
     cvc.plate_license = self.plate_license;
+    cvc.licenseImage = self.licenseImage;
     [self.navigationController pushViewController:cvc animated:YES];
 
 }

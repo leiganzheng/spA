@@ -240,8 +240,8 @@
     }];
 }
 -(void)ocrImage:(UIImage *)originImage{
-//    UIImage *tempImage = [UIImage imageNamed:@"3.pic_hd"];
-    NSData *data = UIImageJPEGRepresentation(originImage, 0.5f);
+    UIImage *tempImage = [self imageFromImage:originImage inRect:CGRectMake(30, 200, KSCREEN_WIDTH-60, 75) transform:self.imageShowView.transform];
+    NSData *data = UIImageJPEGRepresentation(tempImage, 0.5f);
     NSString *encodedImageStr = [data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
     if (encodedImageStr.length!=0) {
         [MBProgressHUD showMessag:@"处理中" toView:self.view];
