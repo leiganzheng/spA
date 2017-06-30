@@ -74,7 +74,7 @@
     
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     [btn setImage:[UIImage imageNamed:@"staffmanagement_btn_back"] forState:UIControlStateNormal];
-    btn.frame = CGRectMake(0, 0, 60, 44);
+    btn.frame = CGRectMake(0, 0, 30, 44);
     [btn addTarget:self action:@selector(cancel) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
     
@@ -266,16 +266,17 @@
     return YES;
 }
 -(void)select{
-    if (self.vc == nil) {
+//    if (self.vc == nil) {
         [self dismissViewControllerAnimated:YES completion:nil];
-    }else{
-        [self dismissViewControllerAnimated:NO completion:^{
-        UIStoryboard *board = [UIStoryboard storyboardWithName: @"Main" bundle: nil];
-        CarInfoViewController *cvc = [board instantiateViewControllerWithIdentifier:@"CarInfoViewController"];
-        cvc.plate_license = self.plate_license;
-        [self.vc.navigationController pushViewController:cvc animated:YES];
-    }];
-    }
+//    }
+//    else{
+//        [self dismissViewControllerAnimated:NO completion:^{
+//        UIStoryboard *board = [UIStoryboard storyboardWithName: @"Main" bundle: nil];
+//        CarInfoViewController *cvc = [board instantiateViewControllerWithIdentifier:@"CarInfoViewController"];
+//        cvc.plate_license = self.plate_license;
+//        [self.vc.navigationController pushViewController:cvc animated:YES];
+//    }];
+//    }
 }
 -(void)loadData{
     

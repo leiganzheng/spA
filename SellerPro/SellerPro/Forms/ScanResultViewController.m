@@ -77,6 +77,7 @@
     CarInfoViewController *cvc = [board instantiateViewControllerWithIdentifier:@"CarInfoViewController"];
     cvc.plate_license = self.plate_license;
     cvc.licenseImage = self.licenseImage;
+    cvc.vc = self.vc;
     [self.navigationController pushViewController:cvc animated:YES];
 
 }

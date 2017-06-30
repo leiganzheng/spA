@@ -117,9 +117,9 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 {
     WorkTypeTableViewCell *myCell = (WorkTypeTableViewCell *)cell;
     NSDictionary *dict = self.dataSource[indexPath.row];
-    myCell.nameT.text = [dict objectForKey:@"name"];
-    myCell.price.text = [NSString stringWithFormat:@"¥%@",[dict objectForKey:@"price"]];
-    [myCell.img sd_setImageWithURL:[NSURL URLWithString:[dict objectForKey:@"picture"]] placeholderImage:[UIImage imageNamed:@"" ]];
+    myCell.nameT.text = [dict objectForKey:@"supplier"][@"name"];
+    myCell.price.text = [NSString stringWithFormat:@"¥%@",[dict objectForKey:@"supplier"][@"price"]];
+    [myCell.img sd_setImageWithURL:[NSURL URLWithString:[dict objectForKey:@"supplier"][@"picture"]] placeholderImage:[UIImage imageNamed:@"" ]];
     [myCell.resultBtn setTitle:@"1" forState:0];
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -177,7 +177,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
             if (self.resultBlock) {
                 NSInteger num = 0;
                 for (NSDictionary *dict in self.dataSource) {
-                    num = num + [[dict objectForKey:@"price"] integerValue];
+                    num = num + [[dict objectForKey:@"supplier"][@"price"] integerValue];
                 }
                 self.totalMoney = num;
                 _resultBlock([NSString stringWithFormat:@"%li",(long)self.totalMoney]);

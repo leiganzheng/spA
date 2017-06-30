@@ -250,6 +250,7 @@
             [MBProgressHUD hiddenFromView:self.view];
             UIStoryboard *board = [UIStoryboard storyboardWithName: @"Main" bundle: nil];
             ScanResultViewController *cvc = [board instantiateViewControllerWithIdentifier:@"ScanResultViewController"];
+            cvc.vc = self;
             if (response && [response isKindOfClass:[NSDictionary class]]) {
                 NSDictionary *dic = (NSDictionary*)response;
                 cvc.licenseImage= [self imageFromImage:originImage inRect:CGRectMake(30, 200, KSCREEN_WIDTH-60, 75) transform:self.imageShowView.transform];
@@ -258,22 +259,22 @@
             }else{
                
                 if ([response  isKindOfClass:[NSString class]]) {
-                    NSString *temp = (NSString *)response;
-                    if ([temp isEqualToString:@"401"]) {
-                        [MBProgressHUD showError:@"不属于92俱乐部会员，请补充信息" toView:self.view];
-                        UIStoryboard *board = [UIStoryboard storyboardWithName: @"Main" bundle: nil];
-                        LoadCarInfoViewController *cvc = [board instantiateViewControllerWithIdentifier:@"LoadCarInfoViewController"];
-                         cvc.licenseImage= [self imageFromImage:originImage inRect:CGRectMake(30, 200, KSCREEN_WIDTH-60, 75) transform:self.imageShowView.transform];
-                         cvc.vc = self;
-                        UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:cvc];
-                        [self presentViewController:nav animated:YES completion:nil];
-                    }else{
+//                    NSString *temp = (NSString *)response;
+//                    if ([temp isEqualToString:@"401"]) {
+//                        [MBProgressHUD showError:@"不属于92俱乐部会员，请补充信息" toView:self.view];
+//                        UIStoryboard *board = [UIStoryboard storyboardWithName: @"Main" bundle: nil];
+//                        LoadCarInfoViewController *cvc = [board instantiateViewControllerWithIdentifier:@"LoadCarInfoViewController"];
+//                         cvc.licenseImage= [self imageFromImage:originImage inRect:CGRectMake(30, 200, KSCREEN_WIDTH-60, 75) transform:self.imageShowView.transform];
+//                         cvc.vc = self;
+//                        UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:cvc];
+//                        [self presentViewController:nav animated:YES completion:nil];
+//                    }else{
                         [MBProgressHUD showError:(NSString *)response toView:self.view];
                         cvc.licenseImage= [self imageFromImage:originImage inRect:CGRectMake(30, 200, KSCREEN_WIDTH-60, 75) transform:self.imageShowView.transform];
                         cvc.plate_license = @"";
                         [self.navigationController pushViewController:cvc animated:YES];
 
-                    }
+//                    }
                 }
             }
         }];

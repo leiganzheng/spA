@@ -7,9 +7,9 @@
 //
 
 #import "DTBaseViewController.h"
-
+#import "TakePhotoViewController.h"
 @interface CarInfoViewController : DTBaseViewController
 @property (nonatomic, strong) NSString *plate_license;
 @property (nonatomic, strong) UIImage *licenseImage;
-
+@property (nonatomic, strong) TakePhotoViewController *vc;
 @end

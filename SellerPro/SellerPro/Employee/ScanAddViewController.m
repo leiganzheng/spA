@@ -53,12 +53,7 @@ UIAlertViewDelegate
     [_btn addTarget:self action:@selector(lightButtonDidTouch) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_btn];
     
-    //    设置loading界面
-    [self setupBgView];
-    //    设置扫面界面
-    [self setupScanView];
-    //    设置扫描线
-    [self setupTimer];
+    [self reLoad];
     [self.view addSubview:_bgView];
 }
 
@@ -68,7 +63,14 @@ UIAlertViewDelegate
         [self setupAVFoundation];
     }
 }
-
+-(void)reLoad{
+    //    设置loading界面
+    [self setupBgView];
+    //    设置扫面界面
+    [self setupScanView];
+    //    设置扫描线
+    [self setupTimer];
+}
 - (void)setupBgView {
     _bgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
     _bgView.backgroundColor = [UIColor blackColor];
@@ -83,7 +85,7 @@ UIAlertViewDelegate
     _scan = [[ScanView alloc]initWithFrame:self.view.bounds];
     _scan.backgroundColor = [UIColor clearColor];
     
-    _slideLineView = [[UIView alloc]initWithFrame:CGRectMake(_viewWidth, 151, ScreenWidth - _viewWidth * 2, 1)];
+    _slideLineView = [[UIView alloc]initWithFrame:CGRectMake(_viewWidth, 181, ScreenWidth - _viewWidth * 2, 1)];
     _slideLineView.backgroundColor = [UIColor greenColor];
     [_scan addSubview:_slideLineView];
     [self.view addSubview:_scan];
@@ -91,8 +93,8 @@ UIAlertViewDelegate
 }
 
 - (void)setupSubView {
-    _titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 300, ScreenWidth, 50.0)];
-    _titleLabel.text = @"请将二维码放入框内";
+    _titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 360, ScreenWidth, 50.0)];
+    _titleLabel.text = @"请将二维码/条形码放入框内";
     _titleLabel.textAlignment = NSTextAlignmentCenter;
     _titleLabel.textColor = [UIColor whiteColor];
     [_scan addSubview:_titleLabel];
@@ -157,6 +159,20 @@ UIAlertViewDelegate
     AVCaptureMetadataOutput *output = [[AVCaptureMetadataOutput alloc]init];
     //设置代理 在主线程里刷新
     [output setMetadataObjectsDelegate:self queue:dispatch_get_main_queue()];
+    
+    //计算中间可探测区域
+    CGSize windowSize = [UIScreen mainScreen].bounds.size;
+    CGSize scanSize = CGSizeMake(240,240);
+    CGRect scanRect = CGRectMake((windowSize.width-scanSize.width)/2,
+                                     (windowSize.height-scanSize.height)/2, scanSize.width, scanSize.height);
+   //计算rectOfInterest 注意x,y交换位置
+    scanRect = CGRectMake(scanRect.origin.y/windowSize.height,
+                          scanRect.origin.x/windowSize.width,
+                          scanRect.size.height/windowSize.height,
+                          scanRect.size.width/windowSize.width);
+//    //设置可探测区域
+    output.rectOfInterest = scanRect;
+    
     //初始化链接对象
     _session = [[AVCaptureSession alloc]init];
     //高质量采集率
@@ -164,12 +180,13 @@ UIAlertViewDelegate
     [_session addInput:input];
     [_session addOutput:output];
     //设置扫码支持的编码格式(如下设置条形码和二维码兼容)
-    output.metadataObjectTypes=@[AVMetadataObjectTypeQRCode,AVMetadataObjectTypeEAN13Code, AVMetadataObjectTypeEAN8Code, AVMetadataObjectTypeCode128Code];
+    output.metadataObjectTypes=@[AVMetadataObjectTypeQRCode,AVMetadataObjectTypeCode128Code,AVMetadataObjectTypeEAN8Code,AVMetadataObjectTypeUPCECode,AVMetadataObjectTypeCode39Code,AVMetadataObjectTypePDF417Code,AVMetadataObjectTypeAztecCode,AVMetadataObjectTypeCode93Code,AVMetadataObjectTypeEAN13Code,AVMetadataObjectTypeCode39Mod43Code,AVMetadataObjectTypeInterleaved2of5Code,AVMetadataObjectTypeITF14Code,AVMetadataObjectTypeDataMatrixCode];
     
     _previewLayer = [AVCaptureVideoPreviewLayer layerWithSession:_session];
     _previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
     _previewLayer.frame = self.view.layer.bounds;
     [self.view.layer insertSublayer:_previewLayer atIndex:0];
+    
     //开始捕获
     [_session startRunning];
     //移除loading view
@@ -183,7 +200,7 @@ UIAlertViewDelegate
 
 - (void)animationView {
     [UIView animateWithDuration:1.5 animations:^{
-        _slideLineView.transform = CGAffineTransformMakeTranslation(0, 150);
+        _slideLineView.transform = CGAffineTransformMakeTranslation(0, 179);
     } completion:^(BOOL finished) {
         _slideLineView.transform = CGAffineTransformIdentity;
     }];
@@ -234,9 +251,8 @@ UIAlertViewDelegate
             if ([response  isKindOfClass:[NSString class]]) {
                 [MBProgressHUD showError:(NSString *)response toView:self.view];
             }
-            if (!_session) {
-                [self setupAVFoundation];
-            }
+            [self.session startRunning];
+            [self setupTimer];
         }
     }];
 }
@@ -253,9 +269,8 @@ UIAlertViewDelegate
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex==0) {
-        if (!_session) {
-            [self setupAVFoundation];
-        }
+        [self.session startRunning];
+        [self setupTimer];
     }else{
         [self goodInfo:self.code];
     }

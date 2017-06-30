@@ -323,7 +323,14 @@
                 callBack(nil,dict);
             }
         }else{
-                callBack(nil,[(NSDictionary*)response objectForKey:@"msg"]);
+            if ([response isKindOfClass:[NSDictionary class]]) {
+                NSString *code = [NSString stringWithFormat:@"%@",[(NSDictionary*)response objectForKey:@"code"]];
+                if ([code isEqualToString:@"401"]) {
+                    callBack(nil,@"401");
+                }else{
+                    callBack(nil,[(NSDictionary*)response objectForKey:@"msg"]);
+                }
+            }
         }
     } fail:^(NSError *error) {
         [DTNetManger requestFailedCallBack:callBack];

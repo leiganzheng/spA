@@ -22,7 +22,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *vipimg;
 @property (nonatomic, strong) NSArray *dataSource;
 @property (weak, nonatomic) IBOutlet UIImageView *bgview;
-
+@property (nonatomic, assign) BOOL isUpdate;
 @end
 
 static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
@@ -51,6 +51,7 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
     [self.view addSubview:self.myTableView];
     self.title = @"车辆概况";
     [self setLeftBackNavItem];
+    self.isUpdate = NO;
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     btn.frame = CGRectMake(0, KSCREEN_HEIGHT-108, KSCREEN_WIDTH, 44);
     [btn setTitle:@"录入服务内容" forState:UIControlStateNormal];
@@ -110,13 +111,15 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
 }
 #pragma mark -- private method
 -(void)updateInfo{
-    UIStoryboard *board = [UIStoryboard storyboardWithName: @"Main" bundle: nil];
-    LoadCarInfoViewController *cvc = [board instantiateViewControllerWithIdentifier:@"LoadCarInfoViewController"];
-    cvc.licenseImage= self.licenseImage;
-    cvc.plate_license = self.plate_license;
-    UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:cvc];
-    [self presentViewController:nav animated:YES completion:nil];
-
+    if (self.isUpdate) {
+        UIStoryboard *board = [UIStoryboard storyboardWithName: @"Main" bundle: nil];
+        LoadCarInfoViewController *cvc = [board instantiateViewControllerWithIdentifier:@"LoadCarInfoViewController"];
+        cvc.licenseImage= self.licenseImage;
+        cvc.plate_license = self.plate_license;
+        cvc.vc = self.vc;
+        UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:cvc];
+        [self presentViewController:nav animated:YES completion:nil];
+    }
 }
 -(void)featchData{//粤S777ML
     [DTNetManger customerGetWith:self.plate_license callBack:^(NSError *error, id response) {
@@ -137,7 +140,13 @@ static NSString *const kDTMyCellIdentifier = @"myCellIdentifier";
             [self.myTableView reloadData];
         }else{
             if ([response isKindOfClass:[NSString class]]) {
-                [MBProgressHUD showError:(NSString*)response toView:self.view];
+                if ([(NSString*)response isEqualToString:@"401"]) {
+                     [MBProgressHUD showError:@"暂无数据" toView:self.view];
+                     self.isUpdate = YES;
+                }else{
+                    [MBProgressHUD showError:(NSString*)response toView:self.view];
+                    self.isUpdate = NO;
+                }
             }
         }
         [self.myTableView.mj_header endRefreshing];
